@@ -8,6 +8,7 @@
 
 #import "UkePopUpViewController.h"
 #import "UkeAlertStyleAnimation.h"
+#import "Masonry.h"
 
 @interface UkePopUpViewController () <UIViewControllerTransitioningDelegate>
 @property (nonatomic, strong) UIView *contentView;
@@ -33,16 +34,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.view.layer.cornerRadius = 12.0;
-    self.view.layer.masksToBounds = YES;
 }
 
 #pragma mark - Public.
 - (void)addContentView:(UIView *)view {
     self.contentView = view;
-    self.view.bounds = view.bounds;
+    
     [self.view addSubview:self.contentView];
+    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(270);
+        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.centerY.mas_equalTo(self.view.mas_centerY);
+    }];
+    [self.view layoutIfNeeded];
+    self.view.bounds = self.contentView.bounds;
 }
 
 - (void)dismiss {

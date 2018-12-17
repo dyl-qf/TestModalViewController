@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5417910121C79EE5000D5F7B /* UkeAlertStyleAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5417910021C79EE5000D5F7B /* UkeAlertStyleAnimation.m */; };
-		5417910421C79EFB000D5F7B /* UkeActionSheetAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5417910321C79EFB000D5F7B /* UkeActionSheetAnimation.m */; };
-		5417910721C7A3F0000D5F7B /* UkePopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5417910621C7A3F0000D5F7B /* UkePopUpViewController.m */; };
+		0B36D7408F7F3B7315E7A672 /* Pods_TestModalViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4A41E29FA4DDB8995BE382B /* Pods_TestModalViewController.framework */; };
 		5417911121C7BAE8000D5F7B /* UkeAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5417911021C7BAE8000D5F7B /* UkeAlertController.m */; };
+		5434CE4421C7E2E800178D31 /* UkeAlertStyleAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5434CE3D21C7E2E800178D31 /* UkeAlertStyleAnimation.m */; };
+		5434CE4521C7E2E800178D31 /* UkeActionSheetAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5434CE3E21C7E2E800178D31 /* UkeActionSheetAnimation.m */; };
+		5434CE4621C7E2E800178D31 /* UkePopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5434CE4221C7E2E800178D31 /* UkePopUpViewController.m */; };
+		5434CE4921C7E59700178D31 /* UkeAlertContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5434CE4821C7E59700178D31 /* UkeAlertContentView.m */; };
+		5434CE4C21C7E60E00178D31 /* UkeAlertHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5434CE4B21C7E60E00178D31 /* UkeAlertHeaderView.m */; };
 		549FC7DF21C39BCE00619693 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 549FC7DE21C39BCE00619693 /* AppDelegate.m */; };
 		549FC7E221C39BCE00619693 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 549FC7E121C39BCE00619693 /* ViewController.m */; };
 		549FC7E521C39BCE00619693 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 549FC7E321C39BCE00619693 /* Main.storyboard */; };
@@ -39,14 +42,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		541790FF21C79EE5000D5F7B /* UkeAlertStyleAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeAlertStyleAnimation.h; sourceTree = "<group>"; };
-		5417910021C79EE5000D5F7B /* UkeAlertStyleAnimation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeAlertStyleAnimation.m; sourceTree = "<group>"; };
-		5417910221C79EFB000D5F7B /* UkeActionSheetAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeActionSheetAnimation.h; sourceTree = "<group>"; };
-		5417910321C79EFB000D5F7B /* UkeActionSheetAnimation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeActionSheetAnimation.m; sourceTree = "<group>"; };
-		5417910521C7A3F0000D5F7B /* UkePopUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkePopUpViewController.h; sourceTree = "<group>"; };
-		5417910621C7A3F0000D5F7B /* UkePopUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkePopUpViewController.m; sourceTree = "<group>"; };
+		0004F1E308EB957B32AE1430 /* Pods-TestModalViewController.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestModalViewController.release.xcconfig"; path = "Pods/Target Support Files/Pods-TestModalViewController/Pods-TestModalViewController.release.xcconfig"; sourceTree = "<group>"; };
 		5417910F21C7BAE8000D5F7B /* UkeAlertController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeAlertController.h; sourceTree = "<group>"; };
 		5417911021C7BAE8000D5F7B /* UkeAlertController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeAlertController.m; sourceTree = "<group>"; };
+		5434CE3D21C7E2E800178D31 /* UkeAlertStyleAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UkeAlertStyleAnimation.m; sourceTree = "<group>"; };
+		5434CE3E21C7E2E800178D31 /* UkeActionSheetAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UkeActionSheetAnimation.m; sourceTree = "<group>"; };
+		5434CE3F21C7E2E800178D31 /* UkeActionSheetAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UkeActionSheetAnimation.h; sourceTree = "<group>"; };
+		5434CE4021C7E2E800178D31 /* UkeAlertStyleAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UkeAlertStyleAnimation.h; sourceTree = "<group>"; };
+		5434CE4221C7E2E800178D31 /* UkePopUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UkePopUpViewController.m; sourceTree = "<group>"; };
+		5434CE4321C7E2E800178D31 /* UkePopUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UkePopUpViewController.h; sourceTree = "<group>"; };
+		5434CE4721C7E59700178D31 /* UkeAlertContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeAlertContentView.h; sourceTree = "<group>"; };
+		5434CE4821C7E59700178D31 /* UkeAlertContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeAlertContentView.m; sourceTree = "<group>"; };
+		5434CE4A21C7E60E00178D31 /* UkeAlertHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeAlertHeaderView.h; sourceTree = "<group>"; };
+		5434CE4B21C7E60E00178D31 /* UkeAlertHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeAlertHeaderView.m; sourceTree = "<group>"; };
 		549FC7DA21C39BCE00619693 /* TestModalViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestModalViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		549FC7DD21C39BCE00619693 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		549FC7DE21C39BCE00619693 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -63,6 +71,8 @@
 		549FC7FD21C39BD000619693 /* TestModalViewControllerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestModalViewControllerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		549FC80121C39BD000619693 /* TestModalViewControllerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestModalViewControllerUITests.m; sourceTree = "<group>"; };
 		549FC80321C39BD000619693 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E4A41E29FA4DDB8995BE382B /* Pods_TestModalViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TestModalViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E66E4CA7D6B7452954F053F4 /* Pods-TestModalViewController.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestModalViewController.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TestModalViewController/Pods-TestModalViewController.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B36D7408F7F3B7315E7A672 /* Pods_TestModalViewController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,19 +101,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5137716D7A4ED1661796062F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E4A41E29FA4DDB8995BE382B /* Pods_TestModalViewController.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		541790F821C7464F000D5F7B /* Resource */ = {
 			isa = PBXGroup;
 			children = (
 				5417910F21C7BAE8000D5F7B /* UkeAlertController.h */,
 				5417911021C7BAE8000D5F7B /* UkeAlertController.m */,
-				5417910521C7A3F0000D5F7B /* UkePopUpViewController.h */,
-				5417910621C7A3F0000D5F7B /* UkePopUpViewController.m */,
-				541790FF21C79EE5000D5F7B /* UkeAlertStyleAnimation.h */,
-				5417910021C79EE5000D5F7B /* UkeAlertStyleAnimation.m */,
-				5417910221C79EFB000D5F7B /* UkeActionSheetAnimation.h */,
-				5417910321C79EFB000D5F7B /* UkeActionSheetAnimation.m */,
+				5434CE3C21C7E2E800178D31 /* Animation */,
+				5434CE4121C7E2E800178D31 /* Controller */,
+				5434CE3B21C7E2E800178D31 /* View */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		5434CE3B21C7E2E800178D31 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5434CE4721C7E59700178D31 /* UkeAlertContentView.h */,
+				5434CE4821C7E59700178D31 /* UkeAlertContentView.m */,
+				5434CE4A21C7E60E00178D31 /* UkeAlertHeaderView.h */,
+				5434CE4B21C7E60E00178D31 /* UkeAlertHeaderView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5434CE3C21C7E2E800178D31 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				5434CE3D21C7E2E800178D31 /* UkeAlertStyleAnimation.m */,
+				5434CE3E21C7E2E800178D31 /* UkeActionSheetAnimation.m */,
+				5434CE3F21C7E2E800178D31 /* UkeActionSheetAnimation.h */,
+				5434CE4021C7E2E800178D31 /* UkeAlertStyleAnimation.h */,
+			);
+			path = Animation;
+			sourceTree = "<group>";
+		};
+		5434CE4121C7E2E800178D31 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5434CE4321C7E2E800178D31 /* UkePopUpViewController.h */,
+				5434CE4221C7E2E800178D31 /* UkePopUpViewController.m */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		549FC7D121C39BCE00619693 = {
@@ -113,6 +160,8 @@
 				549FC7F521C39BD000619693 /* TestModalViewControllerTests */,
 				549FC80021C39BD000619693 /* TestModalViewControllerUITests */,
 				549FC7DB21C39BCE00619693 /* Products */,
+				6E4655D59C802EF6613026DB /* Pods */,
+				5137716D7A4ED1661796062F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -160,6 +209,15 @@
 			path = TestModalViewControllerUITests;
 			sourceTree = "<group>";
 		};
+		6E4655D59C802EF6613026DB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E66E4CA7D6B7452954F053F4 /* Pods-TestModalViewController.debug.xcconfig */,
+				0004F1E308EB957B32AE1430 /* Pods-TestModalViewController.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -167,9 +225,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 549FC80621C39BD000619693 /* Build configuration list for PBXNativeTarget "TestModalViewController" */;
 			buildPhases = (
+				5C4B1D358E81FE13F48C5A86 /* [CP] Check Pods Manifest.lock */,
 				549FC7D621C39BCE00619693 /* Sources */,
 				549FC7D721C39BCE00619693 /* Frameworks */,
 				549FC7D821C39BCE00619693 /* Resources */,
+				79FE7BBCAB7D92CE4DC48DFF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -285,18 +345,59 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5C4B1D358E81FE13F48C5A86 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TestModalViewController-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		79FE7BBCAB7D92CE4DC48DFF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TestModalViewController/Pods-TestModalViewController-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TestModalViewController/Pods-TestModalViewController-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		549FC7D621C39BCE00619693 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5434CE4421C7E2E800178D31 /* UkeAlertStyleAnimation.m in Sources */,
 				549FC7E221C39BCE00619693 /* ViewController.m in Sources */,
-				5417910121C79EE5000D5F7B /* UkeAlertStyleAnimation.m in Sources */,
-				5417910721C7A3F0000D5F7B /* UkePopUpViewController.m in Sources */,
 				5417911121C7BAE8000D5F7B /* UkeAlertController.m in Sources */,
+				5434CE4621C7E2E800178D31 /* UkePopUpViewController.m in Sources */,
+				5434CE4C21C7E60E00178D31 /* UkeAlertHeaderView.m in Sources */,
 				549FC7ED21C39BD000619693 /* main.m in Sources */,
+				5434CE4921C7E59700178D31 /* UkeAlertContentView.m in Sources */,
+				5434CE4521C7E2E800178D31 /* UkeActionSheetAnimation.m in Sources */,
 				549FC7DF21C39BCE00619693 /* AppDelegate.m in Sources */,
-				5417910421C79EFB000D5F7B /* UkeActionSheetAnimation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,6 +566,7 @@
 		};
 		549FC80721C39BD000619693 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E66E4CA7D6B7452954F053F4 /* Pods-TestModalViewController.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -483,6 +585,7 @@
 		};
 		549FC80821C39BD000619693 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0004F1E308EB957B32AE1430 /* Pods-TestModalViewController.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

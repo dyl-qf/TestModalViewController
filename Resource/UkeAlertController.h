@@ -16,6 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
                                      message:(nullable NSString *)message
                               preferredStyle:(UIAlertControllerStyle)preferredStyle;
 
+//! 默认270
+@property (nonatomic, assign) CGFloat contentWidth;
+
 @end
 
 NS_ASSUME_NONNULL_END

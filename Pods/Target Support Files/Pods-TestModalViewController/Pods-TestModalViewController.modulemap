@@ -1,0 +1,6 @@
+framework module Pods_TestModalViewController {
+  umbrella header "Pods-TestModalViewController-umbrella.h"
+
+  export *
+  module * { export * }
+}

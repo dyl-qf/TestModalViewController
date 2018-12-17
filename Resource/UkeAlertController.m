@@ -7,6 +7,9 @@
 //
 
 #import "UkeAlertController.h"
+#import "UkeAlertContentView.h"
+#import "UkeAlertHeaderView.h"
+#import "Masonry.h"
 
 @interface UkeAlertController ()
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -25,32 +28,15 @@
     return alertVc;
 }
 
-- (UIView *)generateAlertContentViewWithTitle:(NSString *)title
+- (UkeAlertContentView *)generateAlertContentViewWithTitle:(NSString *)title
                                       message:(NSString *)message
                                preferredStyle:(UIAlertControllerStyle)preferredStyle {
-    UIView *contentView = [[UIView alloc] init];
-    contentView.frame = CGRectMake(0, 0, 285, 100);
+    UkeAlertHeaderView *header = [[UkeAlertHeaderView alloc] initWithTitle:title message:message];
     
-    if ([title isKindOfClass:[NSString class]] && title.length) {
-        _titleLabel = [[UILabel alloc] init];
-        _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.text = title;
-        _titleLabel.font = [UIFont boldSystemFontOfSize:17];
-        [contentView addSubview:_titleLabel];
-    }
+    UkeAlertContentView *content = [[UkeAlertContentView alloc] init];
+    [content insertHeaderView:header];
     
-    if ([message isKindOfClass:[NSString class]] && message.length) {
-        _messageLabel = [[UILabel alloc] init];
-        _messageLabel.textAlignment = NSTextAlignmentCenter;
-        _messageLabel.text = message;
-        _messageLabel.font = [UIFont systemFontOfSize:15];
-        [contentView addSubview:_messageLabel];
-    }
-    
-    _titleLabel.frame = CGRectMake(0, 20, 285, 20);
-    _messageLabel.frame = CGRectMake(0, CGRectGetMaxY(_titleLabel.frame)+20, 285, 30);
-    
-    return contentView;
+    return content;
 }
 
 @end
