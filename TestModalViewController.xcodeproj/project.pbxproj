@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5417910121C79EE5000D5F7B /* UkeAlertStyleAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5417910021C79EE5000D5F7B /* UkeAlertStyleAnimation.m */; };
+		5417910421C79EFB000D5F7B /* UkeActionSheetAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5417910321C79EFB000D5F7B /* UkeActionSheetAnimation.m */; };
+		5417910721C7A3F0000D5F7B /* UkePopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5417910621C7A3F0000D5F7B /* UkePopUpViewController.m */; };
+		5417911121C7BAE8000D5F7B /* UkeAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5417911021C7BAE8000D5F7B /* UkeAlertController.m */; };
 		549FC7DF21C39BCE00619693 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 549FC7DE21C39BCE00619693 /* AppDelegate.m */; };
 		549FC7E221C39BCE00619693 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 549FC7E121C39BCE00619693 /* ViewController.m */; };
 		549FC7E521C39BCE00619693 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 549FC7E321C39BCE00619693 /* Main.storyboard */; };
@@ -35,6 +39,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		541790FF21C79EE5000D5F7B /* UkeAlertStyleAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeAlertStyleAnimation.h; sourceTree = "<group>"; };
+		5417910021C79EE5000D5F7B /* UkeAlertStyleAnimation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeAlertStyleAnimation.m; sourceTree = "<group>"; };
+		5417910221C79EFB000D5F7B /* UkeActionSheetAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeActionSheetAnimation.h; sourceTree = "<group>"; };
+		5417910321C79EFB000D5F7B /* UkeActionSheetAnimation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeActionSheetAnimation.m; sourceTree = "<group>"; };
+		5417910521C7A3F0000D5F7B /* UkePopUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkePopUpViewController.h; sourceTree = "<group>"; };
+		5417910621C7A3F0000D5F7B /* UkePopUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkePopUpViewController.m; sourceTree = "<group>"; };
+		5417910F21C7BAE8000D5F7B /* UkeAlertController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeAlertController.h; sourceTree = "<group>"; };
+		5417911021C7BAE8000D5F7B /* UkeAlertController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeAlertController.m; sourceTree = "<group>"; };
 		549FC7DA21C39BCE00619693 /* TestModalViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestModalViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		549FC7DD21C39BCE00619693 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		549FC7DE21C39BCE00619693 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -78,9 +90,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		541790F821C7464F000D5F7B /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				5417910F21C7BAE8000D5F7B /* UkeAlertController.h */,
+				5417911021C7BAE8000D5F7B /* UkeAlertController.m */,
+				5417910521C7A3F0000D5F7B /* UkePopUpViewController.h */,
+				5417910621C7A3F0000D5F7B /* UkePopUpViewController.m */,
+				541790FF21C79EE5000D5F7B /* UkeAlertStyleAnimation.h */,
+				5417910021C79EE5000D5F7B /* UkeAlertStyleAnimation.m */,
+				5417910221C79EFB000D5F7B /* UkeActionSheetAnimation.h */,
+				5417910321C79EFB000D5F7B /* UkeActionSheetAnimation.m */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		549FC7D121C39BCE00619693 = {
 			isa = PBXGroup;
 			children = (
+				541790F821C7464F000D5F7B /* Resource */,
 				549FC7DC21C39BCE00619693 /* TestModalViewController */,
 				549FC7F521C39BD000619693 /* TestModalViewControllerTests */,
 				549FC80021C39BD000619693 /* TestModalViewControllerUITests */,
@@ -263,8 +291,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				549FC7E221C39BCE00619693 /* ViewController.m in Sources */,
+				5417910121C79EE5000D5F7B /* UkeAlertStyleAnimation.m in Sources */,
+				5417910721C7A3F0000D5F7B /* UkePopUpViewController.m in Sources */,
+				5417911121C7BAE8000D5F7B /* UkeAlertController.m in Sources */,
 				549FC7ED21C39BD000619693 /* main.m in Sources */,
 				549FC7DF21C39BCE00619693 /* AppDelegate.m in Sources */,
+				5417910421C79EFB000D5F7B /* UkeActionSheetAnimation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +470,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 49VYEW5CMM;
 				INFOPLIST_FILE = TestModalViewController/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -455,6 +488,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 49VYEW5CMM;
 				INFOPLIST_FILE = TestModalViewController/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
