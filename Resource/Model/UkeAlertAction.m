@@ -11,6 +11,7 @@
 @interface UkeAlertAction ()
 @property (nullable, nonatomic) NSString *title;
 @property (nonatomic, assign) UIAlertActionStyle style;
+@property (nonatomic, strong) void(^actionHandler)(UkeAlertAction *action);
 @end
 
 @implementation UkeAlertAction
@@ -21,6 +22,7 @@
     UkeAlertAction *action = [[UkeAlertAction alloc] init];
     action.title = title;
     action.style = style;
+    action.actionHandler = handler;
     return action;
 }
 

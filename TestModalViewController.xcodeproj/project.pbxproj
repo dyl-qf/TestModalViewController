@@ -155,8 +155,8 @@
 			children = (
 				5434CE4021C7E2E800178D31 /* UkeAlertStyleAnimation.h */,
 				5434CE3D21C7E2E800178D31 /* UkeAlertStyleAnimation.m */,
-				5434CE3E21C7E2E800178D31 /* UkeActionSheetAnimation.m */,
 				5434CE3F21C7E2E800178D31 /* UkeActionSheetAnimation.h */,
+				5434CE3E21C7E2E800178D31 /* UkeActionSheetAnimation.m */,
 			);
 			path = Animation;
 			sourceTree = "<group>";

@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addAction:(UkeAlertAction *)action;
 @property (nonatomic, readonly) NSArray<UkeAlertAction *> *actions;
 
+@property (nonatomic, strong) void(^dismissHandler)(void);
+
 @end
 
 NS_ASSUME_NONNULL_END

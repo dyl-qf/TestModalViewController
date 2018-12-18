@@ -57,6 +57,10 @@
 - (UkeActionGroupView *)actionGroupView {
     if (!_actionGroupView) {
         _actionGroupView = [[UkeActionGroupView alloc] init];
+        __weak typeof(self)weakSelf = self;
+        _actionGroupView.dismissHandler = ^{
+            [weakSelf dismiss];
+        };
     }
     return _actionGroupView;
 }

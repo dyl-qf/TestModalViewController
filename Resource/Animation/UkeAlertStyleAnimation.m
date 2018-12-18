@@ -76,7 +76,8 @@
     
     UIView *maskView = [containerView viewWithTag:1000];
     NSTimeInterval duration = [self transitionDuration:transitionContext];
-    [UIView animateWithDuration:duration animations:^{
+    
+    [UIView animateWithDuration:duration delay:0.1 options:UIViewAnimationOptionCurveLinear animations:^{
         maskView.alpha = 0.0;
     } completion:^(BOOL finished) {
         [maskView removeFromSuperview];

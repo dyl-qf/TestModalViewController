@@ -44,10 +44,9 @@
     
     if (self.actions.count == 2) {
         [self layoutForTwoActions];
-        return;
+    }else {
+        [self layoutForNotTwoActions];
     }
-    
-    
 }
 
 - (void)layoutForTwoActions {
@@ -56,15 +55,17 @@
     [self addSubview:lineView];
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.offset(0);
-        make.width.mas_equalTo(1);
+        make.width.mas_equalTo(1.0);
         make.centerX.mas_equalTo(self.mas_centerX);
     }];
     
     for (int i = 0; i < 2; i ++) {
         UkeAlertAction *action = self.actions[i];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.tag = i;
         [button setTitle:action.title forState:UIControlStateNormal];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(handleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
     
         if (i == 0) {
@@ -80,6 +81,57 @@
                 make.height.mas_equalTo(UkeAlertActionButtonHeight);
             }];
         }
+    }
+}
+
+- (void)layoutForNotTwoActions {
+    NSMutableArray *lines = [NSMutableArray array];
+    [self.actions enumerateObjectsUsingBlock:^(UkeAlertAction *action, NSUInteger idx, BOOL * _Nonnull stop) {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.tag = idx;
+        [button setTitle:action.title forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(handleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:button];
+        
+        UIView *lineView = [[UIView alloc] init];
+        lineView.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1.0];
+        [self addSubview:lineView];
+        [lines addObject:lineView];
+        
+        [button mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.offset(0);
+            make.height.mas_equalTo(UkeAlertActionButtonHeight);
+            if (idx == 0) {
+                make.top.offset(0);
+            }else {
+                UIView *lastLine = lines[idx-1];
+                make.top.mas_equalTo(lastLine.mas_bottom);
+            }
+            
+            if (idx == self.actions.count-1) {
+                make.bottom.offset(0);
+            }
+        }];
+        
+        if (idx != self.actions.count-1) {
+            [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.offset(0);
+                make.height.mas_equalTo(1.0);
+                make.top.mas_equalTo(button.mas_bottom);
+            }];
+        }
+    }];
+}
+
+- (void)handleButtonAction:(UIButton *)button {
+    UkeAlertAction *action = self.actions[button.tag];
+    if (action.actionHandler) {
+        action.actionHandler(action);
+    }
+    
+    if (self.dismissHandler) {
+        self.dismissHandler();
     }
 }
 

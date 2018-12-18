@@ -10,7 +10,7 @@
 #import "UkeAlertController.h"
 
 @interface ViewController ()
-@property (nonatomic, strong) UkeAlertController *popUpVc;
+
 @end
 
 @implementation ViewController
@@ -38,10 +38,10 @@
 //    }]];
 //    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
 //    }]];
-//    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//    }]];
-//    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//    }]];
+    [alert2 addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    }]];
+    [alert2 addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    }]];
     [alert2 addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     }]];
     [alert2 addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -64,25 +64,16 @@
 
 
 - (IBAction)test3:(id)sender {
-//    UIView *view = [[UIView alloc] init];
-//    view.frame = CGRectMake(0, 0, 260, 150);
-//    view.backgroundColor = [UIColor whiteColor];
-//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-//    button.backgroundColor = [UIColor purpleColor];
-//    button.frame = CGRectMake(50, 80, 80, 50);
-//    [button setTitle:@"dismiss" forState:UIControlStateNormal];
-//    [button addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
-//    [view addSubview:button];
-    
-    _popUpVc = [UkeAlertController alertControllerWithTitle:@"友情提示" message:@"课前15分钟才可进入教室\n请耐心等待哦～" preferredStyle:UIAlertControllerStyleAlert];
-    [_popUpVc addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [_popUpVc addAction:[UkeAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+//    UkeAlertController *alert = [UkeAlertController alertControllerWithTitle:@"友情提示" message:@"课前15分钟才可进入教室\n请耐心等待哦～" preferredStyle:UIAlertControllerStyleAlert];
+    UkeAlertController *alert = [UkeAlertController alertControllerWithTitle:@"你正在使用移动流量，是否继续播放？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UkeAlertAction * _Nonnull action) {
+        NSLog(@"点击确定");
+    }]];
+    [alert addAction:[UkeAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [alert addAction:[UkeAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [alert addAction:[UkeAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
 
-    [self presentViewController:_popUpVc animated:YES completion:nil];
-}
-
-- (void)dismiss {
-    [_popUpVc dismiss];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (IBAction)test4:(id)sender {

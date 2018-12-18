@@ -18,7 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
                             handler:(void (^ __nullable)(UkeAlertAction *action))handler;
 
 @property (nullable, nonatomic, readonly) NSString *title;
-@property (nonatomic, readonly) UIAlertActionStyle style;
+@property (nonatomic, assign, readonly) UIAlertActionStyle style;
+@property (nullable, nonatomic, strong, readonly) void(^actionHandler)(UkeAlertAction *action);
 
 @end
 
