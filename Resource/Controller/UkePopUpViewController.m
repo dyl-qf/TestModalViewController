@@ -25,7 +25,7 @@
     return self;
 }
 
-+ (instancetype)uke_alertControllerWithContentView:(UIView *)view
++ (instancetype)alertControllerWithContentView:(UIView *)view
                              preferredStyle:(UIAlertControllerStyle)preferredStyle {
     UkePopUpViewController *popUpController = [[UkePopUpViewController alloc] init];
     [popUpController addContentView:view];
@@ -38,6 +38,10 @@
 
 #pragma mark - Public.
 - (void)addContentView:(UIView *)view {
+    if (self.contentView) {
+        [self.contentView removeFromSuperview];
+    }
+    
     self.contentView = view;
     
     [self.view addSubview:self.contentView];

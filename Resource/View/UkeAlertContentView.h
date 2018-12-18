@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UkeAlertContentView : UIView
 
 - (void)insertHeaderView:(UIView *)headerView;
-- (void)insertActionView:(UIView *)actionView;
+- (void)insertActionGroupView:(UIView *)actionGroupView;
 
 @end
 

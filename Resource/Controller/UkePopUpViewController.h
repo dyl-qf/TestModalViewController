@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) UIAlertControllerStyle preferredStyle;
 
-+ (instancetype)uke_alertControllerWithContentView:(UIView *)view
++ (instancetype)alertControllerWithContentView:(UIView *)view
                              preferredStyle:(UIAlertControllerStyle)preferredStyle;
 
 - (void)addContentView:(UIView *)view;
