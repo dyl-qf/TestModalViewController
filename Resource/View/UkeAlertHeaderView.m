@@ -70,7 +70,7 @@
     }];
     
     if (subviews.count == 2) {
-        UIView *secondView = subviews.firstObject;
+        UIView *secondView = subviews.lastObject;
         [secondView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.offset(40);
             make.right.offset(-40);
@@ -78,7 +78,6 @@
             make.bottom.offset(-30);
         }];
     }
-    [self layoutIfNeeded];
 }
 
 @end
