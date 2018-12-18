@@ -22,6 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)dismiss;
 - (void)dismissWithAnimated:(BOOL)animated;
 
+
+//! 默认270，跟系统保持一致
+@property (nonatomic, assign) CGFloat contentWidth;
+
 @end
 
 NS_ASSUME_NONNULL_END

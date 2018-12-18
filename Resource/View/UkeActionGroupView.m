@@ -12,9 +12,9 @@
 
 @interface UkeActionGroupView ()
 @property (nonatomic, strong) NSArray<UkeAlertAction *> *actions;
-@property (nonatomic, strong) NSArray<UkeAlertAction *> *defaultActions;
-@property (nonatomic, strong) NSArray<UkeAlertAction *> *cancelActions;
-@property (nonatomic, strong) NSArray<UkeAlertAction *> *destructiveActions;
+@property (nonatomic, strong) NSMutableArray *defaultButtons;
+@property (nonatomic, strong) NSMutableArray *cancelButtons;
+@property (nonatomic, strong) NSMutableArray *destructiveButtons;
 @end
 
 #define UkeAlertActionButtonHeight 44.0
@@ -24,10 +24,17 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        
-        
         self.actions = [NSArray array];
+        self.defaultButtons = [NSMutableArray array];
+        self.cancelButtons = [NSMutableArray array];
+        self.destructiveButtons = [NSMutableArray array];
         
+        _defaultButtonAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor],
+                             NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Medium" size:18]                             };
+        _cancelButtonAttributes = @{NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                     NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Medium" size:18]                             };
+        _destructiveButtonAttributes = @{NSForegroundColorAttributeName: [UIColor redColor],
+                                     NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Medium" size:18]                             };
     }
     return self;
 }
@@ -63,8 +70,7 @@
         UkeAlertAction *action = self.actions[i];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.tag = i;
-        [button setTitle:action.title forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self setAttributedTextWith:action.title forButton:button style:action.style];
         [button addTarget:self action:@selector(handleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
     
@@ -89,8 +95,7 @@
     [self.actions enumerateObjectsUsingBlock:^(UkeAlertAction *action, NSUInteger idx, BOOL * _Nonnull stop) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.tag = idx;
-        [button setTitle:action.title forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self setAttributedTextWith:action.title forButton:button style:action.style];
         [button addTarget:self action:@selector(handleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
         
@@ -139,6 +144,34 @@
     while (self.subviews.count) {
         [self.subviews.lastObject removeFromSuperview];
     }
+}
+
+- (void)setAttributedTextWith:(NSString *)text
+            forButton:(UIButton *)button
+                style:(UIAlertActionStyle)style {
+    if (style == UIAlertActionStyleDefault) {
+        button.titleLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:_defaultButtonAttributes];
+    }else if (style == UIAlertActionStyleCancel) {
+        button.titleLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:_cancelButtonAttributes];
+    }else if (style == UIAlertActionStyleDestructive) {
+        button.titleLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:_destructiveButtonAttributes];
+    }
+}
+
+#pragma mark - Setter
+- (void)setDefaultButtonAttributes:(NSDictionary<NSString *,id> *)defaultButtonAttributes {
+    _defaultButtonAttributes = defaultButtonAttributes;
+    
+}
+
+- (void)setCancelButtonAttributes:(NSDictionary<NSString *,id> *)cancelButtonAttributes {
+    _cancelButtonAttributes = cancelButtonAttributes;
+    
+}
+
+- (void)setDestructiveButtonAttributes:(NSDictionary<NSString *,id> *)destructiveButtonAttributes {
+    _destructiveButtonAttributes = destructiveButtonAttributes;
+    
 }
 
 @end

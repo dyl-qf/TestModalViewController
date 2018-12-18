@@ -7,9 +7,13 @@
 //
 
 #import "UkeAlertHeaderView.h"
+#import "NSParagraphStyle+Shortcut.h"
 #import "Masonry.h"
 
 @interface UkeAlertHeaderView ()
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *message;
+
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *messageLabel;
 @end
@@ -32,13 +36,22 @@
     
     self = [super init];
     if (self) {
+        _titleAttributes = @{NSForegroundColorAttributeName: [UIColor redColor],
+                             NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Medium" size:18],
+                             NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]
+                             };
+        _messageAttributes = @{NSForegroundColorAttributeName: [UIColor orangeColor],
+                             NSFontAttributeName: [UIFont systemFontOfSize:16],
+                             NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]
+                             };
+        _title = title;
+        _message = message;
+        
         NSMutableArray *subviews = [NSMutableArray array];
         if (hasTitle) {
             _titleLabel = [[UILabel alloc] init];
             _titleLabel.numberOfLines = 0;
-            _titleLabel.textAlignment = NSTextAlignmentCenter;
-            _titleLabel.text = title;
-            _titleLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18];
+            _titleLabel.attributedText = [[NSAttributedString alloc] initWithString:title attributes:_titleAttributes];
             [self addSubview:_titleLabel];
             [subviews addObject:_titleLabel];
         }
@@ -46,9 +59,7 @@
         if (hasMessage) {
             _messageLabel = [[UILabel alloc] init];
             _messageLabel.numberOfLines = 0;
-            _messageLabel.textAlignment = NSTextAlignmentCenter;
-            _messageLabel.text = message;
-            _messageLabel.font = [UIFont systemFontOfSize:16];
+            _messageLabel.attributedText = [[NSAttributedString alloc] initWithString:title attributes:_messageAttributes];
             [self addSubview:_messageLabel];
             [subviews addObject:_messageLabel];
         }
@@ -78,6 +89,17 @@
             make.bottom.offset(-30);
         }];
     }
+}
+
+#pragma mark - Setter.
+- (void)setTitleAttributes:(NSDictionary<NSString *,id> *)titleAttributes {
+    _titleAttributes = titleAttributes;
+    _titleLabel.attributedText = [[NSAttributedString alloc] initWithString:_title attributes:_titleAttributes];
+}
+
+- (void)setMessageAttributes:(NSDictionary<NSString *,id> *)messageAttributes {
+    _messageAttributes = messageAttributes;
+    _messageLabel.attributedText = [[NSAttributedString alloc] initWithString:_message attributes:_messageAttributes];
 }
 
 @end

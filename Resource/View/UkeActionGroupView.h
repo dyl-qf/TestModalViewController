@@ -15,8 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)addAction:(UkeAlertAction *)action;
 @property (nonatomic, readonly) NSArray<UkeAlertAction *> *actions;
-
 @property (nonatomic, strong) void(^dismissHandler)(void);
+
+//! 按钮相关属性
+@property(nonatomic, strong) NSDictionary<NSString *, id> *defaultButtonAttributes;
+@property(nonatomic, strong) NSDictionary<NSString *, id> *cancelButtonAttributes;
+@property(nonatomic, strong) NSDictionary<NSString *, id> *destructiveButtonAttributes;
 
 @end
 

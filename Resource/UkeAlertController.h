@@ -7,6 +7,7 @@
 //
 
 #import "UkePopUpViewController.h"
+#import "NSParagraphStyle+Shortcut.h"
 #import "UkeAlertAction.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -20,8 +21,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addAction:(UkeAlertAction *)action;
 @property (nonatomic, readonly) NSArray<UkeAlertAction *> *actions;
 
-//! 默认270
-@property (nonatomic, assign) CGFloat contentWidth;
+//! 标题相关属性
+@property(nonatomic, strong) NSDictionary<NSString *, id> *titleAttributes;
+//! message相关属性
+@property(nonatomic, strong) NSDictionary<NSString *, id> *messageAttributes;
+
+//! 按钮相关属性
+@property(nonatomic, strong) NSDictionary<NSString *, id> *defaultButtonAttributes;
+@property(nonatomic, strong) NSDictionary<NSString *, id> *cancelButtonAttributes;
+@property(nonatomic, strong) NSDictionary<NSString *, id> *destructiveButtonAttributes;
 
 @end
 

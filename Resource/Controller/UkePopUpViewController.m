@@ -21,6 +21,7 @@
     if (self) {
         self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         self.transitioningDelegate = self;
+        self.contentWidth = 270;
     }
     return self;
 }
@@ -46,7 +47,7 @@
     
     [self.view addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(270);
+        make.width.mas_equalTo(self.contentWidth);
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.centerY.mas_equalTo(self.view.mas_centerY);
     }];

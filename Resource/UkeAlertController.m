@@ -53,6 +53,28 @@
     return content;
 }
 
+
+#pragma mark - Setter.
+- (void)setTitleAttributes:(NSDictionary<NSString *,id> *)titleAttributes {
+    [self.headerView setTitleAttributes:titleAttributes];
+}
+
+- (void)setMessageAttributes:(NSDictionary<NSString *,id> *)messageAttributes {
+    [self.headerView setMessageAttributes:messageAttributes];
+}
+
+- (void)setDefaultButtonAttributes:(NSDictionary<NSString *,id> *)defaultButtonAttributes {
+    [self.actionGroupView setDefaultButtonAttributes:defaultButtonAttributes];
+}
+
+- (void)setCancelButtonAttributes:(NSDictionary<NSString *,id> *)cancelButtonAttributes {
+    [self.actionGroupView setCancelButtonAttributes:cancelButtonAttributes];
+}
+
+- (void)setDestructiveButtonAttributes:(NSDictionary<NSString *,id> *)destructiveButtonAttributes {
+    [self.actionGroupView setDestructiveButtonAttributes:destructiveButtonAttributes];
+}
+
 #pragma mark - Getter.
 - (UkeActionGroupView *)actionGroupView {
     if (!_actionGroupView) {

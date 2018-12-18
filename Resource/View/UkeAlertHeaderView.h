@@ -15,6 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithTitle:(nullable NSString *)title
                       message:(nullable NSString *)message;
 
+//! 标题相关属性
+@property(nonatomic, strong) NSDictionary<NSString *, id> *titleAttributes;
+//! message相关属性
+@property(nonatomic, strong) NSDictionary<NSString *, id> *messageAttributes;
+
 @end
 
 NS_ASSUME_NONNULL_END
