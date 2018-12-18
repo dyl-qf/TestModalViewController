@@ -70,14 +70,18 @@
     }else {
         fromView = fromVc.view;
     }
-    
-    fromView.hidden = YES;
+
     UIView *containerView = [transitionContext containerView];
-    
     UIView *maskView = [containerView viewWithTag:1000];
-    NSTimeInterval duration = [self transitionDuration:transitionContext];
     
-    [UIView animateWithDuration:duration delay:0.1 options:UIViewAnimationOptionCurveLinear animations:^{
+    NSTimeInterval duration = [self transitionDuration:transitionContext];
+    NSTimeInterval delay = 0.1;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        fromView.hidden = YES;
+    });
+    
+    [UIView animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveLinear animations:^{
         maskView.alpha = 0.0;
     } completion:^(BOOL finished) {
         [maskView removeFromSuperview];

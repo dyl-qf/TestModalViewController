@@ -36,16 +36,17 @@
     
     self = [super init];
     if (self) {
+        _title = title;
+        _message = message;
+        
         _titleAttributes = @{NSForegroundColorAttributeName: [UIColor redColor],
                              NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Medium" size:18],
                              NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]
                              };
         _messageAttributes = @{NSForegroundColorAttributeName: [UIColor orangeColor],
-                             NSFontAttributeName: [UIFont systemFontOfSize:16],
-                             NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]
-                             };
-        _title = title;
-        _message = message;
+                               NSFontAttributeName: [UIFont systemFontOfSize:16],
+                               NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]
+                               };
         
         NSMutableArray *subviews = [NSMutableArray array];
         if (hasTitle) {
@@ -59,7 +60,7 @@
         if (hasMessage) {
             _messageLabel = [[UILabel alloc] init];
             _messageLabel.numberOfLines = 0;
-            _messageLabel.attributedText = [[NSAttributedString alloc] initWithString:title attributes:_messageAttributes];
+            _messageLabel.attributedText = [[NSAttributedString alloc] initWithString:message attributes:_messageAttributes];
             [self addSubview:_messageLabel];
             [subviews addObject:_messageLabel];
         }
@@ -93,11 +94,15 @@
 
 #pragma mark - Setter.
 - (void)setTitleAttributes:(NSDictionary<NSString *,id> *)titleAttributes {
+    if (![self.title isKindOfClass:[NSString class]] || !self.title.length) return;
+    
     _titleAttributes = titleAttributes;
     _titleLabel.attributedText = [[NSAttributedString alloc] initWithString:_title attributes:_titleAttributes];
 }
 
 - (void)setMessageAttributes:(NSDictionary<NSString *,id> *)messageAttributes {
+    if (![self.message isKindOfClass:[NSString class]] || !self.message.length) return;
+
     _messageAttributes = messageAttributes;
     _messageLabel.attributedText = [[NSAttributedString alloc] initWithString:_message attributes:_messageAttributes];
 }

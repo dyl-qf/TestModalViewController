@@ -8,13 +8,14 @@
 
 #import "UkeActionGroupView.h"
 #import "Masonry.h"
+#import "UkeAlertActionButton.h"
 #import "UkeAlertAction.h"
 
 @interface UkeActionGroupView ()
 @property (nonatomic, strong) NSArray<UkeAlertAction *> *actions;
-@property (nonatomic, strong) NSMutableArray *defaultButtons;
-@property (nonatomic, strong) NSMutableArray *cancelButtons;
-@property (nonatomic, strong) NSMutableArray *destructiveButtons;
+@property (nonatomic, strong) NSMutableArray<UkeAlertActionButton *> *defaultButtons;
+@property (nonatomic, strong) NSMutableArray<UkeAlertActionButton *> *cancelButtons;
+@property (nonatomic, strong) NSMutableArray<UkeAlertActionButton *> *destructiveButtons;
 @end
 
 #define UkeAlertActionButtonHeight 44.0
@@ -30,11 +31,11 @@
         self.destructiveButtons = [NSMutableArray array];
         
         _defaultButtonAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor],
-                             NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Medium" size:18]                             };
+                             NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Regular" size:16]                             };
         _cancelButtonAttributes = @{NSForegroundColorAttributeName: [UIColor lightGrayColor],
-                                     NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Medium" size:18]                             };
+                                     NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Regular" size:16]                             };
         _destructiveButtonAttributes = @{NSForegroundColorAttributeName: [UIColor redColor],
-                                     NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Medium" size:18]                             };
+                                     NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Regular" size:16]                             };
     }
     return self;
 }
@@ -68,7 +69,7 @@
     
     for (int i = 0; i < 2; i ++) {
         UkeAlertAction *action = self.actions[i];
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        UkeAlertActionButton *button = [[UkeAlertActionButton alloc] init];
         button.tag = i;
         [self setAttributedTextWith:action.title forButton:button style:action.style];
         [button addTarget:self action:@selector(handleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -93,7 +94,7 @@
 - (void)layoutForNotTwoActions {
     NSMutableArray *lines = [NSMutableArray array];
     [self.actions enumerateObjectsUsingBlock:^(UkeAlertAction *action, NSUInteger idx, BOOL * _Nonnull stop) {
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        UkeAlertActionButton *button = [[UkeAlertActionButton alloc] init];
         button.tag = idx;
         [self setAttributedTextWith:action.title forButton:button style:action.style];
         [button addTarget:self action:@selector(handleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -147,7 +148,7 @@
 }
 
 - (void)setAttributedTextWith:(NSString *)text
-            forButton:(UIButton *)button
+            forButton:(UkeAlertActionButton *)button
                 style:(UIAlertActionStyle)style {
     if (style == UIAlertActionStyleDefault) {
         button.titleLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:_defaultButtonAttributes];

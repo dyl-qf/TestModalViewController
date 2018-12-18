@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)dismissWithAnimated:(BOOL)animated;
 
 
-//! 默认270，跟系统保持一致
+//! 中间内容区宽度，默认270，跟系统保持一致
 @property (nonatomic, assign) CGFloat contentWidth;
 
 @end
