@@ -21,7 +21,6 @@
     if (self) {
         self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         self.transitioningDelegate = self;
-        self.contentWidth = 270;
     }
     return self;
 }
@@ -38,6 +37,23 @@
 }
 
 #pragma mark - Public.
+- (void)setContentWidth:(CGFloat)contentWidth {
+    _contentWidth = contentWidth;
+    if (!self.contentView) {
+        return;
+    }
+    
+    [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        if (contentWidth != 0) {
+            make.width.mas_equalTo(contentWidth);
+        }
+        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.centerY.mas_equalTo(self.view.mas_centerY);
+    }];
+    [self.view layoutIfNeeded];
+    self.view.bounds = self.contentView.bounds;
+}
+
 - (void)addContentView:(UIView *)view {
     if (self.contentView) {
         [self.contentView removeFromSuperview];
@@ -47,7 +63,9 @@
     
     [self.view addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(self.contentWidth);
+        if (self.contentWidth != 0) {
+            make.width.mas_equalTo(self.contentWidth);
+        }
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.centerY.mas_equalTo(self.view.mas_centerY);
     }];

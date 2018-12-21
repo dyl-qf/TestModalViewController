@@ -23,8 +23,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)dismissWithAnimated:(BOOL)animated;
 
 
-//! 中间内容区宽度，默认270，跟系统保持一致
+//! 中间内容区宽度。默认为0，内部通过contentView的约束计算，如果手动指定将忽略约束计算。
 @property (nonatomic, assign) CGFloat contentWidth;
+
+//! maskView是否可以响应dismiss手势
+@property (nonatomic, assign) BOOL shouldRespondsMaskViewTouch;
 
 @end
 

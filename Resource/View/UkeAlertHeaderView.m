@@ -73,8 +73,8 @@
 - (void)layoutTitleAndMessage:(NSArray *)subviews {
     UIView *firstView = subviews.firstObject;
     [firstView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(40);
-        make.right.offset(-40);
+        make.left.offset(30);
+        make.right.offset(-30);
         make.top.offset(24);
         if (subviews.count == 1) {
             make.bottom.offset(-24);
@@ -84,8 +84,8 @@
     if (subviews.count == 2) {
         UIView *secondView = subviews.lastObject;
         [secondView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.offset(40);
-            make.right.offset(-40);
+            make.left.offset(30);
+            make.right.offset(-30);
             make.top.mas_equalTo(firstView.mas_bottom).offset(24);
             make.bottom.offset(-30);
         }];

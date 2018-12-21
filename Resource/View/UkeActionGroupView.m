@@ -160,19 +160,19 @@
 }
 
 #pragma mark - Setter
-- (void)setDefaultButtonAttributes:(NSDictionary<NSString *,id> *)defaultButtonAttributes {
-    _defaultButtonAttributes = defaultButtonAttributes;
-    
-}
-
-- (void)setCancelButtonAttributes:(NSDictionary<NSString *,id> *)cancelButtonAttributes {
-    _cancelButtonAttributes = cancelButtonAttributes;
-    
-}
-
-- (void)setDestructiveButtonAttributes:(NSDictionary<NSString *,id> *)destructiveButtonAttributes {
-    _destructiveButtonAttributes = destructiveButtonAttributes;
-    
-}
+//- (void)setDefaultButtonAttributes:(NSDictionary<NSString *,id> *)defaultButtonAttributes {
+//    _defaultButtonAttributes = defaultButtonAttributes;
+//
+//}
+//
+//- (void)setCancelButtonAttributes:(NSDictionary<NSString *,id> *)cancelButtonAttributes {
+//    _cancelButtonAttributes = cancelButtonAttributes;
+//
+//}
+//
+//- (void)setDestructiveButtonAttributes:(NSDictionary<NSString *,id> *)destructiveButtonAttributes {
+//    _destructiveButtonAttributes = destructiveButtonAttributes;
+//
+//}
 
 @end

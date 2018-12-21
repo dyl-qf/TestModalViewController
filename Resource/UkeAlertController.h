@@ -21,6 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addAction:(UkeAlertAction *)action;
 @property (nonatomic, readonly) NSArray<UkeAlertAction *> *actions;
 
+//! 中间内容区宽度，默认270，跟系统保持一致
+@property (nonatomic, assign) CGFloat contentWidth;
+
 //! 标题相关属性
 @property(nonatomic, strong) NSDictionary<NSString *, id> *titleAttributes;
 //! message相关属性

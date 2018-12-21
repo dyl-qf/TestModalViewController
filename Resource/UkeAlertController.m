@@ -22,6 +22,7 @@
 @end
 
 @implementation UkeAlertController
+@synthesize contentWidth = _contentWidth;
 
 + (instancetype)alertControllerWithTitle:(NSString *)title
                                      message:(NSString *)message
@@ -30,6 +31,7 @@
     alertVc.preferredStyle = preferredStyle;
     UIView *contentView = [alertVc generateAlertContentViewWithTitle:title message:message preferredStyle:preferredStyle];
     [alertVc addContentView:contentView];
+    [alertVc setContentWidth:270];
     return alertVc;
 }
 
@@ -55,6 +57,10 @@
 
 
 #pragma mark - Setter.
+- (void)setContentWidth:(CGFloat)contentWidth {
+    [super setContentWidth:contentWidth];
+}
+
 - (void)setTitleAttributes:(NSDictionary<NSString *,id> *)titleAttributes {
     [self.headerView setTitleAttributes:titleAttributes];
 }
