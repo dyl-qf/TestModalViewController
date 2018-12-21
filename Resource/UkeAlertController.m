@@ -31,7 +31,12 @@
     alertVc.preferredStyle = preferredStyle;
     UIView *contentView = [alertVc generateAlertContentViewWithTitle:title message:message preferredStyle:preferredStyle];
     [alertVc addContentView:contentView];
-    [alertVc setContentWidth:270];
+    if (preferredStyle == UIAlertControllerStyleAlert) {
+        [alertVc setContentWidth:270];
+    }else if (preferredStyle == UIAlertControllerStyleActionSheet) {
+        CGFloat defaultWidth = [UIScreen mainScreen].bounds.size.width-8-8;
+        [alertVc setContentWidth:defaultWidth];
+    }
     return alertVc;
 }
 
@@ -44,7 +49,7 @@
 - (UkeAlertContentView *)generateAlertContentViewWithTitle:(NSString *)title
                                       message:(NSString *)message
                                preferredStyle:(UIAlertControllerStyle)preferredStyle {
-    UkeAlertHeaderView *header = [[UkeAlertHeaderView alloc] initWithTitle:title message:message];
+    UkeAlertHeaderView *header = [[UkeAlertHeaderView alloc] initWithTitle:title message:message preferredStyle:preferredStyle];
     
     UkeAlertContentView *content = [[UkeAlertContentView alloc] init];
     [content insertHeaderView:header];

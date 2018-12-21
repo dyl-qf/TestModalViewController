@@ -11,6 +11,8 @@
 #import "Masonry.h"
 
 @interface UkeAlertHeaderView ()
+@property (nonatomic, assign) UIAlertControllerStyle preferredStyle;
+
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *message;
 
@@ -21,7 +23,8 @@
 @implementation UkeAlertHeaderView
 
 - (instancetype)initWithTitle:(nullable NSString *)title
-                      message:(nullable NSString *)message {
+                      message:(nullable NSString *)message
+               preferredStyle:(UIAlertControllerStyle)preferredStyle {
     BOOL hasTitle = NO;
     BOOL hasMessage = NO;
     if ([title isKindOfClass:[NSString class]] && title.length) {
@@ -39,14 +42,26 @@
         _title = title;
         _message = message;
         
-        _titleAttributes = @{NSForegroundColorAttributeName: [UIColor redColor],
-                             NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Medium" size:18],
-                             NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]
-                             };
-        _messageAttributes = @{NSForegroundColorAttributeName: [UIColor orangeColor],
-                               NSFontAttributeName: [UIFont systemFontOfSize:16],
-                               NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]
-                               };
+        self.preferredStyle = preferredStyle;
+        if (preferredStyle == UIAlertControllerStyleAlert) {
+            _titleAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor],
+                                 NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Medium" size:18],
+                                 NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]
+                                 };
+            _messageAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor],
+                                   NSFontAttributeName: [UIFont systemFontOfSize:16],
+                                   NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]
+                                   };
+        }else if (preferredStyle == UIAlertControllerStyleActionSheet) {
+            _titleAttributes = @{NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                 NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Medium" size:13],
+                                 NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]
+                                 };
+            _messageAttributes = @{NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                   NSFontAttributeName: [UIFont systemFontOfSize:12],
+                                   NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]
+                                   };
+        }
         
         NSMutableArray *subviews = [NSMutableArray array];
         if (hasTitle) {

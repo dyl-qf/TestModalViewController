@@ -40,7 +40,6 @@
                                 <state key="normal" title="自定义alert"/>
                                 <connections>
                                     <action selector="test3:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o3Z-Fx-HOG"/>
-                                    <action selector="test:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DUW-su-IEw"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="13x-Gh-LGz">
@@ -48,7 +47,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="自定义actionSheet"/>
                                 <connections>
-                                    <action selector="test2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nPY-kP-Ij8"/>
                                     <action selector="test4:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iLc-Hs-ixQ"/>
                                 </connections>
                             </button>

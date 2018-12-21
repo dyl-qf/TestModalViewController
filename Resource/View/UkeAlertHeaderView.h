@@ -13,7 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UkeAlertHeaderView : UIView
 
 - (instancetype)initWithTitle:(nullable NSString *)title
-                      message:(nullable NSString *)message;
+                      message:(nullable NSString *)message
+               preferredStyle:(UIAlertControllerStyle)preferredStyle;
 
 //! 标题相关属性
 @property(nonatomic, strong) NSDictionary<NSString *, id> *titleAttributes;

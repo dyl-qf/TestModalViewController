@@ -8,6 +8,7 @@
 
 #import "UkePopUpViewController.h"
 #import "UkeAlertStyleAnimation.h"
+#import "UkeActionSheetAnimation.h"
 #import "Masonry.h"
 
 @interface UkePopUpViewController () <UIViewControllerTransitioningDelegate>
@@ -88,14 +89,27 @@
 
 #pragma mark - UIViewControllerTransitioningDelegate.
 - (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-    UkeAlertStyleAnimation *animation = [[UkeAlertStyleAnimation alloc] init];
-    animation.isPresented = YES;
-    return animation;
+    if (self.preferredStyle == UIAlertControllerStyleAlert) {
+        UkeAlertStyleAnimation *animation = [[UkeAlertStyleAnimation alloc] init];
+        animation.isPresented = YES;
+        return animation;
+    }else if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
+        UkeActionSheetAnimation *animation = [[UkeActionSheetAnimation alloc] init];
+        animation.isPresented = YES;
+        return animation;
+    }
+    return nil;
 }
 
 - (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    UkeAlertStyleAnimation *animation = [[UkeAlertStyleAnimation alloc] init];
-    return animation;
+    if (self.preferredStyle == UIAlertControllerStyleAlert) {
+        UkeAlertStyleAnimation *animation = [[UkeAlertStyleAnimation alloc] init];
+        return animation;
+    }else if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
+        UkeActionSheetAnimation *animation = [[UkeActionSheetAnimation alloc] init];
+        return animation;
+    }
+    return nil;
 }
 
 @end
