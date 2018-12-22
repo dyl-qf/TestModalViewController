@@ -40,6 +40,13 @@
         // layout
         [self.backContentView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.top.bottom.offset(0);
+            CGFloat maxmumHeight = [UIScreen mainScreen].bounds.size.height-24-24;
+//            UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+//            if (orientation == UIInterfaceOrientationLandscapeLeft ||
+//                orientation == UIInterfaceOrientationLandscapeRight) {
+//
+//            }
+            make.height.mas_lessThanOrEqualTo(maxmumHeight);
         }];
         [self.headerScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.right.offset(0);
@@ -60,8 +67,10 @@
         [defaultHeader mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(UIEdgeInsetsZero);
             make.height.mas_equalTo(0);
-            make.height.mas_equalTo(self.headerScrollView.mas_height);
             make.width.mas_equalTo(self.headerScrollView.mas_width);
+        }];
+        [self.headerScrollView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(defaultHeader.mas_height);
         }];
         
         UIView *defaultActionView = [[UIView alloc] init];
@@ -69,8 +78,10 @@
         [defaultActionView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(UIEdgeInsetsZero);
             make.height.mas_equalTo(0);
-            make.height.mas_equalTo(self.actionScrollview.mas_height);
             make.width.mas_equalTo(self.actionScrollview.mas_width);
+        }];
+        [self.actionScrollview mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(defaultActionView.mas_height);
         }];
     }
     return self;
@@ -87,8 +98,14 @@
     [self.headerScrollView addSubview:headerView];
     [headerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
-        make.height.mas_equalTo(self.headerScrollView.mas_height);
         make.width.mas_equalTo(self.headerScrollView.mas_width);
+    }];
+    
+    [self.headerScrollView mas_updateConstraints:^(MASConstraintMaker *make) {
+//        make.height.mas_lessThanOrEqualTo(200);
+        [self.headerScrollView setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+        make.height.mas_greaterThanOrEqualTo(100);
+        make.height.mas_equalTo(headerView.mas_height).priority(500);
     }];
 }
 
@@ -103,8 +120,12 @@
     [self.actionScrollview addSubview:actionGroupView];
     [actionGroupView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
-        make.height.mas_equalTo(self.actionScrollview.mas_height);
         make.width.mas_equalTo(self.actionScrollview.mas_width);
+    }];
+    
+    [self.actionScrollview mas_updateConstraints:^(MASConstraintMaker *make) {
+//        make.height.mas_lessThanOrEqualTo(300);
+        make.height.mas_equalTo(actionGroupView.mas_height).priority(500);
     }];
 }
 
