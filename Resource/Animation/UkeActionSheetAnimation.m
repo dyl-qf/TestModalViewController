@@ -75,7 +75,7 @@
     UIView *maskView = [containerView viewWithTag:1000];
     
     NSTimeInterval duration = [self transitionDuration:transitionContext];
-    NSTimeInterval delay = 0.0;
+    NSTimeInterval delay = 0.1;
     
     CGRect endFrame = CGRectMake((CGRectGetWidth(containerView.frame)-CGRectGetWidth(fromView.frame))*0.5, CGRectGetHeight(containerView.frame), CGRectGetWidth(fromView.frame), CGRectGetHeight(fromView.frame));
     [UIView animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveEaseOut animations:^{
