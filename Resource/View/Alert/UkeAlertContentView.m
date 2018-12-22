@@ -10,6 +10,7 @@
 #import "Masonry.h"
 
 @interface UkeAlertContentView ()
+@property (nonatomic, strong) UIView *backContentView;
 @property (nonatomic, strong) UIScrollView *headerScrollView;
 @property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, strong) UIScrollView *actionScrollview;
@@ -20,20 +21,26 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
-        self.layer.cornerRadius = 12.0;
-        self.layer.masksToBounds = YES;
+        self.backContentView = [[UIView alloc] init];
+        self.backContentView.backgroundColor = [UIColor whiteColor];
+        self.backContentView.layer.cornerRadius = 12.0;
+        self.backContentView.layer.masksToBounds = YES;
+        [self addSubview:self.backContentView];
         
         self.headerScrollView = [[UIScrollView alloc] init];
-        [self addSubview:self.headerScrollView];
+        [self.backContentView addSubview:self.headerScrollView];
         
         self.lineView = [[UIView alloc] init];
         self.lineView.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1.0];
-        [self addSubview:self.lineView];
+        [self.backContentView addSubview:self.lineView];
         
         self.actionScrollview = [[UIScrollView alloc] init];
-        [self addSubview:self.actionScrollview];
+        [self.backContentView addSubview:self.actionScrollview];
         
+        // layout
+        [self.backContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.top.bottom.offset(0);
+        }];
         [self.headerScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.right.offset(0);
         }];
@@ -47,6 +54,7 @@
             make.left.right.bottom.offset(0);
         }];
         
+        // 添加scrollView的默认占位内容
         UIView *defaultHeader = [[UIView alloc] init];
         [self.headerScrollView addSubview:defaultHeader];
         [defaultHeader mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -13,8 +13,6 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
-
         self.actionButtonHeight = 57.0;
         self.defaultButtonAttributes = @{NSForegroundColorAttributeName: [UIColor colorWithRed:45/255.0 green:139/255.0 blue:245/255.0 alpha:1.0],
                                      NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Regular" size:20]                             };

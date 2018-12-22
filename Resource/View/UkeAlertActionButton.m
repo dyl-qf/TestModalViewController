@@ -17,9 +17,7 @@
 
 - (instancetype)init {
     self = [super init];
-    if (self) {
-        self.backgroundColor = [UIColor whiteColor];
-        
+    if (self) {        
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_titleLabel];

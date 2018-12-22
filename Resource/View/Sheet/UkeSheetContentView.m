@@ -10,7 +10,6 @@
 #import "UkeSheetActionGroupView.h"
 #import "UkeAlertActionButton.h"
 #import "UkeAlertAction.h"
-#import "UIView+CornerRadius.h"
 #import "Masonry.h"
 
 @interface UkeSheetContentView ()
@@ -23,24 +22,14 @@
 
 - (instancetype)init {
     self = [super init];
-    if (self) {
-        //! 复原属性
-        self.backgroundColor = [UIColor clearColor];
-        
+    if (self) {        
         self.sheetCancelButtonMarginTop = 8.0;
     }
     return self;
 }
 
-- (void)insertHeaderView:(UIView *)headerView {
-    [super insertHeaderView:headerView];
-    [self.headerScrollView layoutIfNeeded];
-}
-
 - (void)insertActionGroupView:(UIView *)actionGroupView {
     [super insertActionGroupView:actionGroupView];
-    [self layoutIfNeeded];
-    [actionGroupView roundedRectWithRectCorner:UIRectCornerBottomLeft|UIRectCornerBottomRight cornerRadius:12];
 
     _actionGroupView = (UkeSheetActionGroupView *)actionGroupView;
     _actionButtonHeight = _actionGroupView.actionButtonHeight;
@@ -49,11 +38,12 @@
 - (void)addCancelAction:(UkeAlertAction *)action {
     self.cancelAction = action;
     
-    [self.actionScrollview mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.bottom.offset(-self.actionButtonHeight-self.sheetCancelButtonMarginTop);
+    [self.backContentView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.offset(-self.sheetCancelButtonMarginTop-self.actionButtonHeight);
     }];
     
     UkeAlertActionButton *cancelButton = [[UkeAlertActionButton alloc] init];
+    cancelButton.backgroundColor = [UIColor whiteColor];
     cancelButton.layer.cornerRadius = 12.0;
     cancelButton.layer.masksToBounds = YES;
     [self setAttributedTextWith:action.title forButton:cancelButton];
@@ -61,7 +51,7 @@
     [self addSubview:cancelButton];
     
     [cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.actionScrollview.mas_bottom).offset(self.sheetCancelButtonMarginTop);
+        make.top.mas_equalTo(self.backContentView.mas_bottom).offset(self.sheetCancelButtonMarginTop);
         make.left.right.offset(0);
         make.height.mas_equalTo(self.actionButtonHeight);
     }];
