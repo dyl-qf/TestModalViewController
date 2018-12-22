@@ -29,12 +29,12 @@
         self.cancelButtons = [NSMutableArray array];
         self.destructiveButtons = [NSMutableArray array];
         
-        _defaultButtonAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor],
-                             NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Regular" size:16]                             };
-        _cancelButtonAttributes = @{NSForegroundColorAttributeName: [UIColor lightGrayColor],
-                                     NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Regular" size:16]                             };
+        _defaultButtonAttributes = @{NSForegroundColorAttributeName: [UIColor colorWithRed:45/255.0 green:139/255.0 blue:245/255.0 alpha:1.0],
+                                         NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Regular" size:17]                             };
+        _cancelButtonAttributes = @{NSForegroundColorAttributeName: [UIColor colorWithRed:45/255.0 green:139/255.0 blue:245/255.0 alpha:1.0],
+                                        NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Semibold" size:17]                             };
         _destructiveButtonAttributes = @{NSForegroundColorAttributeName: [UIColor redColor],
-                                     NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Regular" size:16]                             };
+                                             NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Regular" size:17]                             };
     }
     return self;
 }
