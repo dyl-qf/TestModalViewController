@@ -9,6 +9,7 @@
 #import "UkeAlertController.h"
 #import "UkeAlertContentView.h"
 #import "UkeAlertHeaderView.h"
+#import "UkeSheetHeaderView.h"
 #import "UkeActionGroupView.h"
 #import "Masonry.h"
 
@@ -49,7 +50,12 @@
 - (UkeAlertContentView *)generateAlertContentViewWithTitle:(NSString *)title
                                       message:(NSString *)message
                                preferredStyle:(UIAlertControllerStyle)preferredStyle {
-    UkeAlertHeaderView *header = [[UkeAlertHeaderView alloc] initWithTitle:title message:message preferredStyle:preferredStyle];
+    UkeAlertHeaderView *header = nil;
+    if (preferredStyle == UIAlertControllerStyleAlert) {
+        header = [[UkeAlertHeaderView alloc] initWithTitle:title message:message];
+    }else if (preferredStyle == UIAlertControllerStyleActionSheet) {
+        header = [[UkeSheetHeaderView alloc] initWithTitle:title message:message];
+    }
     
     UkeAlertContentView *content = [[UkeAlertContentView alloc] init];
     [content insertHeaderView:header];

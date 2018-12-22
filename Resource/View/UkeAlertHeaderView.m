@@ -11,8 +11,6 @@
 #import "Masonry.h"
 
 @interface UkeAlertHeaderView ()
-@property (nonatomic, assign) UIAlertControllerStyle preferredStyle;
-
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *message;
 
@@ -23,8 +21,7 @@
 @implementation UkeAlertHeaderView
 
 - (instancetype)initWithTitle:(nullable NSString *)title
-                      message:(nullable NSString *)message
-               preferredStyle:(UIAlertControllerStyle)preferredStyle {
+                      message:(nullable NSString *)message {
     BOOL hasTitle = NO;
     BOOL hasMessage = NO;
     if ([title isKindOfClass:[NSString class]] && title.length) {
@@ -42,30 +39,19 @@
         _title = title;
         _message = message;
         
-        self.preferredStyle = preferredStyle;
-        if (preferredStyle == UIAlertControllerStyleAlert) {
-            _titleAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor],
-                                 NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Medium" size:18],
-                                 NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]
-                                 };
-            _messageAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor],
-                                   NSFontAttributeName: [UIFont systemFontOfSize:16],
-                                   NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]
-                                   };
-        }else if (preferredStyle == UIAlertControllerStyleActionSheet) {
-            _titleAttributes = @{NSForegroundColorAttributeName: [UIColor lightGrayColor],
-                                 NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Medium" size:13],
-                                 NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]
-                                 };
-            _messageAttributes = @{NSForegroundColorAttributeName: [UIColor lightGrayColor],
-                                   NSFontAttributeName: [UIFont systemFontOfSize:12],
-                                   NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]
-                                   };
-        }
+        _titleAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor],
+                             NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Medium" size:18],
+                             NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]
+                             };
+        _messageAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor],
+                               NSFontAttributeName: [UIFont systemFontOfSize:16],
+                               NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]
+                               };
         
         NSMutableArray *subviews = [NSMutableArray array];
         if (hasTitle) {
             _titleLabel = [[UILabel alloc] init];
+            _titleLabel.tag = 100;
             _titleLabel.numberOfLines = 0;
             _titleLabel.attributedText = [[NSAttributedString alloc] initWithString:title attributes:_titleAttributes];
             [self addSubview:_titleLabel];
@@ -74,6 +60,7 @@
         
         if (hasMessage) {
             _messageLabel = [[UILabel alloc] init];
+            _messageLabel.tag = 101;
             _messageLabel.numberOfLines = 0;
             _messageLabel.attributedText = [[NSAttributedString alloc] initWithString:message attributes:_messageAttributes];
             [self addSubview:_messageLabel];
@@ -85,7 +72,7 @@
     return self;
 }
 
-- (void)layoutTitleAndMessage:(NSArray *)subviews {
+- (void)layoutTitleAndMessage:(NSArray<UIView *> *)subviews {
     UIView *firstView = subviews.firstObject;
     [firstView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(30);

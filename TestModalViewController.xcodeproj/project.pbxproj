@@ -26,6 +26,7 @@
 		549FC7ED21C39BD000619693 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 549FC7EC21C39BD000619693 /* main.m */; };
 		549FC7F721C39BD000619693 /* TestModalViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 549FC7F621C39BD000619693 /* TestModalViewControllerTests.m */; };
 		549FC80221C39BD000619693 /* TestModalViewControllerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 549FC80121C39BD000619693 /* TestModalViewControllerUITests.m */; };
+		54B28D6B21CDCA0A00335FD9 /* UkeSheetHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B28D6A21CDCA0A00335FD9 /* UkeSheetHeaderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,8 @@
 		549FC7FD21C39BD000619693 /* TestModalViewControllerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestModalViewControllerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		549FC80121C39BD000619693 /* TestModalViewControllerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestModalViewControllerUITests.m; sourceTree = "<group>"; };
 		549FC80321C39BD000619693 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		54B28D6921CDCA0A00335FD9 /* UkeSheetHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeSheetHeaderView.h; sourceTree = "<group>"; };
+		54B28D6A21CDCA0A00335FD9 /* UkeSheetHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeSheetHeaderView.m; sourceTree = "<group>"; };
 		E4A41E29FA4DDB8995BE382B /* Pods_TestModalViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TestModalViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E66E4CA7D6B7452954F053F4 /* Pods-TestModalViewController.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestModalViewController.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TestModalViewController/Pods-TestModalViewController.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -152,6 +155,8 @@
 				5434CE4821C7E59700178D31 /* UkeAlertContentView.m */,
 				5434CE4A21C7E60E00178D31 /* UkeAlertHeaderView.h */,
 				5434CE4B21C7E60E00178D31 /* UkeAlertHeaderView.m */,
+				54B28D6921CDCA0A00335FD9 /* UkeSheetHeaderView.h */,
+				54B28D6A21CDCA0A00335FD9 /* UkeSheetHeaderView.m */,
 				5417911221C89946000D5F7B /* UkeActionGroupView.h */,
 				5417911321C89946000D5F7B /* UkeActionGroupView.m */,
 				5417911C21C8ECA5000D5F7B /* UkeAlertActionButton.h */,
@@ -418,6 +423,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5434CE4421C7E2E800178D31 /* UkeAlertStyleAnimation.m in Sources */,
+				54B28D6B21CDCA0A00335FD9 /* UkeSheetHeaderView.m in Sources */,
 				5417911B21C8E693000D5F7B /* NSParagraphStyle+Shortcut.m in Sources */,
 				549FC7E221C39BCE00619693 /* ViewController.m in Sources */,
 				5417911121C7BAE8000D5F7B /* UkeAlertController.m in Sources */,
