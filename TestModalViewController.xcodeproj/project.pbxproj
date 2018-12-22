@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0B36D7408F7F3B7315E7A672 /* Pods_TestModalViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4A41E29FA4DDB8995BE382B /* Pods_TestModalViewController.framework */; };
 		5417911121C7BAE8000D5F7B /* UkeAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5417911021C7BAE8000D5F7B /* UkeAlertController.m */; };
-		5417911421C89946000D5F7B /* UkeActionGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5417911321C89946000D5F7B /* UkeActionGroupView.m */; };
 		5417911821C899D8000D5F7B /* UkeAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 5417911721C899D8000D5F7B /* UkeAlertAction.m */; };
 		5417911B21C8E693000D5F7B /* NSParagraphStyle+Shortcut.m in Sources */ = {isa = PBXBuildFile; fileRef = 5417911A21C8E693000D5F7B /* NSParagraphStyle+Shortcut.m */; };
 		5417911E21C8ECA5000D5F7B /* UkeAlertActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5417911D21C8ECA5000D5F7B /* UkeAlertActionButton.m */; };
@@ -17,7 +16,6 @@
 		5434CE4521C7E2E800178D31 /* UkeActionSheetAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5434CE3E21C7E2E800178D31 /* UkeActionSheetAnimation.m */; };
 		5434CE4621C7E2E800178D31 /* UkePopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5434CE4221C7E2E800178D31 /* UkePopUpViewController.m */; };
 		5434CE4921C7E59700178D31 /* UkeAlertContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5434CE4821C7E59700178D31 /* UkeAlertContentView.m */; };
-		5434CE4C21C7E60E00178D31 /* UkeAlertHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5434CE4B21C7E60E00178D31 /* UkeAlertHeaderView.m */; };
 		549FC7DF21C39BCE00619693 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 549FC7DE21C39BCE00619693 /* AppDelegate.m */; };
 		549FC7E221C39BCE00619693 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 549FC7E121C39BCE00619693 /* ViewController.m */; };
 		549FC7E521C39BCE00619693 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 549FC7E321C39BCE00619693 /* Main.storyboard */; };
@@ -26,7 +24,10 @@
 		549FC7ED21C39BD000619693 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 549FC7EC21C39BD000619693 /* main.m */; };
 		549FC7F721C39BD000619693 /* TestModalViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 549FC7F621C39BD000619693 /* TestModalViewControllerTests.m */; };
 		549FC80221C39BD000619693 /* TestModalViewControllerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 549FC80121C39BD000619693 /* TestModalViewControllerUITests.m */; };
-		54B28D6B21CDCA0A00335FD9 /* UkeSheetHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B28D6A21CDCA0A00335FD9 /* UkeSheetHeaderView.m */; };
+		54B28D7421CDD43B00335FD9 /* UkeAlertActionGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B28D6D21CDD43A00335FD9 /* UkeAlertActionGroupView.m */; };
+		54B28D7521CDD43B00335FD9 /* UkeAlertHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B28D6E21CDD43B00335FD9 /* UkeAlertHeaderView.m */; };
+		54B28D7621CDD43B00335FD9 /* UkeSheetHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B28D7321CDD43B00335FD9 /* UkeSheetHeaderView.m */; };
+		54B28D7C21CDD53600335FD9 /* UkeSheetActionGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B28D7B21CDD53600335FD9 /* UkeSheetActionGroupView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,8 +51,6 @@
 		0004F1E308EB957B32AE1430 /* Pods-TestModalViewController.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestModalViewController.release.xcconfig"; path = "Pods/Target Support Files/Pods-TestModalViewController/Pods-TestModalViewController.release.xcconfig"; sourceTree = "<group>"; };
 		5417910F21C7BAE8000D5F7B /* UkeAlertController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeAlertController.h; sourceTree = "<group>"; };
 		5417911021C7BAE8000D5F7B /* UkeAlertController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeAlertController.m; sourceTree = "<group>"; };
-		5417911221C89946000D5F7B /* UkeActionGroupView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeActionGroupView.h; sourceTree = "<group>"; };
-		5417911321C89946000D5F7B /* UkeActionGroupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeActionGroupView.m; sourceTree = "<group>"; };
 		5417911621C899D8000D5F7B /* UkeAlertAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeAlertAction.h; sourceTree = "<group>"; };
 		5417911721C899D8000D5F7B /* UkeAlertAction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeAlertAction.m; sourceTree = "<group>"; };
 		5417911921C8E693000D5F7B /* NSParagraphStyle+Shortcut.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSParagraphStyle+Shortcut.h"; sourceTree = "<group>"; };
@@ -66,8 +65,6 @@
 		5434CE4321C7E2E800178D31 /* UkePopUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UkePopUpViewController.h; sourceTree = "<group>"; };
 		5434CE4721C7E59700178D31 /* UkeAlertContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeAlertContentView.h; sourceTree = "<group>"; };
 		5434CE4821C7E59700178D31 /* UkeAlertContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeAlertContentView.m; sourceTree = "<group>"; };
-		5434CE4A21C7E60E00178D31 /* UkeAlertHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeAlertHeaderView.h; sourceTree = "<group>"; };
-		5434CE4B21C7E60E00178D31 /* UkeAlertHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeAlertHeaderView.m; sourceTree = "<group>"; };
 		549FC7DA21C39BCE00619693 /* TestModalViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestModalViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		549FC7DD21C39BCE00619693 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		549FC7DE21C39BCE00619693 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -84,8 +81,14 @@
 		549FC7FD21C39BD000619693 /* TestModalViewControllerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestModalViewControllerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		549FC80121C39BD000619693 /* TestModalViewControllerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestModalViewControllerUITests.m; sourceTree = "<group>"; };
 		549FC80321C39BD000619693 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		54B28D6921CDCA0A00335FD9 /* UkeSheetHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeSheetHeaderView.h; sourceTree = "<group>"; };
-		54B28D6A21CDCA0A00335FD9 /* UkeSheetHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeSheetHeaderView.m; sourceTree = "<group>"; };
+		54B28D6D21CDD43A00335FD9 /* UkeAlertActionGroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UkeAlertActionGroupView.m; sourceTree = "<group>"; };
+		54B28D6E21CDD43B00335FD9 /* UkeAlertHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UkeAlertHeaderView.m; sourceTree = "<group>"; };
+		54B28D6F21CDD43B00335FD9 /* UkeAlertActionGroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UkeAlertActionGroupView.h; sourceTree = "<group>"; };
+		54B28D7021CDD43B00335FD9 /* UkeAlertHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UkeAlertHeaderView.h; sourceTree = "<group>"; };
+		54B28D7221CDD43B00335FD9 /* UkeSheetHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UkeSheetHeaderView.h; sourceTree = "<group>"; };
+		54B28D7321CDD43B00335FD9 /* UkeSheetHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UkeSheetHeaderView.m; sourceTree = "<group>"; };
+		54B28D7A21CDD53600335FD9 /* UkeSheetActionGroupView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeSheetActionGroupView.h; sourceTree = "<group>"; };
+		54B28D7B21CDD53600335FD9 /* UkeSheetActionGroupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeSheetActionGroupView.m; sourceTree = "<group>"; };
 		E4A41E29FA4DDB8995BE382B /* Pods_TestModalViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TestModalViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E66E4CA7D6B7452954F053F4 /* Pods-TestModalViewController.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestModalViewController.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TestModalViewController/Pods-TestModalViewController.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -151,14 +154,10 @@
 		5434CE3B21C7E2E800178D31 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				54B28D6C21CDD43A00335FD9 /* Alert */,
+				54B28D7121CDD43B00335FD9 /* Sheet */,
 				5434CE4721C7E59700178D31 /* UkeAlertContentView.h */,
 				5434CE4821C7E59700178D31 /* UkeAlertContentView.m */,
-				5434CE4A21C7E60E00178D31 /* UkeAlertHeaderView.h */,
-				5434CE4B21C7E60E00178D31 /* UkeAlertHeaderView.m */,
-				54B28D6921CDCA0A00335FD9 /* UkeSheetHeaderView.h */,
-				54B28D6A21CDCA0A00335FD9 /* UkeSheetHeaderView.m */,
-				5417911221C89946000D5F7B /* UkeActionGroupView.h */,
-				5417911321C89946000D5F7B /* UkeActionGroupView.m */,
 				5417911C21C8ECA5000D5F7B /* UkeAlertActionButton.h */,
 				5417911D21C8ECA5000D5F7B /* UkeAlertActionButton.m */,
 			);
@@ -240,6 +239,28 @@
 				549FC80321C39BD000619693 /* Info.plist */,
 			);
 			path = TestModalViewControllerUITests;
+			sourceTree = "<group>";
+		};
+		54B28D6C21CDD43A00335FD9 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				54B28D6E21CDD43B00335FD9 /* UkeAlertHeaderView.m */,
+				54B28D7021CDD43B00335FD9 /* UkeAlertHeaderView.h */,
+				54B28D6F21CDD43B00335FD9 /* UkeAlertActionGroupView.h */,
+				54B28D6D21CDD43A00335FD9 /* UkeAlertActionGroupView.m */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		54B28D7121CDD43B00335FD9 /* Sheet */ = {
+			isa = PBXGroup;
+			children = (
+				54B28D7221CDD43B00335FD9 /* UkeSheetHeaderView.h */,
+				54B28D7321CDD43B00335FD9 /* UkeSheetHeaderView.m */,
+				54B28D7A21CDD53600335FD9 /* UkeSheetActionGroupView.h */,
+				54B28D7B21CDD53600335FD9 /* UkeSheetActionGroupView.m */,
+			);
+			path = Sheet;
 			sourceTree = "<group>";
 		};
 		6E4655D59C802EF6613026DB /* Pods */ = {
@@ -423,18 +444,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				5434CE4421C7E2E800178D31 /* UkeAlertStyleAnimation.m in Sources */,
-				54B28D6B21CDCA0A00335FD9 /* UkeSheetHeaderView.m in Sources */,
 				5417911B21C8E693000D5F7B /* NSParagraphStyle+Shortcut.m in Sources */,
 				549FC7E221C39BCE00619693 /* ViewController.m in Sources */,
 				5417911121C7BAE8000D5F7B /* UkeAlertController.m in Sources */,
 				5434CE4621C7E2E800178D31 /* UkePopUpViewController.m in Sources */,
-				5417911421C89946000D5F7B /* UkeActionGroupView.m in Sources */,
-				5434CE4C21C7E60E00178D31 /* UkeAlertHeaderView.m in Sources */,
+				54B28D7621CDD43B00335FD9 /* UkeSheetHeaderView.m in Sources */,
 				549FC7ED21C39BD000619693 /* main.m in Sources */,
 				5434CE4921C7E59700178D31 /* UkeAlertContentView.m in Sources */,
+				54B28D7C21CDD53600335FD9 /* UkeSheetActionGroupView.m in Sources */,
 				5434CE4521C7E2E800178D31 /* UkeActionSheetAnimation.m in Sources */,
 				549FC7DF21C39BCE00619693 /* AppDelegate.m in Sources */,
 				5417911E21C8ECA5000D5F7B /* UkeAlertActionButton.m in Sources */,
+				54B28D7521CDD43B00335FD9 /* UkeAlertHeaderView.m in Sources */,
+				54B28D7421CDD43B00335FD9 /* UkeAlertActionGroupView.m in Sources */,
 				5417911821C899D8000D5F7B /* UkeAlertAction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

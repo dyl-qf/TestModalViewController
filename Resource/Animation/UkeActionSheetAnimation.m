@@ -11,7 +11,7 @@
 @implementation UkeActionSheetAnimation
 
 - (NSTimeInterval)transitionDuration:(nullable id <UIViewControllerContextTransitioning>)transitionContext {
-    return self.isPresented ? 0.20 : 0.16;
+    return self.isPresented ? 0.18 : 0.16;
 }
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
@@ -53,7 +53,7 @@
     NSTimeInterval duration = [self transitionDuration:transitionContext];
     
     CGRect endFrame = CGRectMake((CGRectGetWidth(containerView.frame)-CGRectGetWidth(toView.frame))*0.5, CGRectGetHeight(containerView.frame)-CGRectGetHeight(toView.frame), CGRectGetWidth(toView.frame), CGRectGetHeight(toView.frame));
-    [UIView animateWithDuration:duration delay:0.1 options:UIViewAnimationOptionCurveEaseOut animations:^{
+    [UIView animateWithDuration:duration delay:0.05 options:UIViewAnimationOptionCurveEaseIn animations:^{
         toView.frame = endFrame;
         maskView.alpha = 1.0;
     } completion:^(BOOL finished) {

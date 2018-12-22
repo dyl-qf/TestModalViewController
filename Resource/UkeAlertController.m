@@ -10,7 +10,8 @@
 #import "UkeAlertContentView.h"
 #import "UkeAlertHeaderView.h"
 #import "UkeSheetHeaderView.h"
-#import "UkeActionGroupView.h"
+#import "UkeAlertActionGroupView.h"
+#import "UkeSheetActionGroupView.h"
 #import "Masonry.h"
 
 @interface UkeAlertController ()
@@ -19,7 +20,7 @@
 
 @property (nonatomic, strong) UkeAlertContentView *contentView; //! 整个content
 @property (nonatomic, strong) UkeAlertHeaderView *headerView; //! title和message
-@property (nonatomic, strong) UkeActionGroupView *actionGroupView; //! 按钮区域
+@property (nonatomic, strong) UkeAlertActionGroupView *actionGroupView; //! 按钮区域
 @end
 
 @implementation UkeAlertController
@@ -93,9 +94,13 @@
 }
 
 #pragma mark - Getter.
-- (UkeActionGroupView *)actionGroupView {
+- (UkeAlertActionGroupView *)actionGroupView {
     if (!_actionGroupView) {
-        _actionGroupView = [[UkeActionGroupView alloc] init];
+        if (self.preferredStyle == UIAlertControllerStyleAlert) {
+            _actionGroupView = [[UkeAlertActionGroupView alloc] init];
+        }else if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
+            _actionGroupView = [[UkeSheetActionGroupView alloc] init];
+        }
         __weak typeof(self)weakSelf = self;
         _actionGroupView.dismissHandler = ^{
             [weakSelf dismiss];

@@ -1,30 +1,29 @@
 //
-//  UkeActionGroupView.m
+//  UkeAlertActionGroupView.m
 //  TestModalViewController
 //
 //  Created by liqian on 2018/12/18.
 //  Copyright © 2018 liqian. All rights reserved.
 //
 
-#import "UkeActionGroupView.h"
+#import "UkeAlertActionGroupView.h"
 #import "Masonry.h"
 #import "UkeAlertActionButton.h"
 #import "UkeAlertAction.h"
 
-@interface UkeActionGroupView ()
+@interface UkeAlertActionGroupView ()
 @property (nonatomic, strong) NSArray<UkeAlertAction *> *actions;
 @property (nonatomic, strong) NSMutableArray<UkeAlertActionButton *> *defaultButtons;
 @property (nonatomic, strong) NSMutableArray<UkeAlertActionButton *> *cancelButtons;
 @property (nonatomic, strong) NSMutableArray<UkeAlertActionButton *> *destructiveButtons;
 @end
 
-#define UkeAlertActionButtonHeight 44.0
-
-@implementation UkeActionGroupView
+@implementation UkeAlertActionGroupView
 
 - (instancetype)init {
     self = [super init];
     if (self) {
+        self.actionButtonHeight = 44.0;
         self.actions = [NSArray array];
         self.defaultButtons = [NSMutableArray array];
         self.cancelButtons = [NSMutableArray array];
@@ -79,13 +78,13 @@
             [button mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.top.bottom.offset(0);
                 make.right.mas_equalTo(lineView.mas_left);
-                make.height.mas_equalTo(UkeAlertActionButtonHeight);
+                make.height.mas_equalTo(self.actionButtonHeight);
             }];
         }else if (i == 1) {
             [button mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.right.top.offset(0);
                 make.left.mas_equalTo(lineView.mas_right);
-                make.height.mas_equalTo(UkeAlertActionButtonHeight);
+                make.height.mas_equalTo(self.actionButtonHeight);
             }];
         }
     }
@@ -107,7 +106,7 @@
         
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.offset(0);
-            make.height.mas_equalTo(UkeAlertActionButtonHeight);
+            make.height.mas_equalTo(self.actionButtonHeight);
             if (idx == 0) {
                 make.top.offset(0);
             }else {
