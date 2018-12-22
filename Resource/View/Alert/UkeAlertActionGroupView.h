@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UkeAlertActionGroupView : UIView
 
 - (void)addAction:(UkeAlertAction *)action;
+
+- (void)layoutActions;
+
 @property (nonatomic, readonly) NSArray<UkeAlertAction *> *actions;
 @property (nonatomic, strong) void(^dismissHandler)(void);
 

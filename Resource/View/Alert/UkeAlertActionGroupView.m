@@ -43,7 +43,6 @@
     NSMutableArray *actions = self.actions.mutableCopy;
     [actions addObject:action];
     self.actions = actions.copy;
-    [self layoutActions];
 }
 
 - (void)layoutActions {

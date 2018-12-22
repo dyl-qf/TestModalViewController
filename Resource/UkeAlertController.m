@@ -30,21 +30,53 @@
 + (instancetype)alertControllerWithTitle:(NSString *)title
                                      message:(NSString *)message
                               preferredStyle:(UIAlertControllerStyle)preferredStyle {
-    UkeAlertController *alertVc = [[UkeAlertController alloc] init];
-    alertVc.preferredStyle = preferredStyle;
-    UIView *contentView = [alertVc generateAlertContentViewWithTitle:title message:message preferredStyle:preferredStyle];
-    [alertVc addContentView:contentView];
-    if (preferredStyle == UIAlertControllerStyleAlert) {
-        [alertVc setContentWidth:270];
-    }else if (preferredStyle == UIAlertControllerStyleActionSheet) {
-        CGFloat defaultWidth = [UIScreen mainScreen].bounds.size.width-8-8;
-        [alertVc setContentWidth:defaultWidth];
-    }
+    UkeAlertController *alertVc = [[UkeAlertController alloc] initWithTitle:title message:message preferredStyle:preferredStyle];
     return alertVc;
 }
 
+
+- (instancetype)initWithTitle:(NSString *)title
+                                 message:(NSString *)message
+                          preferredStyle:(UIAlertControllerStyle)preferredStyle {
+    self = [super init];
+    if (self) {
+        self.preferredStyle = preferredStyle;
+        
+        CGFloat defaultContentWidth = 0;
+        UkeAlertContentView *content = nil;
+        UkeAlertHeaderView *header = nil;
+
+        if (preferredStyle == UIAlertControllerStyleAlert) {
+            content = [[UkeAlertContentView alloc] init];
+            header = [[UkeAlertHeaderView alloc] initWithTitle:title message:message];
+            defaultContentWidth = 270.0;
+        }else if (preferredStyle == UIAlertControllerStyleActionSheet) {
+            content = [[UkeSheetContentView alloc] init];
+            header = [[UkeSheetHeaderView alloc] initWithTitle:title message:message];
+            defaultContentWidth = [UIScreen mainScreen].bounds.size.width-8-8;
+        }
+        
+        [self setContentWidth:defaultContentWidth];
+        self.contentView = content;
+        self.headerView = header;
+    }
+    return self;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self.actionGroupView layoutActions];
+
+    [self.contentView insertHeaderView:self.headerView];
+    [self.contentView insertActionGroupView:self.actionGroupView];
+    
+    [self addContentView:self.contentView];
+}
+
 - (void)addAction:(UkeAlertAction *)action {
-    BOOL isSheetCancelAction = NO; // ActionSheet的cancel按钮需要特殊处理，因为这个按钮s不是添加在actionGroupView中的，而是在contentView中
+    // ActionSheet的cancel按钮需要特殊处理，因为这个按钮s不是添加在actionGroupView中的，而是在contentView中
+    BOOL isSheetCancelAction = NO;
     if (self.preferredStyle == UIAlertControllerStyleActionSheet && action.style == UIAlertActionStyleCancel) {
         isSheetCancelAction = YES;
     }
@@ -58,34 +90,11 @@
         UkeSheetContentView *sheetContentView = (UkeSheetContentView *)self.contentView;
         [sheetContentView addCancelAction:action];
     }
-    
-    [self addContentView:self.contentView];
 }
-
-- (UkeAlertContentView *)generateAlertContentViewWithTitle:(NSString *)title
-                                      message:(NSString *)message
-                               preferredStyle:(UIAlertControllerStyle)preferredStyle {
-    UkeAlertContentView *content = nil;
-    UkeAlertHeaderView *header = nil;
-    if (preferredStyle == UIAlertControllerStyleAlert) {
-        content = [[UkeAlertContentView alloc] init];
-        header = [[UkeAlertHeaderView alloc] initWithTitle:title message:message];
-    }else if (preferredStyle == UIAlertControllerStyleActionSheet) {
-        content = [[UkeSheetContentView alloc] init];
-        header = [[UkeSheetHeaderView alloc] initWithTitle:title message:message];
-    }
-    
-    [content insertHeaderView:header];
-    
-    self.headerView = header;
-    self.contentView = content;
-    
-    return content;
-}
-
 
 #pragma mark - Setter.
 - (void)setContentWidth:(CGFloat)contentWidth {
+    _contentWidth = contentWidth;
     [super setContentWidth:contentWidth];
 }
 
