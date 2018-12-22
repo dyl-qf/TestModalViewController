@@ -15,6 +15,8 @@
 - (instancetype)initWithTitle:(NSString *)title message:(NSString *)message {
     self = [super initWithTitle:title message:message];
     if (self) {
+        self.backgroundColor = [UIColor whiteColor];
+        
         self.titleAttributes = @{NSForegroundColorAttributeName: [UIColor lightGrayColor],
                              NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Medium" size:13],
                              NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]

@@ -49,7 +49,7 @@
 - (void)layoutActions {
     [self removeAllSubviews];
     
-    if (self.actions.count == 2) {
+    if (self.actions.count == 2 && [self isMemberOfClass:[UkeAlertActionGroupView class]]) {
         [self layoutForTwoActions];
     }else {
         [self layoutForNotTwoActions];

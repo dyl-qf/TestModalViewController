@@ -8,6 +8,7 @@
 
 #import "UkeAlertController.h"
 #import "UkeAlertContentView.h"
+#import "UkeSheetContentView.h"
 #import "UkeAlertHeaderView.h"
 #import "UkeSheetHeaderView.h"
 #import "UkeAlertActionGroupView.h"
@@ -43,22 +44,37 @@
 }
 
 - (void)addAction:(UkeAlertAction *)action {
-    [self.actionGroupView addAction:action];
+    BOOL isSheetCancelAction = NO; // ActionSheet的cancel按钮需要特殊处理，因为这个按钮s不是添加在actionGroupView中的，而是在contentView中
+    if (self.preferredStyle == UIAlertControllerStyleActionSheet && action.style == UIAlertActionStyleCancel) {
+        isSheetCancelAction = YES;
+    }
+    
+    if (!isSheetCancelAction) {
+        [self.actionGroupView addAction:action];
+    }
     [self.contentView insertActionGroupView:self.actionGroupView];
+    
+    if (isSheetCancelAction) {
+        UkeSheetContentView *sheetContentView = (UkeSheetContentView *)self.contentView;
+        [sheetContentView addCancelAction:action];
+    }
+    
     [self addContentView:self.contentView];
 }
 
 - (UkeAlertContentView *)generateAlertContentViewWithTitle:(NSString *)title
                                       message:(NSString *)message
                                preferredStyle:(UIAlertControllerStyle)preferredStyle {
+    UkeAlertContentView *content = nil;
     UkeAlertHeaderView *header = nil;
     if (preferredStyle == UIAlertControllerStyleAlert) {
+        content = [[UkeAlertContentView alloc] init];
         header = [[UkeAlertHeaderView alloc] initWithTitle:title message:message];
     }else if (preferredStyle == UIAlertControllerStyleActionSheet) {
+        content = [[UkeSheetContentView alloc] init];
         header = [[UkeSheetHeaderView alloc] initWithTitle:title message:message];
     }
     
-    UkeAlertContentView *content = [[UkeAlertContentView alloc] init];
     [content insertHeaderView:header];
     
     self.headerView = header;

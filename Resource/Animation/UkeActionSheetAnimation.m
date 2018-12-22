@@ -52,8 +52,8 @@
     
     NSTimeInterval duration = [self transitionDuration:transitionContext];
     
-    CGRect endFrame = CGRectMake((CGRectGetWidth(containerView.frame)-CGRectGetWidth(toView.frame))*0.5, CGRectGetHeight(containerView.frame)-CGRectGetHeight(toView.frame), CGRectGetWidth(toView.frame), CGRectGetHeight(toView.frame));
-    [UIView animateWithDuration:duration delay:0.05 options:UIViewAnimationOptionCurveEaseIn animations:^{
+    CGRect endFrame = CGRectMake((CGRectGetWidth(containerView.frame)-CGRectGetWidth(toView.frame))*0.5, CGRectGetHeight(containerView.frame)-CGRectGetHeight(toView.frame)-8.0, CGRectGetWidth(toView.frame), CGRectGetHeight(toView.frame));
+    [UIView animateWithDuration:duration delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         toView.frame = endFrame;
         maskView.alpha = 1.0;
     } completion:^(BOOL finished) {
