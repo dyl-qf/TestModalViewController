@@ -26,6 +26,7 @@
 
 @implementation UkeAlertController
 @synthesize contentWidth = _contentWidth;
+@synthesize sheetContentMarginBottom = _sheetContentMarginBottom;
 
 + (instancetype)alertControllerWithTitle:(NSString *)title
                                      message:(NSString *)message
@@ -51,6 +52,8 @@
             header = [[UkeAlertHeaderView alloc] initWithTitle:title message:message];
             defaultContentWidth = 270.0;
         }else if (preferredStyle == UIAlertControllerStyleActionSheet) {
+            [self setSheetContentMarginBottom:8.0];
+            
             content = [[UkeSheetContentView alloc] init];
             header = [[UkeSheetHeaderView alloc] initWithTitle:title message:message];
             defaultContentWidth = [UIScreen mainScreen].bounds.size.width-8-8;
@@ -98,12 +101,29 @@
     [super setContentWidth:contentWidth];
 }
 
+- (void)setSheetContentMarginBottom:(CGFloat)sheetContentMarginBottom {
+    _sheetContentMarginBottom = sheetContentMarginBottom;
+    [super setSheetContentMarginBottom:sheetContentMarginBottom];
+}
+
+- (void)setSheetCancelButtonMarginTop:(CGFloat)sheetCancelButtonMarginTop {
+    _sheetCancelButtonMarginTop = sheetCancelButtonMarginTop;
+    if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
+        ((UkeSheetContentView *)self.contentView).sheetCancelButtonMarginTop = sheetCancelButtonMarginTop;
+    }
+}
+
 - (void)setTitleAttributes:(NSDictionary<NSString *,id> *)titleAttributes {
     [self.headerView setTitleAttributes:titleAttributes];
 }
 
 - (void)setMessageAttributes:(NSDictionary<NSString *,id> *)messageAttributes {
     [self.headerView setMessageAttributes:messageAttributes];
+}
+
+- (void)setActionButtonHeight:(CGFloat)actionButtonHeight {
+    _actionButtonHeight = actionButtonHeight;
+    [self.actionGroupView setActionButtonHeight:actionButtonHeight];
 }
 
 - (void)setDefaultButtonAttributes:(NSDictionary<NSString *,id> *)defaultButtonAttributes {

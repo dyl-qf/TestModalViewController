@@ -20,8 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSArray<UkeAlertAction *> *actions;
 @property (nonatomic, strong) void(^dismissHandler)(void);
 
-//! 按钮相关属性
-@property (nonatomic, assign) CGFloat actionButtonHeight; // alert默认44.0，sheet默认57.0，跟系统保持一致
+//MARK: 按钮相关属性
+// alert默认44.0，sheet默认57.0，跟系统保持一致
+@property (nonatomic, assign) CGFloat actionButtonHeight;
 @property(nonatomic, strong) NSDictionary<NSString *, id> *defaultButtonAttributes;
 @property(nonatomic, strong) NSDictionary<NSString *, id> *cancelButtonAttributes;
 @property(nonatomic, strong) NSDictionary<NSString *, id> *destructiveButtonAttributes;

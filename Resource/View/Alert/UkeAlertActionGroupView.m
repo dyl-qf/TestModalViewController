@@ -23,12 +23,12 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.actionButtonHeight = 44.0;
         self.actions = [NSArray array];
         self.defaultButtons = [NSMutableArray array];
         self.cancelButtons = [NSMutableArray array];
         self.destructiveButtons = [NSMutableArray array];
         
+        _actionButtonHeight = 44.0;
         _defaultButtonAttributes = @{NSForegroundColorAttributeName: [UIColor colorWithRed:45/255.0 green:139/255.0 blue:245/255.0 alpha:1.0],
                                          NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Regular" size:17]                             };
         _cancelButtonAttributes = @{NSForegroundColorAttributeName: [UIColor colorWithRed:45/255.0 green:139/255.0 blue:245/255.0 alpha:1.0],
@@ -158,6 +158,10 @@
 }
 
 #pragma mark - Setter
+//- (void)setActionButtonHeight:(CGFloat)actionButtonHeight {
+//    _actionButtonHeight = actionButtonHeight;
+//}
+
 //- (void)setDefaultButtonAttributes:(NSDictionary<NSString *,id> *)defaultButtonAttributes {
 //    _defaultButtonAttributes = defaultButtonAttributes;
 //

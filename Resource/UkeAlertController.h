@@ -21,15 +21,26 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addAction:(UkeAlertAction *)action;
 @property (nonatomic, readonly) NSArray<UkeAlertAction *> *actions;
 
-//! 如果是alertView中间内容区宽度，默认270，跟系统保持一致
+
+
+
+
+//! 中间内容区宽度。如果是alertView，默认270；如果是actionSheet，默认为屏幕宽度-8-8，跟系统保持一致
 @property (nonatomic, assign) CGFloat contentWidth;
+
+//! actionSheet的cancelButton距离上边内容的间距，默认为8，跟系统保持一致
+@property (nonatomic, assign) CGFloat sheetCancelButtonMarginTop;
+
+//! actionSheet整体内容距离屏幕底部距离，默认为8，跟系统保持一致
+@property (nonatomic, assign) CGFloat sheetContentMarginBottom;
 
 //! 标题相关属性
 @property(nonatomic, strong) NSDictionary<NSString *, id> *titleAttributes;
 //! message相关属性
 @property(nonatomic, strong) NSDictionary<NSString *, id> *messageAttributes;
-
 //! 按钮相关属性
+// 按钮高度。alert默认44.0，sheet默认57.0，跟系统保持一致
+@property (nonatomic, assign) CGFloat actionButtonHeight;
 @property(nonatomic, strong) NSDictionary<NSString *, id> *defaultButtonAttributes;
 @property(nonatomic, strong) NSDictionary<NSString *, id> *cancelButtonAttributes;
 @property(nonatomic, strong) NSDictionary<NSString *, id> *destructiveButtonAttributes;
