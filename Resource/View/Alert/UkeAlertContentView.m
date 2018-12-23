@@ -9,8 +9,11 @@
 #import "UkeAlertContentView.h"
 #import "Masonry.h"
 
-@interface UkeAlertContentView ()
+@interface UkeAlertContentView () {
+    CGFloat contentMaximumHeight;
+}
 @property (nonatomic, strong) UIView *backContentView;
+
 @property (nonatomic, strong) UIScrollView *headerScrollView;
 @property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, strong) UIScrollView *actionScrollview;
@@ -38,15 +41,10 @@
         [self.backContentView addSubview:self.actionScrollview];
         
         // layout
+        contentMaximumHeight = [UIScreen mainScreen].bounds.size.height-24-24;
         [self.backContentView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.top.bottom.offset(0);
-            CGFloat maxmumHeight = [UIScreen mainScreen].bounds.size.height-24-24;
-//            UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-//            if (orientation == UIInterfaceOrientationLandscapeLeft ||
-//                orientation == UIInterfaceOrientationLandscapeRight) {
-//
-//            }
-            make.height.mas_lessThanOrEqualTo(maxmumHeight);
+            make.height.mas_lessThanOrEqualTo(self->contentMaximumHeight);
         }];
         [self.headerScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.right.offset(0);
@@ -102,9 +100,7 @@
     }];
     
     [self.headerScrollView mas_updateConstraints:^(MASConstraintMaker *make) {
-//        make.height.mas_lessThanOrEqualTo(200);
-        [self.headerScrollView setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
-        make.height.mas_greaterThanOrEqualTo(100);
+        make.height.mas_lessThanOrEqualTo(self->contentMaximumHeight-100);
         make.height.mas_equalTo(headerView.mas_height).priority(500);
     }];
 }
@@ -124,8 +120,7 @@
     }];
     
     [self.actionScrollview mas_updateConstraints:^(MASConstraintMaker *make) {
-//        make.height.mas_lessThanOrEqualTo(300);
-        make.height.mas_equalTo(actionGroupView.mas_height).priority(500);
+        make.height.mas_equalTo(actionGroupView.mas_height).priority(250);
     }];
 }
 
