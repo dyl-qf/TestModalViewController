@@ -7,7 +7,6 @@
 //
 
 #import "UkeSheetContentView.h"
-#import "UkeSheetActionGroupView.h"
 #import "UkeAlertActionButton.h"
 #import "UkeAlertAction.h"
 #import "Masonry.h"
@@ -15,8 +14,6 @@
 @interface UkeSheetContentView ()
 @property (nonatomic, strong) UkeAlertAction *cancelAction;
 @property (nonatomic, strong) UIView *cancelButtonWrapperView;
-@property (nonatomic, strong) UkeSheetActionGroupView *actionGroupView;
-@property (nonatomic, assign) CGFloat actionButtonHeight;
 @end
 
 @implementation UkeSheetContentView
@@ -25,15 +22,11 @@
     self = [super init];
     if (self) {
         _sheetCancelButtonMarginTop = 8.0;
+        _cancelActionButtonHeight = 57.0;
+        _cancelButtonAttributes = @{NSForegroundColorAttributeName: [UIColor colorWithRed:45/255.0 green:139/255.0 blue:245/255.0 alpha:1.0],
+                                        NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Semibold" size:20]                             };
     }
     return self;
-}
-
-- (void)insertActionGroupView:(UIView *)actionGroupView {
-    [super insertActionGroupView:actionGroupView];
-
-    _actionGroupView = (UkeSheetActionGroupView *)actionGroupView;
-    _actionButtonHeight = _actionGroupView.actionButtonHeight;
 }
 
 - (void)addCancelAction:(UkeAlertAction *)action {
@@ -53,12 +46,12 @@
     
     
     [self.backContentView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.bottom.offset(-self.sheetCancelButtonMarginTop-self.actionButtonHeight);
+        make.bottom.offset(-self.sheetCancelButtonMarginTop-self.cancelActionButtonHeight);
     }];
     
     [cancelView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.offset(0);
-        make.height.mas_equalTo(self.actionButtonHeight);
+        make.height.mas_equalTo(self.cancelActionButtonHeight);
     }];
 
     [cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -68,7 +61,7 @@
 
 - (void)setAttributedTextWith:(NSString *)text
                     forButton:(UkeAlertActionButton *)button {
-    button.titleLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:self.actionGroupView.cancelButtonAttributes];
+    button.titleLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:self.cancelButtonAttributes];
 }
 
 - (void)setSheetCancelButtonMarginTop:(CGFloat)sheetCancelButtonMarginTop {
@@ -77,17 +70,19 @@
     [self updateConstraintsIfNeeded];
 }
 
-- (void)updateConstraints {
-    [self.backContentView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.bottom.offset(-self.sheetCancelButtonMarginTop-self.actionButtonHeight);
-    }];
-    [super updateConstraints];
+- (void)setCancelActionButtonHeight:(CGFloat)cancelActionButtonHeight {
+    _cancelActionButtonHeight = cancelActionButtonHeight;
+    [self updateConstraintsIfNeeded];
 }
 
-- (void)setActionButtonHeight:(CGFloat)actionButtonHeight {
-    _actionButtonHeight = actionButtonHeight;
-    
-    // 需要更新
+- (void)updateConstraints {
+    [self.backContentView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.offset(-self.sheetCancelButtonMarginTop-self.cancelActionButtonHeight);
+    }];
+    [self.cancelButtonWrapperView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(self.cancelActionButtonHeight);
+    }];
+    [super updateConstraints];
 }
 
 - (void)handleCancelButtonAction:(UIButton *)button {
@@ -95,8 +90,8 @@
         self.cancelAction.actionHandler(self.cancelAction);
     }
     
-    if (self.actionGroupView.dismissHandler) {
-        self.actionGroupView.dismissHandler();
+    if (self.dismissHandler) {
+        self.dismissHandler();
     }
 }
 

@@ -53,8 +53,8 @@
             defaultContentWidth = 270.0;
         }else if (preferredStyle == UIAlertControllerStyleActionSheet) {
             [self setSheetContentMarginBottom:8.0];
-            
-            content = [[UkeSheetContentView alloc] init];
+        
+            content = [self sheetContentView];
             header = [[UkeSheetHeaderView alloc] initWithTitle:title message:message];
             defaultContentWidth = [UIScreen mainScreen].bounds.size.width-8-8;
         }
@@ -84,15 +84,12 @@
         isSheetCancelAction = YES;
     }
     
-    if (!isSheetCancelAction) {
+    if (isSheetCancelAction) {
+        [[self sheetContentView] addCancelAction:action];
+    }else {
         [self.actionGroupView addAction:action];
     }
     [self.contentView insertActionGroupView:self.actionGroupView];
-    
-    if (isSheetCancelAction) {
-        UkeSheetContentView *sheetContentView = (UkeSheetContentView *)self.contentView;
-        [sheetContentView addCancelAction:action];
-    }
 }
 
 #pragma mark - Setter.
@@ -109,7 +106,7 @@
 - (void)setSheetCancelButtonMarginTop:(CGFloat)sheetCancelButtonMarginTop {
     _sheetCancelButtonMarginTop = sheetCancelButtonMarginTop;
     if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
-        ((UkeSheetContentView *)self.contentView).sheetCancelButtonMarginTop = sheetCancelButtonMarginTop;
+        [self sheetContentView].sheetCancelButtonMarginTop = sheetCancelButtonMarginTop;
     }
 }
 
@@ -124,6 +121,9 @@
 - (void)setActionButtonHeight:(CGFloat)actionButtonHeight {
     _actionButtonHeight = actionButtonHeight;
     [self.actionGroupView setActionButtonHeight:actionButtonHeight];
+    if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
+        [self sheetContentView].cancelActionButtonHeight = actionButtonHeight;
+    }
 }
 
 - (void)setDefaultButtonAttributes:(NSDictionary<NSString *,id> *)defaultButtonAttributes {
@@ -132,6 +132,9 @@
 
 - (void)setCancelButtonAttributes:(NSDictionary<NSString *,id> *)cancelButtonAttributes {
     [self.actionGroupView setCancelButtonAttributes:cancelButtonAttributes];
+    if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
+        [self sheetContentView].cancelButtonAttributes = cancelButtonAttributes;
+    }
 }
 
 - (void)setDestructiveButtonAttributes:(NSDictionary<NSString *,id> *)destructiveButtonAttributes {
@@ -152,6 +155,18 @@
         };
     }
     return _actionGroupView;
+}
+
+- (UkeSheetContentView *)sheetContentView {
+    UkeSheetContentView *sheetContentView = (UkeSheetContentView *)self.contentView;
+    if (!sheetContentView) {
+        sheetContentView = [[UkeSheetContentView alloc] init];
+        __weak typeof(self)weakSelf = self;
+        sheetContentView.dismissHandler = ^{
+            [weakSelf dismiss];
+        };
+    }
+    return sheetContentView;
 }
 
 - (NSArray<UkeAlertAction *> *)actions {

@@ -14,6 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UkeSheetContentView : UkeAlertContentView
 @property (nonatomic, assign) CGFloat sheetCancelButtonMarginTop;
 
+@property (nonatomic, strong) void(^dismissHandler)(void);
+
+//MARK: 取消按钮相关属性
+// 取消按钮高度默认57.0，跟系统保持一致
+@property (nonatomic, assign) CGFloat cancelActionButtonHeight;
+@property(nonatomic, strong) NSDictionary<NSString *, id> *cancelButtonAttributes;
+
 - (void)addCancelAction:(UkeAlertAction *)action;
 
 @end
