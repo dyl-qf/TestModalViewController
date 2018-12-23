@@ -24,7 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 
-
 //! 中间内容区宽度。如果是alertView，默认270；如果是actionSheet，默认为屏幕宽度-8-8，跟系统保持一致
 @property (nonatomic, assign) CGFloat contentWidth;
 

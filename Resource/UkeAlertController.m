@@ -35,6 +35,11 @@
     return alertVc;
 }
 
+//! Override
+- (void)addContentView:(UIView *)view {
+    // TODO: 这个contentView要添加到header里面
+//    [super addContentView:view];
+}
 
 - (instancetype)initWithTitle:(NSString *)title
                                  message:(NSString *)message
@@ -70,7 +75,6 @@
     [super viewDidLoad];
     
     [self.actionGroupView layoutActions];
-
     [self.contentView insertHeaderView:self.headerView];
     [self.contentView insertActionGroupView:self.actionGroupView];
     
