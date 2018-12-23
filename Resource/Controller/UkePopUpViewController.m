@@ -11,7 +11,9 @@
 #import "UkeActionSheetAnimation.h"
 #import "Masonry.h"
 
-@interface UkePopUpViewController () <UIViewControllerTransitioningDelegate>
+@interface UkePopUpViewController () <UIViewControllerTransitioningDelegate> {
+    CGFloat contentMaximumHeight;
+}
 @property (nonatomic, strong) UIView *contentView;
 @end
 
@@ -22,6 +24,7 @@
     if (self) {
         self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         self.transitioningDelegate = self;
+        contentMaximumHeight = [UIScreen mainScreen].bounds.size.height-24-24;
     }
     return self;
 }
@@ -29,6 +32,7 @@
 + (instancetype)alertControllerWithContentView:(UIView *)view
                              preferredStyle:(UIAlertControllerStyle)preferredStyle {
     UkePopUpViewController *popUpController = [[UkePopUpViewController alloc] init];
+    popUpController.preferredStyle = preferredStyle;
     [popUpController addContentView:view];
     return popUpController;
 }
@@ -38,6 +42,13 @@
 }
 
 #pragma mark - Public.
+- (void)setPreferredStyle:(UIAlertControllerStyle)preferredStyle {
+    _preferredStyle = preferredStyle;
+    if (preferredStyle == UIAlertControllerStyleActionSheet) {
+        contentMaximumHeight = contentMaximumHeight-_sheetContentMarginBottom;
+    }
+}
+
 - (void)setContentWidth:(CGFloat)contentWidth {
     _contentWidth = contentWidth;
     if (!self.contentView) {
@@ -50,6 +61,7 @@
         }
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.centerY.mas_equalTo(self.view.mas_centerY);
+        make.height.mas_lessThanOrEqualTo(self->contentMaximumHeight);
     }];
     [self.view layoutIfNeeded];
     self.view.bounds = self.contentView.bounds;
@@ -69,6 +81,7 @@
         }
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.centerY.mas_equalTo(self.view.mas_centerY);
+        make.height.mas_lessThanOrEqualTo(self->contentMaximumHeight);
     }];
     [self.view layoutIfNeeded];
     self.view.bounds = self.contentView.bounds;

@@ -44,7 +44,7 @@
                              NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]
                              };
         _messageAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor],
-                               NSFontAttributeName: [UIFont systemFontOfSize:16],
+                               NSFontAttributeName: [UIFont systemFontOfSize:13],
                                NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]
                                };
         

@@ -24,6 +24,8 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        contentMaximumHeight = [UIScreen mainScreen].bounds.size.height-24-24;
+
         self.backContentView = [[UIView alloc] init];
         self.backContentView.backgroundColor = [UIColor whiteColor];
         self.backContentView.layer.cornerRadius = 12.0;
@@ -41,10 +43,8 @@
         [self.backContentView addSubview:self.actionScrollview];
         
         // layout
-        contentMaximumHeight = [UIScreen mainScreen].bounds.size.height-24-24;
         [self.backContentView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.top.bottom.offset(0);
-            make.height.mas_lessThanOrEqualTo(self->contentMaximumHeight);
         }];
         [self.headerScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.right.offset(0);
@@ -99,6 +99,7 @@
         make.width.mas_equalTo(self.headerScrollView.mas_width);
     }];
     
+    // TODO: 这里-100需要根据情况来看到底减去多少，比如sheet要考虑到cancelbutton的高还有marginTop
     [self.headerScrollView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_lessThanOrEqualTo(self->contentMaximumHeight-100);
         make.height.mas_equalTo(headerView.mas_height).priority(500);
