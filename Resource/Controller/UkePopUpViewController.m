@@ -126,4 +126,8 @@
     return nil;
 }
 
+- (void)dealloc {
+    NSLog(@"UkePopUpViewController 销毁");
+}
+
 @end

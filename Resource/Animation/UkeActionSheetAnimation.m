@@ -9,6 +9,10 @@
 #import "UkeActionSheetAnimation.h"
 #import "UkePopUpViewController.h"
 
+@interface UkeActionSheetAnimation ()
+@property (nonatomic, weak) UkePopUpViewController *popUpVc;
+@end
+
 @implementation UkeActionSheetAnimation
 
 - (NSTimeInterval)transitionDuration:(nullable id <UIViewControllerContextTransitioning>)transitionContext {
@@ -26,7 +30,8 @@
 - (void)animateForPresentTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
     UIViewController *fromVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     UIViewController *toVc = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
-    
+    UkePopUpViewController *popUpVc = (UkePopUpViewController *)toVc;
+
     UIView *fromView = nil;
     UIView *toView = nil;
     if ([transitionContext respondsToSelector:@selector(viewForKey:)]) {
@@ -45,6 +50,11 @@
     maskView.frame = containerView.bounds;
     maskView.alpha = 0;
     [containerView addSubview:maskView];
+    if (popUpVc.shouldRespondsMaskViewTouch) {
+        _popUpVc = popUpVc;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleMaskViewTapAction)];
+        [maskView addGestureRecognizer:tap];
+    }
     
     // 添加toView
     CGRect startFrame = CGRectMake((CGRectGetWidth(containerView.frame)-CGRectGetWidth(toView.frame))*0.5, CGRectGetHeight(containerView.frame), CGRectGetWidth(toView.frame), CGRectGetHeight(toView.frame));
@@ -53,7 +63,6 @@
     
     NSTimeInterval duration = [self transitionDuration:transitionContext];
     
-    UkePopUpViewController *popUpVc = (UkePopUpViewController *)toVc;
     CGFloat marginBottom = popUpVc.sheetContentMarginBottom;
     CGRect endFrame = CGRectMake((CGRectGetWidth(containerView.frame)-CGRectGetWidth(toView.frame))*0.5, CGRectGetHeight(containerView.frame)-CGRectGetHeight(toView.frame)-marginBottom, CGRectGetWidth(toView.frame), CGRectGetHeight(toView.frame));
     [UIView animateWithDuration:duration+0.2 delay:0.1 usingSpringWithDamping:1.0 initialSpringVelocity:0 options:UIViewAnimationOptionCurveLinear animations:^{
@@ -88,6 +97,14 @@
         [maskView removeFromSuperview];
         [transitionContext completeTransition:YES];
     }];
+}
+
+- (void)handleMaskViewTapAction {
+    [_popUpVc dismiss];
+}
+
+- (void)dealloc {
+    NSLog(@"animation 销毁");
 }
 
 @end

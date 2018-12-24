@@ -7,6 +7,11 @@
 //
 
 #import "UkeAlertStyleAnimation.h"
+#import "UkePopUpViewController.h"
+
+@interface UkeAlertStyleAnimation ()
+@property (nonatomic, weak) UkePopUpViewController *popUpVc;
+@end
 
 @implementation UkeAlertStyleAnimation
 
@@ -25,7 +30,8 @@
 - (void)animateForPresentTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
     UIViewController *fromVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     UIViewController *toVc = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
-    
+    UkePopUpViewController *popUpVc = (UkePopUpViewController *)toVc;
+
     UIView *fromView = nil;
     UIView *toView = nil;
     if ([transitionContext respondsToSelector:@selector(viewForKey:)]) {
@@ -44,6 +50,11 @@
     maskView.frame = containerView.bounds;
     maskView.alpha = 0;
     [containerView addSubview:maskView];
+    if (popUpVc.shouldRespondsMaskViewTouch) {
+        _popUpVc = popUpVc;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleMaskViewTapAction)];
+        [maskView addGestureRecognizer:tap];
+    }
     
     // 添加toView
     toView.center = containerView.center;
@@ -101,6 +112,14 @@
     animation.duration = duration;
     
     [view.layer addAnimation:animation forKey:@"showAlert"];
+}
+
+- (void)handleMaskViewTapAction {
+    [_popUpVc dismiss];
+}
+
+- (void)dealloc {
+    NSLog(@"animation 销毁");
 }
 
 @end
