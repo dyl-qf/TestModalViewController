@@ -76,12 +76,15 @@
 }
 
 - (void)updateConstraints {
-    [self.backContentView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.bottom.offset(-self.sheetCancelButtonMarginTop-self.cancelActionButtonHeight);
-    }];
-    [self.cancelButtonWrapperView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(self.cancelActionButtonHeight);
-    }];
+    if (_cancelAction) {
+        [self.backContentView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.bottom.offset(-self.sheetCancelButtonMarginTop-self.cancelActionButtonHeight);
+        }];
+        [self.cancelButtonWrapperView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(self.cancelActionButtonHeight);
+        }];
+    }
+    
     [super updateConstraints];
 }
 

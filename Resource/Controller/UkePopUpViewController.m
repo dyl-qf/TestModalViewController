@@ -51,11 +51,11 @@
 
 - (void)setContentWidth:(CGFloat)contentWidth {
     _contentWidth = contentWidth;
-    if (!self.contentView || !self.contentView.superview) {
+    if (!_contentView || !_contentView.superview) {
         return;
     }
     
-    [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [_contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
         if (contentWidth != 0) {
             make.width.mas_equalTo(contentWidth);
         }
@@ -64,17 +64,18 @@
         make.height.mas_lessThanOrEqualTo(self->contentMaximumHeight);
     }];
     [self.view layoutIfNeeded];
-    self.view.bounds = self.contentView.bounds;
+    self.view.bounds = _contentView.bounds;
 }
 
 - (void)addContentView:(UIView *)view {
-    if (self.contentView) {
-        [self.contentView removeFromSuperview];
+    if (_contentView) {
+        [_contentView removeFromSuperview];
+        _contentView = nil;
     }
     
-    self.contentView = view;
+    _contentView = view;
     
-    [self.view addSubview:self.contentView];
+    [self.view addSubview:_contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         if (self.contentWidth != 0) {
             make.width.mas_equalTo(self.contentWidth);
@@ -84,7 +85,7 @@
         make.height.mas_lessThanOrEqualTo(self->contentMaximumHeight);
     }];
     [self.view layoutIfNeeded];
-    self.view.bounds = self.contentView.bounds;
+    self.view.bounds = _contentView.bounds;
 }
 
 - (void)dismiss {

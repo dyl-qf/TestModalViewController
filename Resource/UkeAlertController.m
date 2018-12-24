@@ -54,7 +54,7 @@
             defaultContentWidth = [UIScreen mainScreen].bounds.size.width-8-8;
         }
         [self setContentWidth:defaultContentWidth];
-        self.headerView = header;
+        _headerView = header;
     }
     return self;
 }
@@ -71,19 +71,18 @@
             [self setSheetContentMarginBottom:8.0];
             content = [self sheetContentView];
         }
-        self.contentView = content;
+        _contentView = content;
     }
     return self;
 }
 
-+ (instancetype)alertControllerWithCustomizeView:(UIView *)view
-                                preferredStyle:(UIAlertControllerStyle)preferredStyle {
++ (instancetype)alertControllerWithContentView:(UIView *)view preferredStyle:(UIAlertControllerStyle)preferredStyle {
     UkeAlertController *alertVc = [[UkeAlertController alloc] initWithPreferredStyle:preferredStyle];
-    [alertVc addCustomizeView:view];
+    [alertVc addContentView:view];
     return alertVc;
 }
 
-- (void)addCustomizeView:(UIView *)view {
+- (void)addContentView:(UIView *)view {
     _headerView = [[UkeAlertCustomizeHeaderView alloc] initWithCustomizeView:view];
 }
 
@@ -94,7 +93,7 @@
     [self.contentView insertHeaderView:self.headerView];
     [self.contentView insertActionGroupView:self.actionGroupView];
     
-    [self addContentView:self.contentView];
+    [super addContentView:self.contentView];
 }
 
 - (void)addAction:(UkeAlertAction *)action {

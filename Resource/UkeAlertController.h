@@ -14,6 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UkeAlertController : UkePopUpViewController
 
+- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)new NS_UNAVAILABLE;
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil
+                         bundle:(nullable NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
+
+
 + (instancetype)alertControllerWithTitle:(nullable NSString *)title
                                      message:(nullable NSString *)message
                               preferredStyle:(UIAlertControllerStyle)preferredStyle;
@@ -24,21 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
- 通过自定义headerView创建，属于父类重载方法。注意：用UkeAlertController和UkePopUpViewController的调用效果不同
+ 添加一个自定义内容头视图
  
  @warning 对于UkeAlertController来说，这个view将作为headerView取代由title和message生成的UkeAlertHeaderView
  @warning 对于UkePopUpViewController来说，这个view即为整个contentView
- @warning 此处添加的View是headerView，不是整个contentView，所以可以继续添加action
  */
-+ (instancetype)alertControllerWithCustomizeView:(nullable UIView *)view
++ (instancetype)alertControllerWithContentView:(nullable UIView *)view
                                 preferredStyle:(UIAlertControllerStyle)preferredStyle;
+- (void)addContentView:(UIView *)view;
 
-/**
- 添加自定义headerView
-
- @param view 同上
- */
-- (void)addCustomizeView:(nullable UIView *)view;
 
 
 //! 中间内容区宽度。如果是alertView，默认270；如果是actionSheet，默认为屏幕宽度-8-8，跟系统保持一致

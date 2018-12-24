@@ -16,10 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)alertControllerWithContentView:(UIView *)view
                              preferredStyle:(UIAlertControllerStyle)preferredStyle;
-
-/*
- * 添加一个view在黑色遮罩内显示
- */
 - (void)addContentView:(UIView *)view;
 
 - (void)dismiss;
