@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UkeAlertContentView : UIView
 @property (nonatomic, strong, readonly) UIView *backContentView;
 
-- (void)insertHeaderView:(UIView *)headerView;
-- (void)insertActionGroupView:(UIView *)actionGroupView;
+- (void)insertHeaderView:(nullable UIView *)headerView;
+- (void)insertActionGroupView:(nullable UIView *)actionGroupView;
 
 @end
 

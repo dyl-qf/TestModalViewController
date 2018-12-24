@@ -30,6 +30,7 @@
 		54B28D7F21CDDD1F00335FD9 /* UkeAlertContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B28D7E21CDDD1F00335FD9 /* UkeAlertContentView.m */; };
 		54B28D8221CDDD4200335FD9 /* UkeSheetContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B28D8121CDDD4200335FD9 /* UkeSheetContentView.m */; };
 		54B28D8521CDE7A800335FD9 /* UIView+CornerRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B28D8421CDE7A800335FD9 /* UIView+CornerRadius.m */; };
+		54B6364721D0DE010059F2A9 /* UkeAlertCustomizeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B6364621D0DE010059F2A9 /* UkeAlertCustomizeHeaderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,8 @@
 		54B28D8121CDDD4200335FD9 /* UkeSheetContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeSheetContentView.m; sourceTree = "<group>"; };
 		54B28D8321CDE7A800335FD9 /* UIView+CornerRadius.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+CornerRadius.h"; sourceTree = "<group>"; };
 		54B28D8421CDE7A800335FD9 /* UIView+CornerRadius.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+CornerRadius.m"; sourceTree = "<group>"; };
+		54B6364521D0DE010059F2A9 /* UkeAlertCustomizeHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeAlertCustomizeHeaderView.h; sourceTree = "<group>"; };
+		54B6364621D0DE010059F2A9 /* UkeAlertCustomizeHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeAlertCustomizeHeaderView.m; sourceTree = "<group>"; };
 		E4A41E29FA4DDB8995BE382B /* Pods_TestModalViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TestModalViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E66E4CA7D6B7452954F053F4 /* Pods-TestModalViewController.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestModalViewController.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TestModalViewController/Pods-TestModalViewController.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -166,6 +169,8 @@
 				54B28D7121CDD43B00335FD9 /* Sheet */,
 				5417911C21C8ECA5000D5F7B /* UkeAlertActionButton.h */,
 				5417911D21C8ECA5000D5F7B /* UkeAlertActionButton.m */,
+				54B6364521D0DE010059F2A9 /* UkeAlertCustomizeHeaderView.h */,
+				54B6364621D0DE010059F2A9 /* UkeAlertCustomizeHeaderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -459,6 +464,7 @@
 				5417911121C7BAE8000D5F7B /* UkeAlertController.m in Sources */,
 				54B28D8221CDDD4200335FD9 /* UkeSheetContentView.m in Sources */,
 				5434CE4621C7E2E800178D31 /* UkePopUpViewController.m in Sources */,
+				54B6364721D0DE010059F2A9 /* UkeAlertCustomizeHeaderView.m in Sources */,
 				54B28D7621CDD43B00335FD9 /* UkeSheetHeaderView.m in Sources */,
 				549FC7ED21C39BD000619693 /* main.m in Sources */,
 				54B28D7C21CDD53600335FD9 /* UkeSheetActionGroupView.m in Sources */,

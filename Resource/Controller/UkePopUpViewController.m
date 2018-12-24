@@ -51,7 +51,7 @@
 
 - (void)setContentWidth:(CGFloat)contentWidth {
     _contentWidth = contentWidth;
-    if (!self.contentView) {
+    if (!self.contentView || !self.contentView.superview) {
         return;
     }
     

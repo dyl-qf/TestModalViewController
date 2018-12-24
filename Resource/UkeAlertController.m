@@ -9,6 +9,7 @@
 #import "UkeAlertController.h"
 #import "UkeAlertContentView.h"
 #import "UkeSheetContentView.h"
+#import "UkeAlertCustomizeHeaderView.h"
 #import "UkeAlertHeaderView.h"
 #import "UkeSheetHeaderView.h"
 #import "UkeAlertActionGroupView.h"
@@ -35,40 +36,55 @@
     return alertVc;
 }
 
-//! Override
-- (void)addContentView:(UIView *)view {
-    // TODO: 这个contentView要添加到header里面
-//    [super addContentView:view];
-}
-
 - (instancetype)initWithTitle:(NSString *)title
                                  message:(NSString *)message
                           preferredStyle:(UIAlertControllerStyle)preferredStyle {
-    self = [super init];
+    self = [[[self class] alloc] initWithPreferredStyle:preferredStyle];
     if (self) {
-        self.preferredStyle = preferredStyle;
-        
         CGFloat defaultContentWidth = 0;
-        UkeAlertContentView *content = nil;
         UkeAlertHeaderView *header = nil;
 
         if (preferredStyle == UIAlertControllerStyleAlert) {
-            content = [[UkeAlertContentView alloc] init];
             header = [[UkeAlertHeaderView alloc] initWithTitle:title message:message];
             defaultContentWidth = 270.0;
         }else if (preferredStyle == UIAlertControllerStyleActionSheet) {
             [self setSheetContentMarginBottom:8.0];
         
-            content = [self sheetContentView];
             header = [[UkeSheetHeaderView alloc] initWithTitle:title message:message];
             defaultContentWidth = [UIScreen mainScreen].bounds.size.width-8-8;
         }
-        
         [self setContentWidth:defaultContentWidth];
-        self.contentView = content;
         self.headerView = header;
     }
     return self;
+}
+
+- (instancetype)initWithPreferredStyle:(UIAlertControllerStyle)preferredStyle {
+    self = [super init];
+    if (self) {
+        self.preferredStyle = preferredStyle;
+
+        UkeAlertContentView *content = nil;
+        if (preferredStyle == UIAlertControllerStyleAlert) {
+            content = [[UkeAlertContentView alloc] init];
+        }else if (preferredStyle == UIAlertControllerStyleActionSheet) {
+            [self setSheetContentMarginBottom:8.0];
+            content = [self sheetContentView];
+        }
+        self.contentView = content;
+    }
+    return self;
+}
+
++ (instancetype)alertControllerWithCustomizeView:(UIView *)view
+                                preferredStyle:(UIAlertControllerStyle)preferredStyle {
+    UkeAlertController *alertVc = [[UkeAlertController alloc] initWithPreferredStyle:preferredStyle];
+    [alertVc addCustomizeView:view];
+    return alertVc;
+}
+
+- (void)addCustomizeView:(UIView *)view {
+    _headerView = [[UkeAlertCustomizeHeaderView alloc] initWithCustomizeView:view];
 }
 
 - (void)viewDidLoad {
@@ -82,7 +98,7 @@
 }
 
 - (void)addAction:(UkeAlertAction *)action {
-    // ActionSheet的cancel按钮需要特殊处理，因为这个按钮s不是添加在actionGroupView中的，而是在contentView中
+    // ActionSheet的cancel按钮需要特殊处理，因为这个按钮不是添加在actionGroupView中的，而是在contentView中
     BOOL isSheetCancelAction = NO;
     if (self.preferredStyle == UIAlertControllerStyleActionSheet && action.style == UIAlertActionStyleCancel) {
         isSheetCancelAction = YES;
@@ -146,6 +162,18 @@
 }
 
 #pragma mark - Getter.
+- (UkeSheetContentView *)sheetContentView {
+    UkeSheetContentView *sheetContentView = (UkeSheetContentView *)self.contentView;
+    if (!sheetContentView) {
+        sheetContentView = [[UkeSheetContentView alloc] init];
+        __weak typeof(self)weakSelf = self;
+        sheetContentView.dismissHandler = ^{
+            [weakSelf dismiss];
+        };
+    }
+    return sheetContentView;
+}
+
 - (UkeAlertActionGroupView *)actionGroupView {
     if (!_actionGroupView) {
         if (self.preferredStyle == UIAlertControllerStyleAlert) {
@@ -159,18 +187,6 @@
         };
     }
     return _actionGroupView;
-}
-
-- (UkeSheetContentView *)sheetContentView {
-    UkeSheetContentView *sheetContentView = (UkeSheetContentView *)self.contentView;
-    if (!sheetContentView) {
-        sheetContentView = [[UkeSheetContentView alloc] init];
-        __weak typeof(self)weakSelf = self;
-        sheetContentView.dismissHandler = ^{
-            [weakSelf dismiss];
-        };
-    }
-    return sheetContentView;
 }
 
 - (NSArray<UkeAlertAction *> *)actions {
