@@ -6,13 +6,13 @@
 //  Copyright © 2018 liqian. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "UkeAlertBaseAnimation.h"
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UkeAlertStyleAnimation : NSObject <UIViewControllerAnimatedTransitioning>
-@property (nonatomic, assign) BOOL isPresented;
+@interface UkeAlertStyleAnimation : UkeAlertBaseAnimation
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -30,6 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 //! maskView是否可以响应dismiss手势
 @property (nonatomic, assign) BOOL shouldRespondsMaskViewTouch;
 
+
+#pragma mark - 动画时间
+// 弹出时间
+@property (nonatomic, assign) CGFloat presentDelayTimeInterval;
+@property (nonatomic, assign) CGFloat presentTimeInterval;
+// 消失时间
+@property (nonatomic, assign) CGFloat dismissDelayTimeInterval;
+@property (nonatomic, assign) CGFloat dismissTimeInterval;
+
 @end
 
 NS_ASSUME_NONNULL_END

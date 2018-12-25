@@ -129,14 +129,13 @@
 }
 
 - (void)handleButtonAction:(UIButton *)button {
-    UkeAlertAction *action = self.actions[button.tag];
-    if (action.actionHandler) {
-        action.actionHandler(action);
-    }
-    
-    if (self.dismissHandler) {
-        self.dismissHandler();
-    }
+    self.dismissHandler();
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.dismissAnimationInterval * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        UkeAlertAction *action = self.actions[button.tag];
+        if (action.actionHandler) {
+            action.actionHandler(action);
+        }
+    });
 }
 
 - (void)removeAllSubviews {

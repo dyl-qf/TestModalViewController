@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)layoutActions;
 
 @property (nonatomic, readonly) NSArray<UkeAlertAction *> *actions;
+
+@property (nonatomic, assign) CGFloat dismissAnimationInterval;
 @property (nonatomic, strong) void(^dismissHandler)(void);
 
 //MARK: 按钮相关属性

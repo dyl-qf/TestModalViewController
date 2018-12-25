@@ -32,52 +32,12 @@
 + (instancetype)alertControllerWithTitle:(NSString *)title
                                      message:(NSString *)message
                               preferredStyle:(UIAlertControllerStyle)preferredStyle {
-    UkeAlertController *alertVc = [[UkeAlertController alloc] initWithTitle:title message:message preferredStyle:preferredStyle];
+    UkeAlertController *alertVc = [[UkeAlertController alloc] initInternalWithTitle:title message:message preferredStyle:preferredStyle];
     return alertVc;
 }
 
-- (instancetype)initWithTitle:(NSString *)title
-                                 message:(NSString *)message
-                          preferredStyle:(UIAlertControllerStyle)preferredStyle {
-    self = [[[self class] alloc] initWithPreferredStyle:preferredStyle];
-    if (self) {
-        CGFloat defaultContentWidth = 0;
-        UkeAlertHeaderView *header = nil;
-
-        if (preferredStyle == UIAlertControllerStyleAlert) {
-            header = [[UkeAlertHeaderView alloc] initWithTitle:title message:message];
-            defaultContentWidth = 270.0;
-        }else if (preferredStyle == UIAlertControllerStyleActionSheet) {
-            [self setSheetContentMarginBottom:8.0];
-        
-            header = [[UkeSheetHeaderView alloc] initWithTitle:title message:message];
-            defaultContentWidth = [UIScreen mainScreen].bounds.size.width-8-8;
-        }
-        [self setContentWidth:defaultContentWidth];
-        _headerView = header;
-    }
-    return self;
-}
-
-- (instancetype)initWithPreferredStyle:(UIAlertControllerStyle)preferredStyle {
-    self = [super init];
-    if (self) {
-        self.preferredStyle = preferredStyle;
-
-        UkeAlertContentView *content = nil;
-        if (preferredStyle == UIAlertControllerStyleAlert) {
-            content = [[UkeAlertContentView alloc] init];
-        }else if (preferredStyle == UIAlertControllerStyleActionSheet) {
-            [self setSheetContentMarginBottom:8.0];
-            content = [self sheetContentView];
-        }
-        _contentView = content;
-    }
-    return self;
-}
-
 + (instancetype)alertControllerWithContentView:(UIView *)view preferredStyle:(UIAlertControllerStyle)preferredStyle {
-    UkeAlertController *alertVc = [[UkeAlertController alloc] initWithPreferredStyle:preferredStyle];
+    UkeAlertController *alertVc = [[UkeAlertController alloc] initInternalWithPreferredStyle:preferredStyle];
     [alertVc addContentView:view];
     return alertVc;
 }
@@ -109,6 +69,47 @@
         [self.actionGroupView addAction:action];
     }
     [self.contentView insertActionGroupView:self.actionGroupView];
+}
+
+#pragma mark - Private.
+- (instancetype)initInternalWithTitle:(NSString *)title
+                              message:(NSString *)message
+                       preferredStyle:(UIAlertControllerStyle)preferredStyle {
+    self = [[[self class] alloc] initInternalWithPreferredStyle:preferredStyle];
+    if (self) {
+        CGFloat defaultContentWidth = 0;
+        UkeAlertHeaderView *header = nil;
+        
+        if (preferredStyle == UIAlertControllerStyleAlert) {
+            header = [[UkeAlertHeaderView alloc] initWithTitle:title message:message];
+            defaultContentWidth = 270.0;
+        }else if (preferredStyle == UIAlertControllerStyleActionSheet) {
+            [self setSheetContentMarginBottom:8.0];
+            
+            header = [[UkeSheetHeaderView alloc] initWithTitle:title message:message];
+            defaultContentWidth = [UIScreen mainScreen].bounds.size.width-8-8;
+        }
+        [self setContentWidth:defaultContentWidth];
+        _headerView = header;
+    }
+    return self;
+}
+
+- (instancetype)initInternalWithPreferredStyle:(UIAlertControllerStyle)preferredStyle {
+    self = [super init];
+    if (self) {
+        self.preferredStyle = preferredStyle;
+        
+        UkeAlertContentView *content = nil;
+        if (preferredStyle == UIAlertControllerStyleAlert) {
+            content = [[UkeAlertContentView alloc] init];
+        }else if (preferredStyle == UIAlertControllerStyleActionSheet) {
+            [self setSheetContentMarginBottom:8.0];
+            content = [self sheetContentView];
+        }
+        _contentView = content;
+    }
+    return self;
 }
 
 #pragma mark - Setter.
@@ -180,6 +181,8 @@
         }else if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
             _actionGroupView = [[UkeSheetActionGroupView alloc] init];
         }
+        _actionGroupView.dismissAnimationInterval = self.dismissDelayTimeInterval+self.dismissTimeInterval;
+        
         __weak typeof(self)weakSelf = self;
         _actionGroupView.dismissHandler = ^{
             [weakSelf dismiss];

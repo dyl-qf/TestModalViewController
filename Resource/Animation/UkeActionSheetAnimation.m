@@ -16,7 +16,7 @@
 @implementation UkeActionSheetAnimation
 
 - (NSTimeInterval)transitionDuration:(nullable id <UIViewControllerContextTransitioning>)transitionContext {
-    return self.isPresented ? 0.18 : 0.16;
+    return self.isPresented ? self.presentTimeInterval : self.dismissTimeInterval;
 }
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
@@ -65,7 +65,7 @@
     
     CGFloat marginBottom = popUpVc.sheetContentMarginBottom;
     CGRect endFrame = CGRectMake((CGRectGetWidth(containerView.frame)-CGRectGetWidth(toView.frame))*0.5, CGRectGetHeight(containerView.frame)-CGRectGetHeight(toView.frame)-marginBottom, CGRectGetWidth(toView.frame), CGRectGetHeight(toView.frame));
-    [UIView animateWithDuration:duration+0.2 delay:0.1 usingSpringWithDamping:1.0 initialSpringVelocity:0 options:UIViewAnimationOptionCurveLinear animations:^{
+    [UIView animateWithDuration:duration+0.2 delay:self.presentDelayTimeInterval usingSpringWithDamping:1.0 initialSpringVelocity:0 options:UIViewAnimationOptionCurveLinear animations:^{
         toView.frame = endFrame;
         maskView.alpha = 1.0;
     } completion:^(BOOL finished) {
@@ -87,7 +87,7 @@
     UIView *maskView = [containerView viewWithTag:1000];
     
     NSTimeInterval duration = [self transitionDuration:transitionContext];
-    NSTimeInterval delay = 0.1;
+    NSTimeInterval delay = self.dismissDelayTimeInterval;
     
     CGRect endFrame = CGRectMake((CGRectGetWidth(containerView.frame)-CGRectGetWidth(fromView.frame))*0.5, CGRectGetHeight(containerView.frame), CGRectGetWidth(fromView.frame), CGRectGetHeight(fromView.frame));
     [UIView animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveEaseOut animations:^{

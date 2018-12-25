@@ -14,6 +14,7 @@
 @interface UkePopUpViewController () <UIViewControllerTransitioningDelegate> {
     CGFloat contentMaximumHeight;
 }
+@property (nonatomic, strong) UkeAlertBaseAnimation *animation;
 @property (nonatomic, strong) UIView *contentView;
 @end
 
@@ -44,7 +45,16 @@
 #pragma mark - Public.
 - (void)setPreferredStyle:(UIAlertControllerStyle)preferredStyle {
     _preferredStyle = preferredStyle;
-    if (preferredStyle == UIAlertControllerStyleActionSheet) {
+    if (preferredStyle == UIAlertControllerStyleAlert) {
+        self.presentDelayTimeInterval = 0;
+        self.presentTimeInterval = 0.25;
+        self.dismissDelayTimeInterval = 0.1;
+        self.dismissTimeInterval = 0.22;
+    }else if (preferredStyle == UIAlertControllerStyleActionSheet) {
+        self.presentDelayTimeInterval = 0.1;
+        self.presentTimeInterval = 0.18;
+        self.dismissDelayTimeInterval = 0.1;
+        self.dismissTimeInterval = 0.16;
         contentMaximumHeight = contentMaximumHeight-_sheetContentMarginBottom;
     }
 }
@@ -103,27 +113,48 @@
 
 #pragma mark - UIViewControllerTransitioningDelegate.
 - (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-    if (self.preferredStyle == UIAlertControllerStyleAlert) {
-        UkeAlertStyleAnimation *animation = [[UkeAlertStyleAnimation alloc] init];
-        animation.isPresented = YES;
-        return animation;
-    }else if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
-        UkeActionSheetAnimation *animation = [[UkeActionSheetAnimation alloc] init];
-        animation.isPresented = YES;
-        return animation;
-    }
-    return nil;
+    UkeAlertBaseAnimation *animation = self.animation;
+    animation.isPresented = YES;
+    return animation;
 }
 
 - (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    if (self.preferredStyle == UIAlertControllerStyleAlert) {
-        UkeAlertStyleAnimation *animation = [[UkeAlertStyleAnimation alloc] init];
-        return animation;
-    }else if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
-        UkeActionSheetAnimation *animation = [[UkeActionSheetAnimation alloc] init];
-        return animation;
+    UkeAlertBaseAnimation *animation = self.animation;
+    animation.isPresented = NO;
+    return animation;
+}
+
+#pragma mark - Getter.
+- (void)setPresentDelayTimeInterval:(CGFloat)presentDelayTimeInterval {
+    _presentDelayTimeInterval = presentDelayTimeInterval;
+    self.animation.presentDelayTimeInterval = presentDelayTimeInterval;
+}
+
+- (void)setPresentTimeInterval:(CGFloat)presentTimeInterval {
+    _presentTimeInterval = presentTimeInterval;
+    self.animation.presentTimeInterval = presentTimeInterval;
+}
+
+- (void)setDismissDelayTimeInterval:(CGFloat)dismissDelayTimeInterval {
+    _dismissDelayTimeInterval = dismissDelayTimeInterval;
+    self.animation.dismissDelayTimeInterval = dismissDelayTimeInterval;
+}
+
+- (void)setDismissTimeInterval:(CGFloat)dismissTimeInterval {
+    _dismissTimeInterval = dismissTimeInterval;
+    self.animation.dismissTimeInterval = dismissTimeInterval;
+}
+
+#pragma mark - Setter.
+- (UkeAlertBaseAnimation *)animation {
+    if (!_animation) {
+        if (self.preferredStyle == UIAlertControllerStyleAlert) {
+            _animation = [[UkeAlertStyleAnimation alloc] init];
+        }else if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
+            _animation = [[UkeActionSheetAnimation alloc] init];
+        }
     }
-    return nil;
+    return _animation;
 }
 
 - (void)dealloc {

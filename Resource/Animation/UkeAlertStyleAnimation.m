@@ -16,7 +16,7 @@
 @implementation UkeAlertStyleAnimation
 
 - (NSTimeInterval)transitionDuration:(nullable id <UIViewControllerContextTransitioning>)transitionContext {
-    return self.isPresented ? 0.25 : 0.2;
+    return self.isPresented ? self.presentTimeInterval : self.dismissTimeInterval;
 }
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
@@ -62,8 +62,7 @@
     [containerView addSubview:toView];
     
     NSTimeInterval duration = [self transitionDuration:transitionContext];
-    
-    [UIView animateWithDuration:duration animations:^{
+    [UIView animateWithDuration:duration delay:self.presentDelayTimeInterval options:0 animations:^{
         toView.alpha = 1.0;
         maskView.alpha = 1.0;
     } completion:^(BOOL finished) {
@@ -86,7 +85,7 @@
     UIView *maskView = [containerView viewWithTag:1000];
     
     NSTimeInterval duration = [self transitionDuration:transitionContext];
-    NSTimeInterval delay = 0.1;
+    NSTimeInterval delay = self.dismissDelayTimeInterval;
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         fromView.hidden = YES;
