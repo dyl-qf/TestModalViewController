@@ -32,6 +32,7 @@
 		54B28D8521CDE7A800335FD9 /* UIView+CornerRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B28D8421CDE7A800335FD9 /* UIView+CornerRadius.m */; };
 		54B6364721D0DE010059F2A9 /* UkeAlertCustomizeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B6364621D0DE010059F2A9 /* UkeAlertCustomizeHeaderView.m */; };
 		54B6365121D23F190059F2A9 /* UkeAlertBaseAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B6365021D23F190059F2A9 /* UkeAlertBaseAnimation.m */; };
+		54B6365421D256D70059F2A9 /* ViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B6365321D256D70059F2A9 /* ViewController2.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,8 @@
 		54B6364621D0DE010059F2A9 /* UkeAlertCustomizeHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeAlertCustomizeHeaderView.m; sourceTree = "<group>"; };
 		54B6364F21D23F190059F2A9 /* UkeAlertBaseAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeAlertBaseAnimation.h; sourceTree = "<group>"; };
 		54B6365021D23F190059F2A9 /* UkeAlertBaseAnimation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeAlertBaseAnimation.m; sourceTree = "<group>"; };
+		54B6365221D256D70059F2A9 /* ViewController2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController2.h; sourceTree = "<group>"; };
+		54B6365321D256D70059F2A9 /* ViewController2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController2.m; sourceTree = "<group>"; };
 		E4A41E29FA4DDB8995BE382B /* Pods_TestModalViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TestModalViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E66E4CA7D6B7452954F053F4 /* Pods-TestModalViewController.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestModalViewController.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TestModalViewController/Pods-TestModalViewController.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -230,6 +233,8 @@
 				549FC7DE21C39BCE00619693 /* AppDelegate.m */,
 				549FC7E021C39BCE00619693 /* ViewController.h */,
 				549FC7E121C39BCE00619693 /* ViewController.m */,
+				54B6365221D256D70059F2A9 /* ViewController2.h */,
+				54B6365321D256D70059F2A9 /* ViewController2.m */,
 				549FC7E321C39BCE00619693 /* Main.storyboard */,
 				549FC7E621C39BD000619693 /* Assets.xcassets */,
 				549FC7E821C39BD000619693 /* LaunchScreen.storyboard */,
@@ -480,6 +485,7 @@
 				54B28D7521CDD43B00335FD9 /* UkeAlertHeaderView.m in Sources */,
 				54B28D7F21CDDD1F00335FD9 /* UkeAlertContentView.m in Sources */,
 				54B28D7421CDD43B00335FD9 /* UkeAlertActionGroupView.m in Sources */,
+				54B6365421D256D70059F2A9 /* ViewController2.m in Sources */,
 				5417911821C899D8000D5F7B /* UkeAlertAction.m in Sources */,
 				54B6365121D23F190059F2A9 /* UkeAlertBaseAnimation.m in Sources */,
 			);
