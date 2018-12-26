@@ -11,9 +11,7 @@
 #import "UkeActionSheetAnimation.h"
 #import "Masonry.h"
 
-@interface UkePopUpViewController () <UIViewControllerTransitioningDelegate> {
-    CGFloat contentMaximumHeight;
-}
+@interface UkePopUpViewController () <UIViewControllerTransitioningDelegate>
 @property (nonatomic, strong) UkeAlertBaseAnimation *animation;
 @property (nonatomic, strong) UIView *contentView;
 @end
@@ -25,7 +23,7 @@
     if (self) {
         self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         self.transitioningDelegate = self;
-        contentMaximumHeight = [UIScreen mainScreen].bounds.size.height-24-24;
+        self.contentMaximumHeight = [UIScreen mainScreen].bounds.size.height-24-24;
     }
     return self;
 }
@@ -50,12 +48,14 @@
         self.presentTimeInterval = 0.25;
         self.dismissDelayTimeInterval = 0.1;
         self.dismissTimeInterval = 0.22;
+        self.shouldRespondsMaskViewTouch = NO;
     }else if (preferredStyle == UIAlertControllerStyleActionSheet) {
         self.presentDelayTimeInterval = 0.1;
         self.presentTimeInterval = 0.18;
         self.dismissDelayTimeInterval = 0.1;
         self.dismissTimeInterval = 0.16;
-        contentMaximumHeight = contentMaximumHeight-_sheetContentMarginBottom;
+        self.contentMaximumHeight = self.contentMaximumHeight-_sheetContentMarginBottom;
+        self.shouldRespondsMaskViewTouch = YES;
     }
 }
 
@@ -71,7 +71,7 @@
         }
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.centerY.mas_equalTo(self.view.mas_centerY);
-        make.height.mas_lessThanOrEqualTo(self->contentMaximumHeight);
+        make.height.mas_lessThanOrEqualTo(self.contentMaximumHeight);
     }];
     [self.view layoutIfNeeded];
     self.view.bounds = _contentView.bounds;
@@ -92,7 +92,7 @@
         }
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.centerY.mas_equalTo(self.view.mas_centerY);
-        make.height.mas_lessThanOrEqualTo(self->contentMaximumHeight);
+        make.height.mas_lessThanOrEqualTo(self.contentMaximumHeight);
     }];
     [self.view layoutIfNeeded];
     self.view.bounds = _contentView.bounds;
@@ -124,7 +124,7 @@
     return animation;
 }
 
-#pragma mark - Getter.
+#pragma mark - Setter.
 - (void)setPresentDelayTimeInterval:(CGFloat)presentDelayTimeInterval {
     _presentDelayTimeInterval = presentDelayTimeInterval;
     self.animation.presentDelayTimeInterval = presentDelayTimeInterval;
@@ -145,7 +145,12 @@
     self.animation.dismissTimeInterval = dismissTimeInterval;
 }
 
-#pragma mark - Setter.
+- (void)setContentMaximumHeight:(CGFloat)contentMaximumHeight {
+    _contentMaximumHeight = contentMaximumHeight;
+    // todo...
+}
+
+#pragma mark - Getter.
 - (UkeAlertBaseAnimation *)animation {
     if (!_animation) {
         if (self.preferredStyle == UIAlertControllerStyleAlert) {

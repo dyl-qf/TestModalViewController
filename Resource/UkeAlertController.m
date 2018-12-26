@@ -103,9 +103,11 @@
         UkeAlertContentView *content = nil;
         if (preferredStyle == UIAlertControllerStyleAlert) {
             content = [[UkeAlertContentView alloc] init];
+            content.contentMaximumHeight = self.contentMaximumHeight;
         }else if (preferredStyle == UIAlertControllerStyleActionSheet) {
             [self setSheetContentMarginBottom:8.0];
             content = [self sheetContentView];
+            content.contentMaximumHeight = self.contentMaximumHeight-self.sheetContentMarginBottom;
         }
         _contentView = content;
     }

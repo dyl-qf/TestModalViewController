@@ -9,11 +9,8 @@
 #import "UkeAlertContentView.h"
 #import "Masonry.h"
 
-@interface UkeAlertContentView () {
-    CGFloat contentMaximumHeight;
-}
+@interface UkeAlertContentView ()
 @property (nonatomic, strong) UIView *backContentView;
-
 @property (nonatomic, strong) UIScrollView *headerScrollView;
 @property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, strong) UIScrollView *actionScrollview;
@@ -24,8 +21,6 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        contentMaximumHeight = [UIScreen mainScreen].bounds.size.height-24-24;
-
         self.backContentView = [[UIView alloc] init];
         self.backContentView.backgroundColor = [UIColor whiteColor];
         self.backContentView.layer.cornerRadius = 12.0;
@@ -101,8 +96,8 @@
     
     // TODO: 这里-100需要根据情况来看到底减去多少，比如sheet要考虑到cancelbutton的高还有marginTop
     [self.headerScrollView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_lessThanOrEqualTo(self->contentMaximumHeight-100);
-        make.height.mas_equalTo(headerView.mas_height).priority(500);
+        make.height.mas_lessThanOrEqualTo([self headerViewMaximumHeight]);
+        make.height.mas_equalTo(headerView.mas_height).priority(500);        
     }];
 }
 
@@ -123,6 +118,18 @@
     [self.actionScrollview mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(actionGroupView.mas_height).priority(250);
     }];
+}
+
+#pragma mark - Override.
+- (CGFloat)headerViewMaximumHeight {
+    return self.contentMaximumHeight-100;
+}
+
+#pragma mark - Setter.
+- (void)setContentMaximumHeight:(CGFloat)contentMaximumHeight {
+    _contentMaximumHeight = contentMaximumHeight;
+    // todo...
+    
 }
 
 @end

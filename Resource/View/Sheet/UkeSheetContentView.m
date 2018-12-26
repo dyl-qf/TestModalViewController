@@ -59,6 +59,11 @@
     }];
 }
 
+#pragma mark - Override.
+- (CGFloat)headerViewMaximumHeight {
+    return self.contentMaximumHeight-100;
+}
+
 - (void)setAttributedTextWith:(NSString *)text
                     forButton:(UkeAlertActionButton *)button {
     button.titleLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:self.cancelButtonAttributes];
