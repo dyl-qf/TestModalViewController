@@ -44,7 +44,7 @@
 //    UkeAlertController *alert = [UkeAlertController alertControllerWithTitle:@"友情提示" message:@"课前15分钟才可进入教室\n请耐心等待哦～" preferredStyle:UIAlertControllerStyleAlert];
     
     UIView *view = [[UIView alloc] init];
-        view.frame = CGRectMake(0, 0, 300, 200);
+        view.frame = CGRectMake(0, 0, 300, 400);
     view.backgroundColor = [UIColor redColor];
     
 //    UIView *subView = [[UIView alloc] init];
@@ -59,27 +59,30 @@
     UkeAlertController *alert = [UkeAlertController alertControllerWithContentView:view preferredStyle:UIAlertControllerStyleAlert];
     
     [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
     [alert addAction:[UkeAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
 
     [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (IBAction)test4:(id)sender {
+    
     UIView *view = [[UIView alloc] init];
-//    view.frame = CGRectMake(0, 0, 400, 200);
+    view.frame = CGRectMake(0, 0, 300, 800);
     view.backgroundColor = [UIColor redColor];
     
-    UIView *subView = [[UIView alloc] init];
-//    subView.frame = CGRectMake(0, 0, 400, 200);
-    subView.backgroundColor = [UIColor orangeColor];
-    [view addSubview:subView];
-    [subView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(100, 200));
-        make.edges.mas_equalTo(UIEdgeInsetsMake(20, 20, 20, 20));
-    }];
+//    UIView *subView = [[UIView alloc] init];
+////    subView.frame = CGRectMake(0, 0, 400, 200);
+//    subView.backgroundColor = [UIColor orangeColor];
+//    [view addSubview:subView];
+//    [subView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.size.mas_equalTo(CGSizeMake(100, 200));
+//        make.edges.mas_equalTo(UIEdgeInsetsMake(20, 20, 20, 20));
+//    }];
     
     UkeAlertController *alert = [UkeAlertController alertControllerWithContentView:view preferredStyle:UIAlertControllerStyleActionSheet];
     
+    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
     [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
     [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
 

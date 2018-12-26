@@ -7,6 +7,8 @@
 //
 
 #import "UkeSheetContentView.h"
+#import "UkeSheetHeaderView.h"
+#import "UkeSheetActionGroupView.h"
 #import "UkeAlertActionButton.h"
 #import "UkeAlertAction.h"
 #import "Masonry.h"
@@ -14,6 +16,9 @@
 @interface UkeSheetContentView ()
 @property (nonatomic, strong) UkeAlertAction *cancelAction;
 @property (nonatomic, strong) UIView *cancelButtonWrapperView;
+
+@property (nonatomic, strong) UkeSheetHeaderView *headerView;
+@property (nonatomic, strong) UkeSheetActionGroupView *actionGroupView;
 @end
 
 @implementation UkeSheetContentView
@@ -28,6 +33,17 @@
     }
     return self;
 }
+
+- (void)insertHeaderView:(UIView *)headerView {
+    self.headerView = (UkeSheetHeaderView *)headerView;
+    [super insertHeaderView:headerView];
+}
+
+- (void)insertActionGroupView:(UIView *)actionGroupView {
+    self.actionGroupView = (UkeSheetActionGroupView *)actionGroupView;
+    [super insertActionGroupView:actionGroupView];
+}
+
 
 - (void)addCancelAction:(UkeAlertAction *)action {
     self.cancelAction = action;
@@ -61,7 +77,19 @@
 
 #pragma mark - Override.
 - (CGFloat)headerViewMaximumHeight {
-    return self.contentMaximumHeight-100;
+    CGFloat cancelAreaTotalHeight = 0;
+    if (self.cancelAction) {
+        cancelAreaTotalHeight = self.cancelActionButtonHeight+self.sheetCancelButtonMarginTop;
+    }
+    
+    NSUInteger count = self.actionGroupView.actions.count;
+    if (count <= 2) {
+        return self.contentMaximumHeight-count*self.actionGroupView.actionButtonHeight-cancelAreaTotalHeight;
+    }else {
+        // 多露出0.5个按钮，不然用户以为按钮区域不能滚动
+        return self.contentMaximumHeight-2.5*self.actionGroupView.actionButtonHeight-cancelAreaTotalHeight;
+    }
+    return 0;
 }
 
 - (void)setAttributedTextWith:(NSString *)text

@@ -68,7 +68,6 @@
     }else {
         [self.actionGroupView addAction:action];
     }
-    [self.contentView insertActionGroupView:self.actionGroupView];
 }
 
 #pragma mark - Private.

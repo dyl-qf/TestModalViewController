@@ -7,6 +7,8 @@
 //
 
 #import "UkeAlertContentView.h"
+#import "UkeAlertHeaderView.h"
+#import "UkeAlertActionGroupView.h"
 #import "Masonry.h"
 
 @interface UkeAlertContentView ()
@@ -14,6 +16,9 @@
 @property (nonatomic, strong) UIScrollView *headerScrollView;
 @property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, strong) UIScrollView *actionScrollview;
+
+@property (nonatomic, strong) UkeAlertHeaderView *headerView;
+@property (nonatomic, strong) UkeAlertActionGroupView *actionGroupView;
 @end
 
 @implementation UkeAlertContentView
@@ -83,6 +88,8 @@
 - (void)insertHeaderView:(UIView *)headerView {
     if (!headerView) return;
     
+    self.headerView = (UkeAlertHeaderView *)headerView;
+    
     if (self.headerScrollView.subviews.count) {
         UIView *oldView = self.headerScrollView.subviews.firstObject;
         [oldView removeFromSuperview];
@@ -94,7 +101,6 @@
         make.width.mas_equalTo(self.headerScrollView.mas_width);
     }];
     
-    // TODO: 这里-100需要根据情况来看到底减去多少，比如sheet要考虑到cancelbutton的高还有marginTop
     [self.headerScrollView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_lessThanOrEqualTo([self headerViewMaximumHeight]);
         make.height.mas_equalTo(headerView.mas_height).priority(500);        
@@ -103,6 +109,8 @@
 
 - (void)insertActionGroupView:(UIView *)actionGroupView {
     if (!actionGroupView) return;
+    
+    self.actionGroupView = (UkeAlertActionGroupView *)actionGroupView;
     
     if (self.actionScrollview.subviews.count) {
         UIView *oldView = self.actionScrollview.subviews.firstObject;
@@ -118,11 +126,27 @@
     [self.actionScrollview mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(actionGroupView.mas_height).priority(250);
     }];
+    
+    [self.headerScrollView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_lessThanOrEqualTo([self headerViewMaximumHeight]);
+        make.height.mas_equalTo(self.headerView.mas_height).priority(500);
+    }];
 }
 
 #pragma mark - Override.
 - (CGFloat)headerViewMaximumHeight {
-    return self.contentMaximumHeight-100;
+    if (self.actionGroupView) {
+        if (self.actionGroupView.actions.count <= 2) {
+            // alert中1个按钮和2个按钮都是只占一行的高度
+            return self.contentMaximumHeight-1*self.actionGroupView.actionButtonHeight;
+        }else {
+            // 多露出0.5个按钮，不然用户以为按钮区域不能滚动
+            return self.contentMaximumHeight-2.5*self.actionGroupView.actionButtonHeight;
+        }
+    }else {
+        return self.contentMaximumHeight;
+    }
+    return 0;
 }
 
 #pragma mark - Setter.
