@@ -84,3 +84,10 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+
+
+
+// todo
+// 1. 圆角值
+// 2. 没有添加action时，header里面不要加线。解决办法：把线放在actionGroupView中
