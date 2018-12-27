@@ -41,7 +41,7 @@
         _message = message;
         
         _titleAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor],
-                             NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Medium" size:18],
+                             NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Medium" size:17],
                              NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]
                              };
         _messageAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor],
@@ -49,8 +49,8 @@
                                NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]
                                };
         
-        _titleMessageAreaContentInsets = UIEdgeInsetsMake(24, 30, 30, 30);
-        _titleMessageVerticalSpacing = 24;
+        _titleMessageAreaContentInsets = UIEdgeInsetsMake(20, 16, 10, 16);
+        _titleMessageVerticalSpacing = 2;
         
         NSMutableArray *subviews = [NSMutableArray array];
         if (hasTitle) {
@@ -84,14 +84,13 @@
 
 - (void)layoutTitleAndMessage:(NSArray<UIView *> *)subviews {
     UIView *firstView = subviews.firstObject;
-    NSInteger firstViewTag = firstView.tag;
     UIEdgeInsets insets = self.titleMessageAreaContentInsets;
     [firstView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(insets.left);
         make.right.offset(-insets.right);
-        make.top.offset(firstViewTag==100 ? insets.top : insets.bottom);
+        make.top.offset(insets.top);
         if (subviews.count == 1) {
-            make.bottom.offset(firstViewTag==101 ? -insets.bottom : -insets.top);
+            make.bottom.offset(-insets.top);
         }
     }];
     

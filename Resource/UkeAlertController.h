@@ -54,12 +54,12 @@ NS_ASSUME_NONNULL_BEGIN
 //   -----------------------
 
 //! title所在文本区域离四周的距离
-//! alert默认为 (24, 30, 30, 30)，与系统一致
+//! alert默认为 (20, 16, 10, 16)，与系统一致
 //! sheet默认为 (14.5, 16, 25, 16)，与系统一致
 @property (nonatomic, assign) UIEdgeInsets titleMessageAreaContentInsets;
 
 //! title和message竖直方向的间距
-//! alert默认为 24，与系统一致
+//! alert默认为 2，与系统一致
 //! sheet默认为 12，与系统一致
 @property (nonatomic, assign) CGFloat titleMessageVerticalSpacing;
 

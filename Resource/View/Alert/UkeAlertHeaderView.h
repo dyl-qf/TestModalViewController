@@ -25,6 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 //! title和message竖直方向的间距
 @property (nonatomic, assign) CGFloat titleMessageVerticalSpacing;
 
+#pragma mark - Override.
+- (void)layoutTitleAndMessage:(NSArray<UIView *> *)subviews;
+
 @end
 
 NS_ASSUME_NONNULL_END
