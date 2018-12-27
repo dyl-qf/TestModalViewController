@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *messageLabel;
+@property (nonatomic, strong) NSArray *subviews;
 @end
 
 @implementation UkeAlertHeaderView
@@ -48,6 +49,9 @@
                                NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]
                                };
         
+        _titleMessageAreaContentInsets = UIEdgeInsetsMake(24, 30, 30, 30);
+        _titleMessageVerticalSpacing = 24;
+        
         NSMutableArray *subviews = [NSMutableArray array];
         if (hasTitle) {
             _titleLabel = [[UILabel alloc] init];
@@ -66,30 +70,38 @@
             [self addSubview:_messageLabel];
             [subviews addObject:_messageLabel];
         }
-        
-        [self layoutTitleAndMessage:subviews.copy];
+        _subviews = subviews.copy;
     }
     return self;
 }
 
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+    [super willMoveToSuperview:newSuperview];
+    if (newSuperview) {
+        [self layoutTitleAndMessage:_subviews];
+    }
+}
+
 - (void)layoutTitleAndMessage:(NSArray<UIView *> *)subviews {
     UIView *firstView = subviews.firstObject;
+    NSInteger firstViewTag = firstView.tag;
+    UIEdgeInsets insets = self.titleMessageAreaContentInsets;
     [firstView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(30);
-        make.right.offset(-30);
-        make.top.offset(24);
+        make.left.offset(insets.left);
+        make.right.offset(-insets.right);
+        make.top.offset(firstViewTag==100 ? insets.top : insets.bottom);
         if (subviews.count == 1) {
-            make.bottom.offset(-24);
+            make.bottom.offset(firstViewTag==101 ? -insets.bottom : -insets.top);
         }
     }];
     
     if (subviews.count == 2) {
         UIView *secondView = subviews.lastObject;
         [secondView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.offset(30);
-            make.right.offset(-30);
-            make.top.mas_equalTo(firstView.mas_bottom).offset(24);
-            make.bottom.offset(-30);
+            make.left.offset(insets.left);
+            make.right.offset(-insets.right);
+            make.top.mas_equalTo(firstView.mas_bottom).offset(self.titleMessageVerticalSpacing);
+            make.bottom.offset(-insets.bottom);
         }];
     }
 }

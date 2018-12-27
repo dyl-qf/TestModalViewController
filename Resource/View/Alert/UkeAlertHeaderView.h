@@ -20,8 +20,10 @@ NS_ASSUME_NONNULL_BEGIN
 //! message相关属性
 @property(nonatomic, strong) NSDictionary<NSString *, id> *messageAttributes;
 
-#pragma mark - Override.
-- (void)layoutTitleAndMessage:(NSArray<UIView *> *)subviews;
+//! title所在文本区域离四周的距离
+@property (nonatomic, assign) UIEdgeInsets titleMessageAreaContentInsets;
+//! title和message竖直方向的间距
+@property (nonatomic, assign) CGFloat titleMessageVerticalSpacing;
 
 @end
 

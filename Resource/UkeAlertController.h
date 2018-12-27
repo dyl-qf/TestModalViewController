@@ -40,10 +40,29 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addContentView:(UIView *)view;
 
 
-
 //! 中间内容区宽度。如果是alertView，默认270；如果是actionSheet，默认为屏幕宽度-8-8，跟系统保持一致
 //! 注意：如果是通过alertControllerWithContentView或者addContentView来添加内容，则contentWidth无默认值，除非手动指定
 @property (nonatomic, assign) CGFloat contentWidth;
+
+
+//   -----------------------
+//  |        ---------      |
+//  |       |  title  |     |
+//  |       |         |
+//  |       | message|      |
+//  |        ---------      |
+//   -----------------------
+
+//! title所在文本区域离四周的距离
+//! alert默认为 (24, 30, 30, 30)，与系统一致
+//! sheet默认为 (14.5, 16, 25, 16)，与系统一致
+@property (nonatomic, assign) UIEdgeInsets titleMessageAreaContentInsets;
+
+//! title和message竖直方向的间距
+//! alert默认为 24，与系统一致
+//! sheet默认为 12，与系统一致
+@property (nonatomic, assign) CGFloat titleMessageVerticalSpacing;
+
 
 //! actionSheet的cancelButton距离上边内容的间距，默认为8，跟系统保持一致
 @property (nonatomic, assign) CGFloat sheetCancelButtonMarginTop;

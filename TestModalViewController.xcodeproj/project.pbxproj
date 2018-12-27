@@ -15,6 +15,7 @@
 		5434CE4421C7E2E800178D31 /* UkeAlertStyleAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5434CE3D21C7E2E800178D31 /* UkeAlertStyleAnimation.m */; };
 		5434CE4521C7E2E800178D31 /* UkeActionSheetAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5434CE3E21C7E2E800178D31 /* UkeActionSheetAnimation.m */; };
 		5434CE4621C7E2E800178D31 /* UkePopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5434CE4221C7E2E800178D31 /* UkePopUpViewController.m */; };
+		545C319521D4D6EF00B20236 /* UIView+CornerRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = 545C319321D4D6EE00B20236 /* UIView+CornerRadius.m */; };
 		549FC7DF21C39BCE00619693 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 549FC7DE21C39BCE00619693 /* AppDelegate.m */; };
 		549FC7E221C39BCE00619693 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 549FC7E121C39BCE00619693 /* ViewController.m */; };
 		549FC7E521C39BCE00619693 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 549FC7E321C39BCE00619693 /* Main.storyboard */; };
@@ -29,7 +30,6 @@
 		54B28D7C21CDD53600335FD9 /* UkeSheetActionGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B28D7B21CDD53600335FD9 /* UkeSheetActionGroupView.m */; };
 		54B28D7F21CDDD1F00335FD9 /* UkeAlertContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B28D7E21CDDD1F00335FD9 /* UkeAlertContentView.m */; };
 		54B28D8221CDDD4200335FD9 /* UkeSheetContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B28D8121CDDD4200335FD9 /* UkeSheetContentView.m */; };
-		54B28D8521CDE7A800335FD9 /* UIView+CornerRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B28D8421CDE7A800335FD9 /* UIView+CornerRadius.m */; };
 		54B6364721D0DE010059F2A9 /* UkeAlertCustomizeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B6364621D0DE010059F2A9 /* UkeAlertCustomizeHeaderView.m */; };
 		54B6365121D23F190059F2A9 /* UkeAlertBaseAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B6365021D23F190059F2A9 /* UkeAlertBaseAnimation.m */; };
 		54B6365421D256D70059F2A9 /* ViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B6365321D256D70059F2A9 /* ViewController2.m */; };
@@ -68,6 +68,8 @@
 		5434CE4021C7E2E800178D31 /* UkeAlertStyleAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UkeAlertStyleAnimation.h; sourceTree = "<group>"; };
 		5434CE4221C7E2E800178D31 /* UkePopUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UkePopUpViewController.m; sourceTree = "<group>"; };
 		5434CE4321C7E2E800178D31 /* UkePopUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UkePopUpViewController.h; sourceTree = "<group>"; };
+		545C319321D4D6EE00B20236 /* UIView+CornerRadius.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CornerRadius.m"; sourceTree = "<group>"; };
+		545C319421D4D6EE00B20236 /* UIView+CornerRadius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CornerRadius.h"; sourceTree = "<group>"; };
 		549FC7DA21C39BCE00619693 /* TestModalViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestModalViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		549FC7DD21C39BCE00619693 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		549FC7DE21C39BCE00619693 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -96,8 +98,6 @@
 		54B28D7E21CDDD1F00335FD9 /* UkeAlertContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UkeAlertContentView.m; sourceTree = "<group>"; };
 		54B28D8021CDDD4200335FD9 /* UkeSheetContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeSheetContentView.h; sourceTree = "<group>"; };
 		54B28D8121CDDD4200335FD9 /* UkeSheetContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeSheetContentView.m; sourceTree = "<group>"; };
-		54B28D8321CDE7A800335FD9 /* UIView+CornerRadius.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+CornerRadius.h"; sourceTree = "<group>"; };
-		54B28D8421CDE7A800335FD9 /* UIView+CornerRadius.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+CornerRadius.m"; sourceTree = "<group>"; };
 		54B6364521D0DE010059F2A9 /* UkeAlertCustomizeHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeAlertCustomizeHeaderView.h; sourceTree = "<group>"; };
 		54B6364621D0DE010059F2A9 /* UkeAlertCustomizeHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeAlertCustomizeHeaderView.m; sourceTree = "<group>"; };
 		54B6364F21D23F190059F2A9 /* UkeAlertBaseAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeAlertBaseAnimation.h; sourceTree = "<group>"; };
@@ -162,8 +162,6 @@
 				5417911721C899D8000D5F7B /* UkeAlertAction.m */,
 				5417911921C8E693000D5F7B /* NSParagraphStyle+Shortcut.h */,
 				5417911A21C8E693000D5F7B /* NSParagraphStyle+Shortcut.m */,
-				54B28D8321CDE7A800335FD9 /* UIView+CornerRadius.h */,
-				54B28D8421CDE7A800335FD9 /* UIView+CornerRadius.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -235,6 +233,8 @@
 				549FC7E121C39BCE00619693 /* ViewController.m */,
 				54B6365221D256D70059F2A9 /* ViewController2.h */,
 				54B6365321D256D70059F2A9 /* ViewController2.m */,
+				545C319421D4D6EE00B20236 /* UIView+CornerRadius.h */,
+				545C319321D4D6EE00B20236 /* UIView+CornerRadius.m */,
 				549FC7E321C39BCE00619693 /* Main.storyboard */,
 				549FC7E621C39BD000619693 /* Assets.xcassets */,
 				549FC7E821C39BD000619693 /* LaunchScreen.storyboard */,
@@ -473,6 +473,7 @@
 				549FC7E221C39BCE00619693 /* ViewController.m in Sources */,
 				5417911121C7BAE8000D5F7B /* UkeAlertController.m in Sources */,
 				54B28D8221CDDD4200335FD9 /* UkeSheetContentView.m in Sources */,
+				545C319521D4D6EF00B20236 /* UIView+CornerRadius.m in Sources */,
 				5434CE4621C7E2E800178D31 /* UkePopUpViewController.m in Sources */,
 				54B6364721D0DE010059F2A9 /* UkeAlertCustomizeHeaderView.m in Sources */,
 				54B28D7621CDD43B00335FD9 /* UkeSheetHeaderView.m in Sources */,
@@ -481,7 +482,6 @@
 				5434CE4521C7E2E800178D31 /* UkeActionSheetAnimation.m in Sources */,
 				549FC7DF21C39BCE00619693 /* AppDelegate.m in Sources */,
 				5417911E21C8ECA5000D5F7B /* UkeAlertActionButton.m in Sources */,
-				54B28D8521CDE7A800335FD9 /* UIView+CornerRadius.m in Sources */,
 				54B28D7521CDD43B00335FD9 /* UkeAlertHeaderView.m in Sources */,
 				54B28D7F21CDDD1F00335FD9 /* UkeAlertContentView.m in Sources */,
 				54B28D7421CDD43B00335FD9 /* UkeAlertActionGroupView.m in Sources */,

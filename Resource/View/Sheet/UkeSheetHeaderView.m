@@ -23,30 +23,11 @@
                                NSFontAttributeName: [UIFont systemFontOfSize:12],
                                NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]
                                };
+        
+        self.titleMessageAreaContentInsets = UIEdgeInsetsMake(14.5, 16, 25, 16);
+        self.titleMessageVerticalSpacing = 12;
     }
     return self;
-}
-
-- (void)layoutTitleAndMessage:(NSArray<UIView *> *)subviews {
-    UIView *firstView = subviews.firstObject;
-    [firstView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(16);
-        make.right.offset(-16);
-        make.top.offset(14.5);
-        if (subviews.count == 1) {
-            make.bottom.offset(-14.5);
-        }
-    }];
-    
-    if (subviews.count == 2) {
-        UIView *secondView = subviews.lastObject;
-        [secondView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.offset(16);
-            make.right.offset(-16);
-            make.top.mas_equalTo(firstView.mas_bottom).offset(12);
-            make.bottom.offset(-25);
-        }];
-    }
 }
 
 @end
