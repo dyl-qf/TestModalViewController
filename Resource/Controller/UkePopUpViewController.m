@@ -38,6 +38,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.view addSubview:_contentView];
+    
+    CGFloat contentMaximumHeight = self.contentMaximumHeight;
+    if (_preferredStyle == UIAlertControllerStyleActionSheet) {
+        contentMaximumHeight = self.contentMaximumHeight-self.sheetContentMarginBottom;
+    }
+    [_contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        if (self.contentWidth != 0) {
+            make.width.mas_equalTo(self.contentWidth);
+        }
+        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.centerY.mas_equalTo(self.view.mas_centerY);
+        make.height.mas_lessThanOrEqualTo(contentMaximumHeight);
+    }];
+    [self.view layoutIfNeeded];
+    self.view.bounds = _contentView.bounds;
 }
 
 #pragma mark - Public.
@@ -54,48 +71,12 @@
         self.presentTimeInterval = 0.18;
         self.dismissDelayTimeInterval = 0.1;
         self.dismissTimeInterval = 0.16;
-        self.contentMaximumHeight = self.contentMaximumHeight-_sheetContentMarginBottom;
         self.shouldRespondsMaskViewTouch = YES;
     }
 }
 
-- (void)setContentWidth:(CGFloat)contentWidth {
-    _contentWidth = contentWidth;
-    if (!_contentView || !_contentView.superview) {
-        return;
-    }
-    
-    [_contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        if (contentWidth != 0) {
-            make.width.mas_equalTo(contentWidth);
-        }
-        make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.centerY.mas_equalTo(self.view.mas_centerY);
-        make.height.mas_lessThanOrEqualTo(self.contentMaximumHeight);
-    }];
-    [self.view layoutIfNeeded];
-    self.view.bounds = _contentView.bounds;
-}
-
 - (void)addContentView:(UIView *)view {
-    if (_contentView) {
-        [_contentView removeFromSuperview];
-        _contentView = nil;
-    }
-    
     _contentView = view;
-    
-    [self.view addSubview:_contentView];
-    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        if (self.contentWidth != 0) {
-            make.width.mas_equalTo(self.contentWidth);
-        }
-        make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.centerY.mas_equalTo(self.view.mas_centerY);
-        make.height.mas_lessThanOrEqualTo(self.contentMaximumHeight);
-    }];
-    [self.view layoutIfNeeded];
-    self.view.bounds = _contentView.bounds;
 }
 
 - (void)dismiss {
@@ -143,11 +124,6 @@
 - (void)setDismissTimeInterval:(CGFloat)dismissTimeInterval {
     _dismissTimeInterval = dismissTimeInterval;
     self.animation.dismissTimeInterval = dismissTimeInterval;
-}
-
-- (void)setContentMaximumHeight:(CGFloat)contentMaximumHeight {
-    _contentMaximumHeight = contentMaximumHeight;
-    // todo...
 }
 
 #pragma mark - Getter.

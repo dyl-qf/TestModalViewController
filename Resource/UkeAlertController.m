@@ -47,13 +47,12 @@
 }
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    
     [self.actionGroupView layoutActions];
     [self.contentView insertHeaderView:self.headerView];
     [self.contentView insertActionGroupView:self.actionGroupView];
     
     [super addContentView:self.contentView];
+    [super viewDidLoad];
 }
 
 - (void)addAction:(UkeAlertAction *)action {
@@ -83,8 +82,6 @@
             header = [[UkeAlertHeaderView alloc] initWithTitle:title message:message];
             defaultContentWidth = 270.0;
         }else if (preferredStyle == UIAlertControllerStyleActionSheet) {
-            [self setSheetContentMarginBottom:8.0];
-            
             header = [[UkeSheetHeaderView alloc] initWithTitle:title message:message];
             defaultContentWidth = [UIScreen mainScreen].bounds.size.width-8-8;
         }
