@@ -34,6 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 //! maskView是否可以响应dismiss手势。默认alert不响应，sheet响应
 @property (nonatomic, assign) BOOL shouldRespondsMaskViewTouch;
 
+//! 圆角值
+@property (nonatomic, assign) CGFloat cornerRadius;
 
 #pragma mark - 动画时间
 // 弹出时间

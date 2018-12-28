@@ -28,7 +28,6 @@
     if (self) {
         self.backContentView = [[UIView alloc] init];
         self.backContentView.backgroundColor = [UIColor whiteColor];
-        self.backContentView.layer.cornerRadius = 12.0;
         self.backContentView.layer.masksToBounds = YES;
         [self addSubview:self.backContentView];
         
@@ -83,6 +82,13 @@
         }];
     }
     return self;
+}
+
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+    [super willMoveToSuperview:newSuperview];
+    if (newSuperview) {
+        self.backContentView.layer.cornerRadius = _cornerRadius;
+    }
 }
 
 - (void)insertHeaderView:(UIView *)headerView {

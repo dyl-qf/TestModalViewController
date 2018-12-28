@@ -28,6 +28,7 @@
 @implementation UkeAlertController
 @synthesize contentWidth = _contentWidth;
 @synthesize sheetContentMarginBottom = _sheetContentMarginBottom;
+@synthesize cornerRadius = _cornerRadius;
 
 + (instancetype)alertControllerWithTitle:(NSString *)title
                                      message:(NSString *)message
@@ -106,6 +107,7 @@
             content.contentMaximumHeight = self.contentMaximumHeight-self.sheetContentMarginBottom;
         }
         _contentView = content;
+        [self setCornerRadius:12.0];
     }
     return self;
 }
@@ -157,6 +159,12 @@
 
 - (void)setDestructiveButtonAttributes:(NSDictionary<NSString *,id> *)destructiveButtonAttributes {
     [self.actionGroupView setDestructiveButtonAttributes:destructiveButtonAttributes];
+}
+
+- (void)setCornerRadius:(CGFloat)cornerRadius {
+    _cornerRadius = cornerRadius;
+    _contentView.cornerRadius = cornerRadius;
+    [super setCornerRadius:cornerRadius];
 }
 
 #pragma mark - Getter.

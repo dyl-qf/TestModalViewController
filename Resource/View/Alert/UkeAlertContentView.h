@@ -13,7 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UkeAlertContentView : UIView
 @property (nonatomic, strong, readonly) UIView *backContentView;
 
+//! 内容区高度
 @property (nonatomic, assign) CGFloat contentMaximumHeight;
+//! 圆角值
+@property (nonatomic, assign) CGFloat cornerRadius;
 
 - (void)insertHeaderView:(nullable UIView *)headerView;
 - (void)insertActionGroupView:(nullable UIView *)actionGroupView;

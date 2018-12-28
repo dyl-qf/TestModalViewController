@@ -81,6 +81,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) NSDictionary<NSString *, id> *cancelButtonAttributes;
 @property(nonatomic, strong) NSDictionary<NSString *, id> *destructiveButtonAttributes;
 
+//! 圆角值、默认12.0，与系统一致
+@property (nonatomic, assign) CGFloat cornerRadius;
+
 @end
 
 NS_ASSUME_NONNULL_END

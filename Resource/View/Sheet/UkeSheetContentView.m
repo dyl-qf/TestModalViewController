@@ -34,6 +34,13 @@
     return self;
 }
 
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+    [super willMoveToSuperview:newSuperview];
+    if (newSuperview) {
+        self.cancelButtonWrapperView.layer.cornerRadius = self.cornerRadius;
+    }
+}
+
 - (void)insertHeaderView:(UIView *)headerView {
     self.headerView = (UkeSheetHeaderView *)headerView;
     [super insertHeaderView:headerView];
@@ -50,7 +57,6 @@
     
     UIView *cancelView = [[UIView alloc] init];
     cancelView.backgroundColor = [UIColor whiteColor];
-    cancelView.layer.cornerRadius = 12.0;
     cancelView.layer.masksToBounds = YES;
     [self addSubview:cancelView];
     self.cancelButtonWrapperView = cancelView;
