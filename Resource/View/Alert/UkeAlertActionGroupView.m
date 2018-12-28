@@ -13,9 +13,10 @@
 
 @interface UkeAlertActionGroupView ()
 @property (nonatomic, strong) NSArray<UkeAlertAction *> *actions;
-@property (nonatomic, strong) NSMutableArray<UkeAlertActionButton *> *defaultButtons;
-@property (nonatomic, strong) NSMutableArray<UkeAlertActionButton *> *cancelButtons;
-@property (nonatomic, strong) NSMutableArray<UkeAlertActionButton *> *destructiveButtons;
+@property (nonatomic, strong) UIView *actionGroupArea;
+//@property (nonatomic, strong) NSMutableArray<UkeAlertActionButton *> *defaultButtons;
+//@property (nonatomic, strong) NSMutableArray<UkeAlertActionButton *> *cancelButtons;
+//@property (nonatomic, strong) NSMutableArray<UkeAlertActionButton *> *destructiveButtons;
 @end
 
 @implementation UkeAlertActionGroupView
@@ -24,9 +25,9 @@
     self = [super init];
     if (self) {
         self.actions = [NSArray array];
-        self.defaultButtons = [NSMutableArray array];
-        self.cancelButtons = [NSMutableArray array];
-        self.destructiveButtons = [NSMutableArray array];
+//        self.defaultButtons = [NSMutableArray array];
+//        self.cancelButtons = [NSMutableArray array];
+//        self.destructiveButtons = [NSMutableArray array];
         
         _actionButtonHeight = 44.0;
         _defaultButtonAttributes = @{NSForegroundColorAttributeName: [UIColor colorWithRed:45/255.0 green:139/255.0 blue:245/255.0 alpha:1.0],
@@ -46,7 +47,26 @@
 }
 
 - (void)layoutActions {
+    if (self.actions.count == 0) {
+        return;
+    }
     [self removeAllSubviews];
+    
+    // 添加横线
+    UIView *horizontalLineView = [[UIView alloc] init];
+    horizontalLineView.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1.0];
+    [self addSubview:horizontalLineView];
+    [horizontalLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.offset(0);
+        make.height.mas_equalTo(1.0);
+    }];
+    // 添加按钮区域
+    _actionGroupArea = [[UIView alloc] init];
+    [self addSubview:_actionGroupArea];
+    [_actionGroupArea mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(horizontalLineView.mas_bottom);
+        make.left.bottom.right.offset(0);
+    }];
     
     if (self.actions.count == 2 && [self isMemberOfClass:[UkeAlertActionGroupView class]]) {
         [self layoutForTwoActions];
@@ -56,10 +76,10 @@
 }
 
 - (void)layoutForTwoActions {
-    UIView *lineView = [[UIView alloc] init];
-    lineView.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1.0];
-    [self addSubview:lineView];
-    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIView *verticalLineView = [[UIView alloc] init];
+    verticalLineView.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1.0];
+    [_actionGroupArea addSubview:verticalLineView];
+    [verticalLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.offset(0);
         make.width.mas_equalTo(1.0);
         make.centerX.mas_equalTo(self.mas_centerX);
@@ -71,18 +91,18 @@
         button.tag = i;
         [self setAttributedTextWith:action.title forButton:button style:action.style];
         [button addTarget:self action:@selector(handleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:button];
+        [_actionGroupArea addSubview:button];
     
         if (i == 0) {
             [button mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.top.bottom.offset(0);
-                make.right.mas_equalTo(lineView.mas_left);
+                make.right.mas_equalTo(verticalLineView.mas_left);
                 make.height.mas_equalTo(self.actionButtonHeight);
             }];
         }else if (i == 1) {
             [button mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.right.top.offset(0);
-                make.left.mas_equalTo(lineView.mas_right);
+                make.left.mas_equalTo(verticalLineView.mas_right);
                 make.height.mas_equalTo(self.actionButtonHeight);
             }];
         }
@@ -96,11 +116,11 @@
         button.tag = idx;
         [self setAttributedTextWith:action.title forButton:button style:action.style];
         [button addTarget:self action:@selector(handleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:button];
+        [self.actionGroupArea addSubview:button];
         
         UIView *lineView = [[UIView alloc] init];
         lineView.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1.0];
-        [self addSubview:lineView];
+        [self.actionGroupArea addSubview:lineView];
         [lines addObject:lineView];
         
         [button mas_makeConstraints:^(MASConstraintMaker *make) {

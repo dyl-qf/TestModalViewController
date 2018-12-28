@@ -66,11 +66,10 @@
 }
 
 - (IBAction)test4:(id)sender {
-    UkeAlertController *alert = [UkeAlertController alertControllerWithTitle:@"友情提示" message:@"课前15分钟才可进入教室\n请耐心等待哦～" preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    alert.cornerRadius = 0;
-    alert.contentWidth = [UIScreen mainScreen].bounds.size.width;
-    alert.sheetContentMarginBottom = 0;
+//    UkeAlertController *alert = [UkeAlertController alertControllerWithTitle:@"友情提示" message:@"课前15分钟才可进入教室\n请耐心等待哦～" preferredStyle:UIAlertControllerStyleActionSheet];
+//    alert.cornerRadius = 0;
+//    alert.contentWidth = [UIScreen mainScreen].bounds.size.width;
+//    alert.sheetContentMarginBottom = 0;
     
     UIView *view = [[UIView alloc] init];
     view.frame = CGRectMake(0, 0, 300, 800);
@@ -85,11 +84,11 @@
 //        make.edges.mas_equalTo(UIEdgeInsetsMake(20, 20, 20, 20));
 //    }];
     
-//    UkeAlertController *alert = [UkeAlertController alertControllerWithContentView:view preferredStyle:UIAlertControllerStyleActionSheet];
+    UkeAlertController *alert = [UkeAlertController alertControllerWithContentView:view preferredStyle:UIAlertControllerStyleActionSheet];
     
-    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-
-    [alert addAction:[UkeAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+//    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+//
+//    [alert addAction:[UkeAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     
     [self presentViewController:alert animated:YES completion:nil];
 }

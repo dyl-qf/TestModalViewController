@@ -83,17 +83,21 @@
 
 #pragma mark - Override.
 - (CGFloat)headerViewMaximumHeight {
-    CGFloat cancelAreaTotalHeight = 0;
-    if (self.cancelAction) {
-        cancelAreaTotalHeight = self.cancelActionButtonHeight+self.sheetCancelButtonMarginTop;
-    }
-    
-    NSUInteger count = self.actionGroupView.actions.count;
-    if (count <= 2) {
-        return self.contentMaximumHeight-count*self.actionGroupView.actionButtonHeight-cancelAreaTotalHeight;
+    if (self.actionGroupView && self.actionGroupView.actions.count) {
+        CGFloat cancelAreaTotalHeight = 0;
+        if (self.cancelAction) {
+            cancelAreaTotalHeight = self.cancelActionButtonHeight+self.sheetCancelButtonMarginTop;
+        }
+        
+        NSUInteger count = self.actionGroupView.actions.count;
+        if (count <= 2) {
+            return self.contentMaximumHeight-count*self.actionGroupView.actionButtonHeight-cancelAreaTotalHeight;
+        }else {
+            // 多露出0.5个按钮，不然用户以为按钮区域不能滚动
+            return self.contentMaximumHeight-2.5*self.actionGroupView.actionButtonHeight-cancelAreaTotalHeight;
+        }
     }else {
-        // 多露出0.5个按钮，不然用户以为按钮区域不能滚动
-        return self.contentMaximumHeight-2.5*self.actionGroupView.actionButtonHeight-cancelAreaTotalHeight;
+        return self.contentMaximumHeight;
     }
     return 0;
 }

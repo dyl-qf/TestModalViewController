@@ -13,5 +13,131 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Resource/View/Alert/UkeAlertContentView.m"
+            timestampString = "567670516.5064141"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "-willMoveToSuperview:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[UkeAlertContentView willMoveToSuperview:]"
+                  moduleName = "TestModalViewController"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liqian/MyProjects/TestModalViewController/Resource/View/Alert/UkeAlertContentView.m"
+                  timestampString = "567670516.636881"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "88"
+                  endingLineNumber = "88"
+                  offsetFromSymbolStart = "312">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__43-[UkeAlertContentView willMoveToSuperview:]_block_invoke"
+                  moduleName = "TestModalViewController"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liqian/MyProjects/TestModalViewController/Resource/View/Alert/UkeAlertContentView.m"
+                  timestampString = "567670516.6416219"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "88"
+                  endingLineNumber = "88"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_.91"
+                  moduleName = "TestModalViewController"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liqian/MyProjects/TestModalViewController/Resource/View/Alert/UkeAlertContentView.m"
+                  timestampString = "567670516.645115"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "88"
+                  endingLineNumber = "88"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Resource/View/Alert/UkeAlertContentView.m"
+            timestampString = "567670516.506497"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "-willMoveToSuperview:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[UkeAlertContentView willMoveToSuperview:]"
+                  moduleName = "TestModalViewController"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liqian/MyProjects/TestModalViewController/Resource/View/Alert/UkeAlertContentView.m"
+                  timestampString = "567670516.652365"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "95"
+                  endingLineNumber = "95"
+                  offsetFromSymbolStart = "552">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__43-[UkeAlertContentView willMoveToSuperview:]_block_invoke.95"
+                  moduleName = "TestModalViewController"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liqian/MyProjects/TestModalViewController/Resource/View/Alert/UkeAlertContentView.m"
+                  timestampString = "567670516.654519"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "95"
+                  endingLineNumber = "95"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_.97"
+                  moduleName = "TestModalViewController"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liqian/MyProjects/TestModalViewController/Resource/View/Alert/UkeAlertContentView.m"
+                  timestampString = "567670516.656508"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "95"
+                  endingLineNumber = "95"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

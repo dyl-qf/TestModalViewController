@@ -14,7 +14,6 @@
 @interface UkeAlertContentView ()
 @property (nonatomic, strong) UIView *backContentView;
 @property (nonatomic, strong) UIScrollView *headerScrollView;
-@property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, strong) UIScrollView *actionScrollview;
 
 @property (nonatomic, strong) UkeAlertHeaderView *headerView;
@@ -33,11 +32,7 @@
         
         self.headerScrollView = [[UIScrollView alloc] init];
         [self.backContentView addSubview:self.headerScrollView];
-        
-        self.lineView = [[UIView alloc] init];
-        self.lineView.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1.0];
-        [self.backContentView addSubview:self.lineView];
-        
+                
         self.actionScrollview = [[UIScrollView alloc] init];
         [self.backContentView addSubview:self.actionScrollview];
         
@@ -48,13 +43,13 @@
         [self.headerScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.right.offset(0);
         }];
-        [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.offset(0);
-            make.height.mas_equalTo(1.0);
-            make.top.mas_equalTo(self.headerScrollView.mas_bottom);
-        }];
+//        [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.right.offset(0);
+//            make.height.mas_equalTo(1.0);
+//            make.top.mas_equalTo(self.headerScrollView.mas_bottom);
+//        }];
         [self.actionScrollview mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.lineView.mas_bottom);
+            make.top.mas_equalTo(self.headerScrollView.mas_bottom);
             make.left.right.bottom.offset(0);
         }];
         
@@ -88,6 +83,19 @@
     [super willMoveToSuperview:newSuperview];
     if (newSuperview) {
         self.backContentView.layer.cornerRadius = _cornerRadius;
+        
+        if (self.headerView) {
+            [self.headerScrollView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_lessThanOrEqualTo([self headerViewMaximumHeight]);
+                make.height.mas_equalTo(self.headerView.mas_height).priority(500);
+            }];
+        }
+        
+        if (self.actionGroupView) {
+            [self.actionScrollview mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(self.actionGroupView.mas_height).priority(250);
+            }];
+        }
     }
 }
 
@@ -106,11 +114,6 @@
         make.edges.mas_equalTo(UIEdgeInsetsZero);
         make.width.mas_equalTo(self.headerScrollView.mas_width);
     }];
-    
-    [self.headerScrollView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_lessThanOrEqualTo([self headerViewMaximumHeight]);
-        make.height.mas_equalTo(headerView.mas_height).priority(500);        
-    }];
 }
 
 - (void)insertActionGroupView:(UIView *)actionGroupView {
@@ -127,21 +130,15 @@
     [actionGroupView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
         make.width.mas_equalTo(self.actionScrollview.mas_width);
-    }];
-    
-    [self.actionScrollview mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(actionGroupView.mas_height).priority(250);
-    }];
-    
-    [self.headerScrollView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_lessThanOrEqualTo([self headerViewMaximumHeight]);
-        make.height.mas_equalTo(self.headerView.mas_height).priority(500);
+        if (self.actionGroupView.actions.count == 0) {
+            make.height.mas_equalTo(0);
+        }
     }];
 }
 
 #pragma mark - Override.
 - (CGFloat)headerViewMaximumHeight {
-    if (self.actionGroupView) {
+    if (self.actionGroupView && self.actionGroupView.actions.count) {
         if (self.actionGroupView.actions.count <= 2) {
             // alert中1个按钮和2个按钮都是只占一行的高度
             return self.contentMaximumHeight-1*self.actionGroupView.actionButtonHeight;
@@ -153,13 +150,6 @@
         return self.contentMaximumHeight;
     }
     return 0;
-}
-
-#pragma mark - Setter.
-- (void)setContentMaximumHeight:(CGFloat)contentMaximumHeight {
-    _contentMaximumHeight = contentMaximumHeight;
-    // todo...
-    
 }
 
 @end
