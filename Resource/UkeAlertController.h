@@ -84,6 +84,9 @@ NS_ASSUME_NONNULL_BEGIN
 //! 圆角值、默认12.0，与系统一致
 @property (nonatomic, assign) CGFloat cornerRadius;
 
+//! 线的宽度，默认1pt
+@property (nonatomic, assign) CGFloat lineHeight;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -24,9 +24,13 @@ NS_ASSUME_NONNULL_BEGIN
 //MARK: 按钮相关属性
 // alert默认44.0，sheet默认57.0，跟系统保持一致
 @property (nonatomic, assign) CGFloat actionButtonHeight;
+
 @property(nonatomic, strong) NSDictionary<NSString *, id> *defaultButtonAttributes;
 @property(nonatomic, strong) NSDictionary<NSString *, id> *cancelButtonAttributes;
 @property(nonatomic, strong) NSDictionary<NSString *, id> *destructiveButtonAttributes;
+
+//! 线的宽度，默认1pt
+@property (nonatomic, assign) CGFloat lineHeight;
 
 @end
 

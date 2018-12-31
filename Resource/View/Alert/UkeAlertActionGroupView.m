@@ -24,6 +24,8 @@
         self.actions = [NSArray array];
         
         _actionButtonHeight = 44.0;
+        _lineHeight = 1.0;
+        
         _defaultButtonAttributes = @{NSForegroundColorAttributeName: [UIColor colorWithRed:45/255.0 green:139/255.0 blue:245/255.0 alpha:1.0],
                                          NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Regular" size:17]                             };
         _cancelButtonAttributes = @{NSForegroundColorAttributeName: [UIColor colorWithRed:45/255.0 green:139/255.0 blue:245/255.0 alpha:1.0],
@@ -52,7 +54,7 @@
     [self addSubview:horizontalLineView];
     [horizontalLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.offset(0);
-        make.height.mas_equalTo(1.0);
+        make.height.mas_equalTo(self.lineHeight);
     }];
     // 添加按钮区域
     _actionGroupArea = [[UIView alloc] init];
@@ -76,8 +78,8 @@
     [_actionGroupArea addSubview:verticalLineView];
     [verticalLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.offset(0);
-        make.width.mas_equalTo(1.0);
-        make.centerX.mas_equalTo(self.mas_centerX);
+        make.width.mas_equalTo(self.lineHeight);
+        make.centerX.mas_equalTo(self.actionGroupArea.mas_centerX);
     }];
     
     for (int i = 0; i < 2; i ++) {
@@ -136,7 +138,7 @@
         if (idx != self.actions.count-1) {
             [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.right.offset(0);
-                make.height.mas_equalTo(1.0);
+                make.height.mas_equalTo(self.lineHeight);
                 make.top.mas_equalTo(button.mas_bottom);
             }];
         }

@@ -167,6 +167,11 @@
     [super setCornerRadius:cornerRadius];
 }
 
+- (void)setLineHeight:(CGFloat)lineHeight {
+    _lineHeight = lineHeight;
+    self.actionGroupView.lineHeight = lineHeight;
+}
+
 #pragma mark - Getter.
 - (UkeSheetContentView *)sheetContentView {
     UkeSheetContentView *sheetContentView = (UkeSheetContentView *)self.contentView;

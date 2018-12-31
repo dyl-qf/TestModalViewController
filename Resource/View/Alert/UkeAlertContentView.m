@@ -24,7 +24,7 @@
 
 - (instancetype)init {
     self = [super init];
-    if (self) {
+    if (self) {        
         self.backContentView = [[UIView alloc] init];
         self.backContentView.backgroundColor = [UIColor whiteColor];
         self.backContentView.layer.masksToBounds = YES;
@@ -133,10 +133,10 @@
     if (self.actionGroupView && self.actionGroupView.actions.count) {
         if (self.actionGroupView.actions.count <= 2) {
             // alert中1个按钮和2个按钮都是只占一行的高度
-            return self.contentMaximumHeight-1*self.actionGroupView.actionButtonHeight;
+            return self.contentMaximumHeight-(1*self.actionGroupView.actionButtonHeight)-self.actionGroupView.lineHeight;
         }else {
             // 多露出0.5个按钮，不然用户以为按钮区域不能滚动
-            return self.contentMaximumHeight-2.5*self.actionGroupView.actionButtonHeight;
+            return self.contentMaximumHeight-2.5*self.actionGroupView.actionButtonHeight-3*self.actionGroupView.lineHeight;
         }
     }else {
         return self.contentMaximumHeight;
