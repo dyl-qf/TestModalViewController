@@ -40,18 +40,6 @@
         [self.backContentView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.top.bottom.offset(0);
         }];
-        [self.headerScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.top.right.offset(0);
-        }];
-//        [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.right.offset(0);
-//            make.height.mas_equalTo(1.0);
-//            make.top.mas_equalTo(self.headerScrollView.mas_bottom);
-//        }];
-        [self.actionScrollview mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.headerScrollView.mas_bottom);
-            make.left.right.bottom.offset(0);
-        }];
         
         // 添加scrollView的默认占位内容
         UIView *defaultHeader = [[UIView alloc] init];
@@ -59,10 +47,6 @@
         [defaultHeader mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(UIEdgeInsetsZero);
             make.height.mas_equalTo(0);
-            make.width.mas_equalTo(self.headerScrollView.mas_width);
-        }];
-        [self.headerScrollView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(defaultHeader.mas_height);
         }];
         
         UIView *defaultActionView = [[UIView alloc] init];
@@ -70,9 +54,20 @@
         [defaultActionView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(UIEdgeInsetsZero);
             make.height.mas_equalTo(0);
-            make.width.mas_equalTo(self.actionScrollview.mas_width);
         }];
-        [self.actionScrollview mas_updateConstraints:^(MASConstraintMaker *make) {
+        
+        
+        
+        [self.headerScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.top.right.offset(0);
+            make.width.mas_equalTo(defaultHeader.mas_width);
+            make.height.mas_equalTo(defaultHeader.mas_height);
+        }];
+
+        [self.actionScrollview mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.headerScrollView.mas_bottom);
+            make.left.right.bottom.offset(0);
+            make.width.mas_equalTo(defaultActionView.mas_width);
             make.height.mas_equalTo(defaultActionView.mas_height);
         }];
     }
@@ -86,53 +81,52 @@
         
         if (self.headerView) {
             [self.headerScrollView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.width.mas_equalTo(self.headerView.mas_width);
                 make.height.mas_lessThanOrEqualTo([self headerViewMaximumHeight]);
                 make.height.mas_equalTo(self.headerView.mas_height).priority(500);
             }];
         }
         
         if (self.actionGroupView) {
-            [self.actionScrollview mas_updateConstraints:^(MASConstraintMaker *make) {
+            [self.actionScrollview mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(self.headerScrollView.mas_bottom);
+                make.left.right.bottom.offset(0);
+                make.width.mas_equalTo(self.actionGroupView.mas_width);
                 make.height.mas_equalTo(self.actionGroupView.mas_height).priority(250);
             }];
         }
     }
 }
 
-- (void)insertHeaderView:(UIView *)headerView {
+- (void)insertHeaderView:(nullable UIView *)headerView {
     if (!headerView) return;
     
     self.headerView = (UkeAlertHeaderView *)headerView;
     
     if (self.headerScrollView.subviews.count) {
-        UIView *oldView = self.headerScrollView.subviews.firstObject;
+        UIView *oldView = self.headerScrollView.subviews.lastObject;
         [oldView removeFromSuperview];
     }
     
-    [self.headerScrollView addSubview:headerView];
-    [headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.headerScrollView addSubview:self.headerView];
+    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
-        make.width.mas_equalTo(self.headerScrollView.mas_width);
     }];
 }
 
-- (void)insertActionGroupView:(UIView *)actionGroupView {
+- (void)insertActionGroupView:(nullable UIView *)actionGroupView {
     if (!actionGroupView) return;
     
     self.actionGroupView = (UkeAlertActionGroupView *)actionGroupView;
     
     if (self.actionScrollview.subviews.count) {
-        UIView *oldView = self.actionScrollview.subviews.firstObject;
+        UIView *oldView = self.actionScrollview.subviews.lastObject;
         [oldView removeFromSuperview];
     }
     
     [self.actionScrollview addSubview:actionGroupView];
     [actionGroupView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
-        make.width.mas_equalTo(self.actionScrollview.mas_width);
-        if (self.actionGroupView.actions.count == 0) {
-            make.height.mas_equalTo(0);
-        }
     }];
 }
 

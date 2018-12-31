@@ -16,7 +16,7 @@
 
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *messageLabel;
-@property (nonatomic, strong) NSArray *subviews;
+@property (nonatomic, strong) NSArray *childViews;
 @end
 
 @implementation UkeAlertHeaderView
@@ -49,7 +49,7 @@
                                NSParagraphStyleAttributeName: [NSParagraphStyle paragraphStyleWithLineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentCenter]
                                };
         
-        _titleMessageAreaContentInsets = UIEdgeInsetsMake(20, 16, 10, 16);
+        _titleMessageAreaContentInsets = UIEdgeInsetsMake(20, 16, 20, 16);
         _titleMessageVerticalSpacing = 2;
         
         NSMutableArray *subviews = [NSMutableArray array];
@@ -70,15 +70,15 @@
             [self addSubview:_messageLabel];
             [subviews addObject:_messageLabel];
         }
-        _subviews = subviews.copy;
+        _childViews = subviews.copy;
     }
     return self;
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
-    if (newSuperview) {
-        [self layoutTitleAndMessage:_subviews];
+    if (newSuperview && self.subviews.count) {
+        [self layoutTitleAndMessage:_childViews];
     }
 }
 

@@ -48,9 +48,9 @@
 }
 
 - (void)viewDidLoad {
-    [self.actionGroupView layoutActions];
+    BOOL needLayout = [self.actionGroupView layoutActions];
     [self.contentView insertHeaderView:self.headerView];
-    [self.contentView insertActionGroupView:self.actionGroupView];
+    [self.contentView insertActionGroupView:needLayout ? self.actionGroupView : nil];
     
     [super addContentView:self.contentView];
     [super viewDidLoad];

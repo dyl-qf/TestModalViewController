@@ -38,6 +38,17 @@
     [super willMoveToSuperview:newSuperview];
     if (newSuperview) {
         self.cancelButtonWrapperView.layer.cornerRadius = self.cornerRadius;
+        
+        if (self.cancelButtonWrapperView) {
+            [self.backContentView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.bottom.offset(-self.sheetCancelButtonMarginTop-self.cancelActionButtonHeight);
+            }];
+            
+            [self.cancelButtonWrapperView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.bottom.offset(0);
+                make.height.mas_equalTo(self.cancelActionButtonHeight);
+            }];
+        }
     }
 }
 
@@ -53,32 +64,23 @@
 
 
 - (void)addCancelAction:(UkeAlertAction *)action {
+    if (!action) return;
     self.cancelAction = action;
-    
+
     UIView *cancelView = [[UIView alloc] init];
     cancelView.backgroundColor = [UIColor whiteColor];
     cancelView.layer.masksToBounds = YES;
     [self addSubview:cancelView];
-    self.cancelButtonWrapperView = cancelView;
-    
+
     UkeAlertActionButton *cancelButton = [[UkeAlertActionButton alloc] init];
-    [self setAttributedTextWith:action.title forButton:cancelButton];
+    cancelButton.titleLabel.attributedText = [[NSAttributedString alloc] initWithString:self.cancelAction.title attributes:self.cancelButtonAttributes];
     [cancelButton addTarget:self action:@selector(handleCancelButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [cancelView addSubview:cancelButton];
-    
-    
-    [self.backContentView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.bottom.offset(-self.sheetCancelButtonMarginTop-self.cancelActionButtonHeight);
-    }];
-    
-    [cancelView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.offset(0);
-        make.height.mas_equalTo(self.cancelActionButtonHeight);
-    }];
-
     [cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
+
+    self.cancelButtonWrapperView = cancelView;
 }
 
 #pragma mark - Override.
@@ -102,40 +104,11 @@
     return 0;
 }
 
-- (void)setAttributedTextWith:(NSString *)text
-                    forButton:(UkeAlertActionButton *)button {
-    button.titleLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:self.cancelButtonAttributes];
-}
-
-- (void)setSheetCancelButtonMarginTop:(CGFloat)sheetCancelButtonMarginTop {
-    _sheetCancelButtonMarginTop = sheetCancelButtonMarginTop;
-    // 调整约束
-    [self updateConstraintsIfNeeded];
-}
-
-- (void)setCancelActionButtonHeight:(CGFloat)cancelActionButtonHeight {
-    _cancelActionButtonHeight = cancelActionButtonHeight;
-    [self updateConstraintsIfNeeded];
-}
-
-- (void)updateConstraints {
-    if (_cancelAction) {
-        [self.backContentView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.bottom.offset(-self.sheetCancelButtonMarginTop-self.cancelActionButtonHeight);
-        }];
-        [self.cancelButtonWrapperView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(self.cancelActionButtonHeight);
-        }];
-    }
-    
-    [super updateConstraints];
-}
-
 - (void)handleCancelButtonAction:(UIButton *)button {
     if (self.cancelAction.actionHandler) {
         self.cancelAction.actionHandler(self.cancelAction);
     }
-    
+
     if (self.dismissHandler) {
         self.dismissHandler();
     }

@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)addAction:(UkeAlertAction *)action;
 
-- (void)layoutActions;
+- (BOOL)layoutActions;
 
 @property (nonatomic, readonly) NSArray<UkeAlertAction *> *actions;
 

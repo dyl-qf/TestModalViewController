@@ -46,9 +46,9 @@
     self.actions = actions.copy;
 }
 
-- (void)layoutActions {
+- (BOOL)layoutActions {
     if (self.actions.count == 0) {
-        return;
+        return NO;
     }
     [self removeAllSubviews];
     
@@ -73,6 +73,7 @@
     }else {
         [self layoutForNotTwoActions];
     }
+    return YES;
 }
 
 - (void)layoutForTwoActions {
