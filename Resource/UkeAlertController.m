@@ -187,11 +187,14 @@
         }else if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
             _actionGroupView = [[UkeSheetActionGroupView alloc] init];
         }
-        _actionGroupView.dismissAnimationInterval = self.dismissDelayTimeInterval+self.dismissTimeInterval;
         
         __weak typeof(self)weakSelf = self;
-        _actionGroupView.dismissHandler = ^{
-            [weakSelf dismiss];
+        _actionGroupView.ukeActionButtonHandler = ^(UkeAlertAction * _Nonnull action) {
+            [weakSelf dismissWithAnimated:YES completion:^{
+                if (action.actionHandler) {
+                    action.actionHandler(action);
+                }
+            }];
         };
     }
     return _actionGroupView;

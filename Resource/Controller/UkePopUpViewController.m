@@ -80,16 +80,20 @@
 }
 
 - (void)dismiss {
-    [self dismissPopControllerAnimated:YES];
+    [self dismissWithAnimated:YES];
 }
 
 - (void)dismissWithAnimated:(BOOL)animated {
-    [self dismissPopControllerAnimated:animated];
+    [self dismissViewControllerAnimated:animated completion:nil];
+}
+
+- (void)dismissWithAnimated:(BOOL)animated completion:(void (^)(void))completionHandler {
+    [self dismissPopControllerAnimated:animated completion:completionHandler];
 }
 
 #pragma mark - Private.
-- (void)dismissPopControllerAnimated:(BOOL)animated {
-    [self dismissViewControllerAnimated:animated completion:nil];
+- (void)dismissPopControllerAnimated:(BOOL)animated completion:(void (^)(void))completionHandler {
+    [self dismissViewControllerAnimated:animated completion:completionHandler];
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate.

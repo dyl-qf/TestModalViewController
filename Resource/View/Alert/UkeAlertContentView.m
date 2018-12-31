@@ -82,15 +82,13 @@
         if (self.headerView) {
             [self.headerScrollView mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.width.mas_equalTo(self.headerView.mas_width);
-                make.height.mas_lessThanOrEqualTo([self headerViewMaximumHeight]);
+                make.height.mas_lessThanOrEqualTo([self headerViewMaximumHeight]).priority(750);
                 make.height.mas_equalTo(self.headerView.mas_height).priority(500);
             }];
         }
         
         if (self.actionGroupView) {
-            [self.actionScrollview mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.top.mas_equalTo(self.headerScrollView.mas_bottom);
-                make.left.right.bottom.offset(0);
+            [self.actionScrollview mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.width.mas_equalTo(self.actionGroupView.mas_width);
                 make.height.mas_equalTo(self.actionGroupView.mas_height).priority(250);
             }];

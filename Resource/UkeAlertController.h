@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 //   -----------------------
 
 //! title所在文本区域离四周的距离
-//! alert默认为 (20, 16, 10, 16)，与系统一致
+//! alert默认为 (20, 16, 20, 16)，与系统一致
 //! sheet默认为 (14.5, 16, 25, 16)，与系统一致
 @property (nonatomic, assign) UIEdgeInsets titleMessageAreaContentInsets;
 
@@ -92,4 +92,4 @@ NS_ASSUME_NONNULL_END
 
 
 // todo
-// 2. 没有添加action时，header里面不要加线。解决办法：把线放在actionGroupView中
+// 1、横竖屏转换时失效

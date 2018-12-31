@@ -14,9 +14,6 @@
 @interface UkeAlertActionGroupView ()
 @property (nonatomic, strong) NSArray<UkeAlertAction *> *actions;
 @property (nonatomic, strong) UIView *actionGroupArea;
-//@property (nonatomic, strong) NSMutableArray<UkeAlertActionButton *> *defaultButtons;
-//@property (nonatomic, strong) NSMutableArray<UkeAlertActionButton *> *cancelButtons;
-//@property (nonatomic, strong) NSMutableArray<UkeAlertActionButton *> *destructiveButtons;
 @end
 
 @implementation UkeAlertActionGroupView
@@ -25,9 +22,6 @@
     self = [super init];
     if (self) {
         self.actions = [NSArray array];
-//        self.defaultButtons = [NSMutableArray array];
-//        self.cancelButtons = [NSMutableArray array];
-//        self.destructiveButtons = [NSMutableArray array];
         
         _actionButtonHeight = 44.0;
         _defaultButtonAttributes = @{NSForegroundColorAttributeName: [UIColor colorWithRed:45/255.0 green:139/255.0 blue:245/255.0 alpha:1.0],
@@ -150,13 +144,10 @@
 }
 
 - (void)handleButtonAction:(UIButton *)button {
-    self.dismissHandler();
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.dismissAnimationInterval * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    if (self.ukeActionButtonHandler) {
         UkeAlertAction *action = self.actions[button.tag];
-        if (action.actionHandler) {
-            action.actionHandler(action);
-        }
-    });
+        self.ukeActionButtonHandler(action);
+    }
 }
 
 - (void)removeAllSubviews {
@@ -176,25 +167,5 @@
         button.titleLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:_destructiveButtonAttributes];
     }
 }
-
-#pragma mark - Setter
-//- (void)setActionButtonHeight:(CGFloat)actionButtonHeight {
-//    _actionButtonHeight = actionButtonHeight;
-//}
-
-//- (void)setDefaultButtonAttributes:(NSDictionary<NSString *,id> *)defaultButtonAttributes {
-//    _defaultButtonAttributes = defaultButtonAttributes;
-//
-//}
-//
-//- (void)setCancelButtonAttributes:(NSDictionary<NSString *,id> *)cancelButtonAttributes {
-//    _cancelButtonAttributes = cancelButtonAttributes;
-//
-//}
-//
-//- (void)setDestructiveButtonAttributes:(NSDictionary<NSString *,id> *)destructiveButtonAttributes {
-//    _destructiveButtonAttributes = destructiveButtonAttributes;
-//
-//}
 
 @end
