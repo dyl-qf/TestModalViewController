@@ -172,6 +172,11 @@
     self.actionGroupView.lineHeight = lineHeight;
 }
 
+- (void)setLineColor:(UIColor *)lineColor {
+    _lineColor = lineColor;
+    self.actionGroupView.lineColor = lineColor;
+}
+
 #pragma mark - Getter.
 - (UkeSheetContentView *)sheetContentView {
     UkeSheetContentView *sheetContentView = (UkeSheetContentView *)self.contentView;
