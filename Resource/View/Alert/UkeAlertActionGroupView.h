@@ -31,6 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 //! 线的宽度，默认1pt
 @property (nonatomic, assign) CGFloat lineHeight;
+//! 线的颜色，
+@property (nonatomic, strong) UIColor *lineColor;
 
 @end
 

@@ -24,7 +24,8 @@
         self.actions = [NSArray array];
         
         _actionButtonHeight = 44.0;
-        _lineHeight = 1.0;
+        _lineHeight = 1.0/[UIScreen mainScreen].scale;
+        _lineColor = [UIColor colorWithRed:228/255.0 green:228/255.0 blue:228/255.0 alpha:1.0];
         
         _defaultButtonAttributes = @{NSForegroundColorAttributeName: [UIColor colorWithRed:45/255.0 green:139/255.0 blue:245/255.0 alpha:1.0],
                                          NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Regular" size:17]                             };
@@ -50,7 +51,7 @@
     
     // 添加横线
     UIView *horizontalLineView = [[UIView alloc] init];
-    horizontalLineView.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1.0];
+    horizontalLineView.backgroundColor = self.lineColor;
     [self addSubview:horizontalLineView];
     [horizontalLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.offset(0);
@@ -74,7 +75,7 @@
 
 - (void)layoutForTwoActions {
     UIView *verticalLineView = [[UIView alloc] init];
-    verticalLineView.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1.0];
+    verticalLineView.backgroundColor = self.lineColor;
     [_actionGroupArea addSubview:verticalLineView];
     [verticalLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.offset(0);
@@ -116,7 +117,7 @@
         [self.actionGroupArea addSubview:button];
         
         UIView *lineView = [[UIView alloc] init];
-        lineView.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1.0];
+        lineView.backgroundColor = self.lineColor;
         [self.actionGroupArea addSubview:lineView];
         [lines addObject:lineView];
         

@@ -43,22 +43,24 @@
 }
 
 - (IBAction)test3:(id)sender {
-    UkeAlertController *alert = [UkeAlertController alertControllerWithTitle:@"你好" message:@"哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈" preferredStyle:UIAlertControllerStyleAlert];
+    UkeAlertController *alert = [UkeAlertController alertControllerWithTitle:@"你好" message:@"哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈" preferredStyle:UIAlertControllerStyleAlert];
     
-    UIView *view = [[UIView alloc] init];
-        view.frame = CGRectMake(0, 0, 300, 800);
-    view.backgroundColor = [UIColor redColor];
-    
+//    UIView *view = [[UIView alloc] init];
+////    view.frame = CGRectMake(0, 0, 300, 800);
+//    view.backgroundColor = [UIColor redColor];
+//
 //    UIView *subView = [[UIView alloc] init];
-//    //    subView.frame = CGRectMake(0, 0, 400, 200);
 //    subView.backgroundColor = [UIColor orangeColor];
 //    [view addSubview:subView];
 //    [subView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.size.mas_equalTo(CGSizeMake(200, 200));
+//        make.size.mas_equalTo(CGSizeMake(200, 800));
 //        make.edges.mas_equalTo(UIEdgeInsetsMake(20, 20, 20, 20));
 //    }];
     
 //    UkeAlertController *alert = [UkeAlertController alertControllerWithContentView:view preferredStyle:UIAlertControllerStyleAlert];
+    
+//    UkePopUpViewController *popUp = [UkePopUpViewController alertControllerWithContentView:view preferredStyle:UIAlertControllerStyleAlert];
+    
 //    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
 //    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
 //    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
@@ -68,7 +70,9 @@
 //    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
 //    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
 //    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+//    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+//    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+//    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
     [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
     [alert addAction:[UkeAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
 
@@ -76,26 +80,27 @@
 }
 
 - (IBAction)test4:(id)sender {
-    UkeAlertController *alert = [UkeAlertController alertControllerWithTitle:@"你好" message:@"哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈" preferredStyle:UIAlertControllerStyleActionSheet];
+    UkeAlertController *alert = [UkeAlertController alertControllerWithTitle:@"你好" message:@"哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈" preferredStyle:UIAlertControllerStyleActionSheet];
 //    alert.cornerRadius = 0;
 //    alert.contentWidth = [UIScreen mainScreen].bounds.size.width;
 //    alert.sheetContentMarginBottom = 0;
     
-    UIView *view = [[UIView alloc] init];
-    view.frame = CGRectMake(0, 0, 300, 800);
-    view.backgroundColor = [UIColor redColor];
-    
+//    UIView *view = [[UIView alloc] init];
+////    view.frame = CGRectMake(0, 0, 300, 800);
+//    view.backgroundColor = [UIColor redColor];
+//
 //    UIView *subView = [[UIView alloc] init];
-////    subView.frame = CGRectMake(0, 0, 400, 200);
 //    subView.backgroundColor = [UIColor orangeColor];
 //    [view addSubview:subView];
 //    [subView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.size.mas_equalTo(CGSizeMake(100, 200));
+//        make.size.mas_equalTo(CGSizeMake(200, 800));
 //        make.edges.mas_equalTo(UIEdgeInsetsMake(20, 20, 20, 20));
 //    }];
     
 //    UkeAlertController *alert = [UkeAlertController alertControllerWithContentView:view preferredStyle:UIAlertControllerStyleActionSheet];
     
+//    UkePopUpViewController *popUp = [UkePopUpViewController alertControllerWithContentView:view preferredStyle:UIAlertControllerStyleActionSheet];
+    
 //    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
 //    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
 //    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
@@ -107,8 +112,6 @@
 //    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
 //    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
 //    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
     [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
     [alert addAction:[UkeAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
 
