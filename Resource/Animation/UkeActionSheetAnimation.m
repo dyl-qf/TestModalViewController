@@ -8,6 +8,7 @@
 
 #import "UkeActionSheetAnimation.h"
 #import "UkePopUpViewController.h"
+#import "Masonry.h"
 
 @interface UkeActionSheetAnimation ()
 @property (nonatomic, weak) UkePopUpViewController *popUpVc;
@@ -47,9 +48,12 @@
     UIView *maskView = [[UIView alloc] init];
     maskView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
     maskView.tag = 1000;
-    maskView.frame = containerView.bounds;
     maskView.alpha = 0;
     [containerView addSubview:maskView];
+    [maskView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
+    }];
+    
     if (popUpVc.shouldRespondsMaskViewTouch) {
         _popUpVc = popUpVc;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleMaskViewTapAction)];
@@ -60,13 +64,22 @@
     CGRect startFrame = CGRectMake((CGRectGetWidth(containerView.frame)-CGRectGetWidth(toView.frame))*0.5, CGRectGetHeight(containerView.frame), CGRectGetWidth(toView.frame), CGRectGetHeight(toView.frame));
     toView.frame = startFrame;
     [containerView addSubview:toView];
-    
-    NSTimeInterval duration = [self transitionDuration:transitionContext];
+    [toView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(containerView.mas_centerX);
+        make.bottom.offset(CGRectGetHeight(toView.frame));
+        make.size.mas_equalTo(toView.bounds.size);
+    }];
+    [containerView layoutIfNeeded];
+
     
     CGFloat marginBottom = popUpVc.sheetContentMarginBottom;
-    CGRect endFrame = CGRectMake((CGRectGetWidth(containerView.frame)-CGRectGetWidth(toView.frame))*0.5, CGRectGetHeight(containerView.frame)-CGRectGetHeight(toView.frame)-marginBottom, CGRectGetWidth(toView.frame), CGRectGetHeight(toView.frame));
+    [toView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.offset(-marginBottom);
+    }];
+    
+    NSTimeInterval duration = [self transitionDuration:transitionContext];
     [UIView animateWithDuration:duration+0.2 delay:self.presentDelayTimeInterval usingSpringWithDamping:1.0 initialSpringVelocity:0 options:UIViewAnimationOptionCurveLinear animations:^{
-        toView.frame = endFrame;
+        [containerView layoutIfNeeded];
         maskView.alpha = 1.0;
     } completion:^(BOOL finished) {
         [transitionContext completeTransition:YES];
@@ -86,12 +99,14 @@
     UIView *containerView = [transitionContext containerView];
     UIView *maskView = [containerView viewWithTag:1000];
     
+    [fromView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.offset(CGRectGetHeight(fromView.frame));
+    }];
+    
     NSTimeInterval duration = [self transitionDuration:transitionContext];
     NSTimeInterval delay = self.dismissDelayTimeInterval;
-    
-    CGRect endFrame = CGRectMake((CGRectGetWidth(containerView.frame)-CGRectGetWidth(fromView.frame))*0.5, CGRectGetHeight(containerView.frame), CGRectGetWidth(fromView.frame), CGRectGetHeight(fromView.frame));
     [UIView animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveEaseOut animations:^{
-        fromView.frame = endFrame;
+        [containerView layoutIfNeeded];
         maskView.alpha = 0.0;
     } completion:^(BOOL finished) {
         [maskView removeFromSuperview];

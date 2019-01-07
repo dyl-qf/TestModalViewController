@@ -8,6 +8,7 @@
 
 #import "UkeAlertStyleAnimation.h"
 #import "UkePopUpViewController.h"
+#import "Masonry.h"
 
 @interface UkeAlertStyleAnimation ()
 @property (nonatomic, weak) UkePopUpViewController *popUpVc;
@@ -47,9 +48,12 @@
     UIView *maskView = [[UIView alloc] init];
     maskView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
     maskView.tag = 1000;
-    maskView.frame = containerView.bounds;
     maskView.alpha = 0;
     [containerView addSubview:maskView];
+    [maskView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
+    }];
+    
     if (popUpVc.shouldRespondsMaskViewTouch) {
         _popUpVc = popUpVc;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleMaskViewTapAction)];
@@ -57,9 +61,12 @@
     }
     
     // 添加toView
-    toView.center = containerView.center;
     toView.alpha = 0;
     [containerView addSubview:toView];
+    [toView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(containerView);
+        make.size.mas_equalTo(toView.bounds.size);
+    }];
     
     NSTimeInterval duration = [self transitionDuration:transitionContext];
     [UIView animateWithDuration:duration delay:self.presentDelayTimeInterval options:0 animations:^{

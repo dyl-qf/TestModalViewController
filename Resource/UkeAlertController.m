@@ -84,7 +84,9 @@
             defaultContentWidth = 270.0;
         }else if (preferredStyle == UIAlertControllerStyleActionSheet) {
             header = [[UkeSheetHeaderView alloc] initWithTitle:title message:message];
-            defaultContentWidth = [UIScreen mainScreen].bounds.size.width-8-8;
+            CGSize screenSize = [UIScreen mainScreen].bounds.size;
+            CGFloat minWidth = MIN(screenSize.width, screenSize.height);
+            defaultContentWidth = minWidth-8-8;
         }
         [self setContentWidth:defaultContentWidth];
         _headerView = header;
