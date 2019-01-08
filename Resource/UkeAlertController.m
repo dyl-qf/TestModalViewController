@@ -233,4 +233,13 @@
     return self.actionGroupView.actions;
 }
 
+- (CGFloat)sheetContentMarginBottom {
+    CGFloat safePaddingBottom = 0;
+    if (@available(iOS 11.0, *)) {
+        UIEdgeInsets safeInsets = [UIApplication sharedApplication].keyWindow.safeAreaInsets;
+        safePaddingBottom = safeInsets.bottom;
+    }
+    return _sheetContentMarginBottom+safePaddingBottom;
+}
+
 @end

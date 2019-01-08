@@ -31,7 +31,7 @@ NS_CLASS_AVAILABLE_IOS(6_0)
 //! 注意：内部实际计算时，如果是sheet还会多减去sheetContentMarginBottom的高度。比如如果指定contentMaximumHeight为屏幕的高度，则弹出sheet时还要减去sheetContentMarginBottom才能使内容完全显示,（这个计算方式跟系统一致）。所以外部指定时，不用考虑sheetContentMarginBottom的高度。
 @property (nonatomic, assign) CGFloat contentMaximumHeight;
 
-//! actionSheet整体内容距离屏幕底部距离，默认为0
+//! actionSheet整体内容距离屏幕底部距离，默认为0。注意：刘海屏会自动再加上底部安全区域高度
 @property (nonatomic, assign) CGFloat sheetContentMarginBottom;
 
 //! maskView是否可以响应dismiss手势。默认alert不响应，sheet响应

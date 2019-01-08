@@ -68,7 +68,7 @@ NS_CLASS_AVAILABLE_IOS(6_0)
 //! actionSheet的cancelButton距离上边内容的间距，默认为8，跟系统保持一致
 @property (nonatomic, assign) CGFloat sheetCancelButtonMarginTop;
 
-//! actionSheet整体内容距离屏幕底部距离，默认为8，跟系统保持一致
+//! actionSheet整体内容距离屏幕底部距离，默认为8，跟系统保持一致。注意：刘海屏会自动再加上底部安全区域高度
 @property (nonatomic, assign) CGFloat sheetContentMarginBottom;
 
 //! 标题相关属性

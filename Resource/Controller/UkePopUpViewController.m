@@ -66,22 +66,42 @@
     
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         CGFloat newContentMaximumHeight = size.height-self.contentMaximumHeightInset;
-        if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
-            if (self.originalOrientation == UIDeviceOrientationPortrait ||
-                self.originalOrientation == UIDeviceOrientationPortraitUpsideDown) {
-                UIDevice *device = [UIDevice currentDevice];
-                // 如果最开始是竖屏，现在是横屏
-                if (device.orientation == UIDeviceOrientationLandscapeLeft ||
-                    device.orientation == UIDeviceOrientationLandscapeRight) {
+        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+            [self deviceOrientationWillChangeWithContentMaximumHeight:newContentMaximumHeight duration:context.transitionDuration];
+            return;
+        }
+        
+        CGFloat safePadding = 0;
+        if (@available(iOS 11.0, *)) {
+            UIEdgeInsets safeInsets = [UIApplication sharedApplication].keyWindow.safeAreaInsets;
+            safePadding = MAX(safeInsets.top, safeInsets.bottom);
+        }
+
+        if (self.originalOrientation == UIDeviceOrientationPortrait ||
+            self.originalOrientation == UIDeviceOrientationPortraitUpsideDown) {
+            UIDevice *device = [UIDevice currentDevice];
+            // 如果最开始是竖屏，现在是横屏
+            if (device.orientation == UIDeviceOrientationLandscapeLeft ||
+                device.orientation == UIDeviceOrientationLandscapeRight) {
+                if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
                     newContentMaximumHeight += CGRectGetHeight([UIApplication sharedApplication].statusBarFrame); // 横屏时状态栏是隐藏的，所以多出20pt
+                }else if (self.preferredStyle == UIAlertControllerStyleAlert) {
+                    
                 }
-            }else if (self.originalOrientation == UIDeviceOrientationLandscapeLeft ||
-                      self.originalOrientation == UIDeviceOrientationLandscapeRight) {
-                UIDevice *device = [UIDevice currentDevice];
-                // 如果最开始是横屏，现在是竖屏
-                if (device.orientation == UIDeviceOrientationPortrait ||
-                    device.orientation == UIDeviceOrientationPortraitUpsideDown) {
-                    newContentMaximumHeight -= CGRectGetHeight([UIApplication sharedApplication].statusBarFrame); // 横屏时状态栏是显示的，所以多出20pt
+            }
+        }else if (self.originalOrientation == UIDeviceOrientationLandscapeLeft ||
+                  self.originalOrientation == UIDeviceOrientationLandscapeRight) {
+            UIDevice *device = [UIDevice currentDevice];
+            // 如果最开始是横屏，现在是竖屏
+            if (device.orientation == UIDeviceOrientationPortrait ||
+                device.orientation == UIDeviceOrientationPortraitUpsideDown) {
+                
+                if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
+                    newContentMaximumHeight -= CGRectGetHeight([UIApplication sharedApplication].statusBarFrame); // 竖屏时状态栏是显示的，所以少20pt
+                }else if (self.preferredStyle == UIAlertControllerStyleAlert) {
+                    if (safePadding >= 20) {
+                        newContentMaximumHeight -= safePadding;
+                    }
                 }
             }
         }
@@ -92,7 +112,25 @@
 #else
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
                                 duration:(NSTimeInterval)duration {
-    [self deviceOrientationWillChangeWithContentMaximumHeight:CGRectGetHeight([UIScreen mainScreen].bounds)-self.contentMaximumHeightInset duration:duration];
+    CGFloat newContentMaximumHeight = CGRectGetHeight([UIScreen mainScreen].bounds)-self.contentMaximumHeightInset;
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        [self deviceOrientationWillChangeWithContentMaximumHeight:newContentMaximumHeight duration:context.transitionDuration];
+        return;
+    }
+
+    if (self.originalOrientation == UIDeviceOrientationLandscapeLeft ||
+             self.originalOrientation == UIDeviceOrientationLandscapeRight) {
+        UIDevice *device = [UIDevice currentDevice];
+        // 如果最开始是横屏，现在是竖屏
+        if (device.orientation == UIDeviceOrientationPortrait ||
+            device.orientation == UIDeviceOrientationPortraitUpsideDown) {
+            
+            if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
+                newContentMaximumHeight -= CGRectGetHeight([UIApplication sharedApplication].statusBarFrame); // 竖屏时状态栏是显示的，所以少20pt
+            }
+        }
+    }
+    [self deviceOrientationWillChangeWithContentMaximumHeight:newContentMaximumHeight duration:duration];
 }
 #endif
 
@@ -113,13 +151,24 @@
 #pragma mark - Public.
 - (void)setPreferredStyle:(UIAlertControllerStyle)preferredStyle {
     _preferredStyle = preferredStyle;
+    
+    CGFloat safePadding = 0;
+    if (@available(iOS 11.0, *)) {
+        UIEdgeInsets safeInsets = [UIApplication sharedApplication].keyWindow.safeAreaInsets;
+        safePadding = MAX(safeInsets.top, safeInsets.bottom);
+    }
+    
     if (preferredStyle == UIAlertControllerStyleAlert) {
         self.presentDelayTimeInterval = 0;
         self.presentTimeInterval = 0.25;
         self.dismissDelayTimeInterval = 0.1;
         self.dismissTimeInterval = 0.22;
         self.shouldRespondsMaskViewTouch = NO;
-        self.contentMaximumHeight = [UIScreen mainScreen].bounds.size.height-24-24;
+        
+        if (safePadding <= 20) {
+            safePadding = 24;
+        }
+        self.contentMaximumHeight = [UIScreen mainScreen].bounds.size.height-safePadding-safePadding;
     }else if (preferredStyle == UIAlertControllerStyleActionSheet) {
         self.presentDelayTimeInterval = 0.1;
         self.presentTimeInterval = 0.18;
@@ -130,11 +179,19 @@
         UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
         if (orientation == UIDeviceOrientationPortrait ||
             orientation == UIDeviceOrientationPortraitUpsideDown) {
-            self.contentMaximumHeight = [UIScreen mainScreen].bounds.size.height-40;
+            if (safePadding <= 20) {
+                safePadding = 40;
+            }
         }else if (orientation == UIDeviceOrientationLandscapeLeft ||
                   orientation == UIDeviceOrientationLandscapeRight) {
-            self.contentMaximumHeight = [UIScreen mainScreen].bounds.size.height-8;
+            if (safePadding == 0) {
+                safePadding = 8;
+                if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+                    safePadding = 40; // iPad横屏时状态栏不消失
+                }
+            }
         }
+        self.contentMaximumHeight = [UIScreen mainScreen].bounds.size.height-safePadding;
     }
 }
 
@@ -208,6 +265,15 @@
         }
     }
     return _animation;
+}
+
+- (CGFloat)sheetContentMarginBottom {
+    CGFloat safePaddingBottom = 0;
+    if (@available(iOS 11.0, *)) {
+        UIEdgeInsets safeInsets = [UIApplication sharedApplication].keyWindow.safeAreaInsets;
+        safePaddingBottom = safeInsets.bottom;
+    }
+    return _sheetContentMarginBottom+safePaddingBottom;
 }
 
 - (void)dealloc {
