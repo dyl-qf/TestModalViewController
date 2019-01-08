@@ -10,6 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+NS_CLASS_AVAILABLE_IOS(6_0)
 @interface UkePopUpViewController : UIViewController
 
 @property (nonatomic, assign) UIAlertControllerStyle preferredStyle;
@@ -47,6 +48,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat dismissDelayTimeInterval;
 @property (nonatomic, assign) CGFloat dismissTimeInterval;
 
+#pragma mark - 
+- (void)deviceOrientationWillChangeWithContentMaximumHeight:(CGFloat)contentMaximumHeight
+                                                   duration:(NSTimeInterval)duration;
 @end
 
 NS_ASSUME_NONNULL_END

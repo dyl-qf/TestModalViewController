@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)insertHeaderView:(nullable UIView *)headerView;
 - (void)insertActionGroupView:(nullable UIView *)actionGroupView;
+- (void)deviceOrientationWillChangeWithContentMaximumHeight:(CGFloat)contentMaximumHeight
+                                                   duration:(NSTimeInterval)duration;
 
 // Override.
 //! 通过计算返回headerView的最大高度。通过观察系统弹框，最大高度有一定算法。

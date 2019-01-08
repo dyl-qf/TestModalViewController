@@ -32,6 +32,7 @@
     UIViewController *fromVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     UIViewController *toVc = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UkePopUpViewController *popUpVc = (UkePopUpViewController *)toVc;
+    _popUpVc = popUpVc;
 
     UIView *fromView = nil;
     UIView *toView = nil;
@@ -55,7 +56,6 @@
     }];
     
     if (popUpVc.shouldRespondsMaskViewTouch) {
-        _popUpVc = popUpVc;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleMaskViewTapAction)];
         [maskView addGestureRecognizer:tap];
     }
@@ -111,6 +111,15 @@
     } completion:^(BOOL finished) {
         [maskView removeFromSuperview];
         [transitionContext completeTransition:YES];
+    }];
+}
+
+- (void)deviceOrientationDidChangeDuration:(NSTimeInterval)duration {
+    [_popUpVc.view mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(self.popUpVc.view.bounds.size);
+    }];
+    [UIView animateWithDuration:duration animations:^{
+        [self.popUpVc.view.superview layoutIfNeeded];
     }];
 }
 

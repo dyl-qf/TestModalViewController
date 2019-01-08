@@ -12,6 +12,7 @@
 #import "Masonry.h"
 
 @interface UkePopUpViewController () <UIViewControllerTransitioningDelegate>
+@property (nonatomic, assign) CGFloat contentMaximumHeightInset;
 @property (nonatomic, strong) UkeAlertBaseAnimation *animation;
 @property (nonatomic, strong) UIView *contentView;
 @end
@@ -55,6 +56,36 @@
     }];
     [self.view layoutIfNeeded];
     self.view.bounds = _contentView.bounds;
+}
+
+#pragma mark - 监听屏幕方向变化
+#ifdef __IPHONE_8_0
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        [self deviceOrientationWillChangeWithContentMaximumHeight:size.height-self.contentMaximumHeightInset duration:context.transitionDuration];
+    } completion:nil];
+}
+#else
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+                                duration:(NSTimeInterval)duration {
+    [self deviceOrientationWillChangeWithContentMaximumHeight:CGRectGetHeight([UIScreen mainScreen].bounds)-self.contentMaximumHeightInset duration:duration];
+}
+#endif
+
+- (void)deviceOrientationWillChangeWithContentMaximumHeight:(CGFloat)contentMaximumHeight
+                                                  duration:(NSTimeInterval)duration {
+    if (_preferredStyle == UIAlertControllerStyleActionSheet) {
+        contentMaximumHeight = contentMaximumHeight-self.sheetContentMarginBottom;
+    }
+    [_contentView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_lessThanOrEqualTo(contentMaximumHeight);
+    }];
+    [self.view layoutIfNeeded];
+    self.view.bounds = _contentView.bounds;
+    
+    [self.animation deviceOrientationDidChangeDuration:duration];
 }
 
 #pragma mark - Public.
@@ -110,6 +141,11 @@
 }
 
 #pragma mark - Setter.
+- (void)setContentMaximumHeight:(CGFloat)contentMaximumHeight {
+    _contentMaximumHeight = contentMaximumHeight;
+    _contentMaximumHeightInset = CGRectGetHeight([UIScreen mainScreen].bounds)-contentMaximumHeight;
+}
+
 - (void)setPresentDelayTimeInterval:(CGFloat)presentDelayTimeInterval {
     _presentDelayTimeInterval = presentDelayTimeInterval;
     self.animation.presentDelayTimeInterval = presentDelayTimeInterval;

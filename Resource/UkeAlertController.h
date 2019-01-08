@@ -12,6 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+NS_CLASS_AVAILABLE_IOS(6_0)
 @interface UkeAlertController : UkePopUpViewController
 
 - (instancetype)init NS_UNAVAILABLE;

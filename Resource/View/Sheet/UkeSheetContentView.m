@@ -92,11 +92,11 @@
         }
         
         NSUInteger count = self.actionGroupView.actions.count;
-        if (count <= 2) {
+        if (count <= 1) {
             return self.contentMaximumHeight-count*self.actionGroupView.actionButtonHeight-cancelAreaTotalHeight-count*self.actionGroupView.lineHeight;
         }else {
             // 多露出0.5个按钮，不然用户以为按钮区域不能滚动
-            return self.contentMaximumHeight-2.5*self.actionGroupView.actionButtonHeight-cancelAreaTotalHeight-3*self.actionGroupView.lineHeight;
+            return self.contentMaximumHeight-1.5*self.actionGroupView.actionButtonHeight-cancelAreaTotalHeight-2*self.actionGroupView.lineHeight;
         }
     }else {
         return self.contentMaximumHeight;

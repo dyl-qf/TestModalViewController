@@ -128,6 +128,24 @@
     }];
 }
 
+- (void)deviceOrientationWillChangeWithContentMaximumHeight:(CGFloat)contentMaximumHeight
+                                                   duration:(NSTimeInterval)duration {
+    _contentMaximumHeight = contentMaximumHeight;
+    
+    if (self.headerView) {
+        [self.headerScrollView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_lessThanOrEqualTo([self headerViewMaximumHeight]).priority(750);
+            make.height.mas_equalTo(self.headerView.mas_height).priority(500);
+        }];
+    }
+    
+    if (self.actionGroupView) {
+        [self.actionScrollview mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(self.actionGroupView.mas_height).priority(250);
+        }];
+    }
+}
+
 #pragma mark - Override.
 - (CGFloat)headerViewMaximumHeight {
     if (self.actionGroupView && self.actionGroupView.actions.count) {
@@ -136,7 +154,7 @@
             return self.contentMaximumHeight-(1*self.actionGroupView.actionButtonHeight)-self.actionGroupView.lineHeight;
         }else {
             // 多露出0.5个按钮，不然用户以为按钮区域不能滚动
-            return self.contentMaximumHeight-2.5*self.actionGroupView.actionButtonHeight-3*self.actionGroupView.lineHeight;
+            return self.contentMaximumHeight-1.5*self.actionGroupView.actionButtonHeight-2*self.actionGroupView.lineHeight;
         }
     }else {
         return self.contentMaximumHeight;

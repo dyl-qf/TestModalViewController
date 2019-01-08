@@ -16,4 +16,7 @@
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {}
 
+
+- (void)deviceOrientationDidChangeDuration:(NSTimeInterval)duration {}
+
 @end

@@ -114,6 +114,16 @@
     return self;
 }
 
+- (void)deviceOrientationWillChangeWithContentMaximumHeight:(CGFloat)contentMaximumHeight
+                                                   duration:(NSTimeInterval)duration {
+    [super deviceOrientationWillChangeWithContentMaximumHeight:contentMaximumHeight duration:duration];
+    
+    if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
+        contentMaximumHeight = contentMaximumHeight-self.sheetContentMarginBottom;
+    }
+    [_contentView deviceOrientationWillChangeWithContentMaximumHeight:contentMaximumHeight duration:duration];
+}
+
 #pragma mark - Setter.
 - (void)setContentWidth:(CGFloat)contentWidth {
     _contentWidth = contentWidth;

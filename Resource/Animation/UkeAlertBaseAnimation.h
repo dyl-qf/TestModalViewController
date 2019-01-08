@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat dismissDelayTimeInterval;
 @property (nonatomic, assign) CGFloat dismissTimeInterval;
 
+- (void)deviceOrientationDidChangeDuration:(NSTimeInterval)duration;
+
 @end
 
 NS_ASSUME_NONNULL_END
