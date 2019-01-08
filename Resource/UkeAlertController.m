@@ -116,10 +116,11 @@
 
 - (void)deviceOrientationWillChangeWithContentMaximumHeight:(CGFloat)contentMaximumHeight
                                                    duration:(NSTimeInterval)duration {
+    CGFloat newContentMaximumHeight = contentMaximumHeight;
     if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
-        contentMaximumHeight = contentMaximumHeight-self.sheetContentMarginBottom;
+        newContentMaximumHeight = contentMaximumHeight-self.sheetContentMarginBottom;
     }
-    [_contentView deviceOrientationWillChangeWithContentMaximumHeight:contentMaximumHeight duration:duration];
+    [_contentView deviceOrientationWillChangeWithContentMaximumHeight:newContentMaximumHeight duration:duration];
     
     [super deviceOrientationWillChangeWithContentMaximumHeight:contentMaximumHeight duration:duration];
 }

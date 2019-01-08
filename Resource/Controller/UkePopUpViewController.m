@@ -24,7 +24,6 @@
     if (self) {
         self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         self.transitioningDelegate = self;
-        self.contentMaximumHeight = [UIScreen mainScreen].bounds.size.height-24-24;
     }
     return self;
 }
@@ -64,10 +63,17 @@
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        UIDevice *device = [UIDevice currentDevice];
+        CGFloat newContentMaximumHeight = size.height-self.contentMaximumHeightInset;
+        if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
+            UIDevice *device = [UIDevice currentDevice];
+            // 如果是横屏
+            if (device.orientation == UIDeviceOrientationLandscapeLeft ||
+                device.orientation == UIDeviceOrientationLandscapeRight) {
+                newContentMaximumHeight += 20; // 横屏时状态栏是隐藏的，所以多出20pt
+            }
+        }
         
-        
-        [self deviceOrientationWillChangeWithContentMaximumHeight:size.height-self.contentMaximumHeightInset duration:context.transitionDuration];
+        [self deviceOrientationWillChangeWithContentMaximumHeight:newContentMaximumHeight duration:context.transitionDuration];
     } completion:nil];
 }
 #else
@@ -100,12 +106,14 @@
         self.dismissDelayTimeInterval = 0.1;
         self.dismissTimeInterval = 0.22;
         self.shouldRespondsMaskViewTouch = NO;
+        self.contentMaximumHeight = [UIScreen mainScreen].bounds.size.height-24-24;
     }else if (preferredStyle == UIAlertControllerStyleActionSheet) {
         self.presentDelayTimeInterval = 0.1;
         self.presentTimeInterval = 0.18;
         self.dismissDelayTimeInterval = 0.1;
         self.dismissTimeInterval = 0.16;
         self.shouldRespondsMaskViewTouch = YES;
+        self.contentMaximumHeight = [UIScreen mainScreen].bounds.size.height-40;
     }
 }
 
