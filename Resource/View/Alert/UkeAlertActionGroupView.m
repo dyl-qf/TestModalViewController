@@ -49,20 +49,11 @@
     }
     [self removeAllSubviews];
     
-    // 添加横线
-    UIView *horizontalLineView = [[UIView alloc] init];
-    horizontalLineView.backgroundColor = self.lineColor;
-    [self addSubview:horizontalLineView];
-    [horizontalLineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.offset(0);
-        make.height.mas_equalTo(self.lineHeight);
-    }];
     // 添加按钮区域
     _actionGroupArea = [[UIView alloc] init];
     [self addSubview:_actionGroupArea];
     [_actionGroupArea mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(horizontalLineView.mas_bottom);
-        make.left.bottom.right.offset(0);
+        make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
     
     if (self.actions.count == 2 && [self isMemberOfClass:[UkeAlertActionGroupView class]]) {

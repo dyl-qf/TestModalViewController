@@ -94,8 +94,3 @@ NS_CLASS_AVAILABLE_IOS(6_0)
 
 NS_ASSUME_NONNULL_END
 
-
-
-
-// todo
-// 1、横竖屏转换时失效

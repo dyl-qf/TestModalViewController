@@ -116,12 +116,12 @@
 
 - (void)deviceOrientationWillChangeWithContentMaximumHeight:(CGFloat)contentMaximumHeight
                                                    duration:(NSTimeInterval)duration {
-    [super deviceOrientationWillChangeWithContentMaximumHeight:contentMaximumHeight duration:duration];
-    
     if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
         contentMaximumHeight = contentMaximumHeight-self.sheetContentMarginBottom;
     }
     [_contentView deviceOrientationWillChangeWithContentMaximumHeight:contentMaximumHeight duration:duration];
+    
+    [super deviceOrientationWillChangeWithContentMaximumHeight:contentMaximumHeight duration:duration];
 }
 
 #pragma mark - Setter.
@@ -181,11 +181,13 @@
 
 - (void)setLineHeight:(CGFloat)lineHeight {
     _lineHeight = lineHeight;
+    self.contentView.separatorHeight = lineHeight;
     self.actionGroupView.lineHeight = lineHeight;
 }
 
 - (void)setLineColor:(UIColor *)lineColor {
     _lineColor = lineColor;
+    self.contentView.separatorColor = lineColor;
     self.actionGroupView.lineColor = lineColor;
 }
 

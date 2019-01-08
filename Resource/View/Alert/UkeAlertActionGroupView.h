@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) NSDictionary<NSString *, id> *cancelButtonAttributes;
 @property(nonatomic, strong) NSDictionary<NSString *, id> *destructiveButtonAttributes;
 
-//! 线的宽度，默认1pt
+//! 线的宽度，默认1px
 @property (nonatomic, assign) CGFloat lineHeight;
 //! 线的颜色，
 @property (nonatomic, strong) UIColor *lineColor;

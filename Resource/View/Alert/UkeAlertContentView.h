@@ -18,6 +18,11 @@ NS_ASSUME_NONNULL_BEGIN
 //! 圆角值
 @property (nonatomic, assign) CGFloat cornerRadius;
 
+//! 线的宽度，默认1px
+@property (nonatomic, assign) CGFloat separatorHeight;
+//! 线的颜色，
+@property (nonatomic, strong) UIColor *separatorColor;
+
 
 - (void)insertHeaderView:(nullable UIView *)headerView;
 - (void)insertActionGroupView:(nullable UIView *)actionGroupView;

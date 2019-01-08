@@ -64,6 +64,9 @@
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        UIDevice *device = [UIDevice currentDevice];
+        
+        
         [self deviceOrientationWillChangeWithContentMaximumHeight:size.height-self.contentMaximumHeightInset duration:context.transitionDuration];
     } completion:nil];
 }
