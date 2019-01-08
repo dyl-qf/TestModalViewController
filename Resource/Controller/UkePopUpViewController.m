@@ -12,6 +12,7 @@
 #import "Masonry.h"
 
 @interface UkePopUpViewController () <UIViewControllerTransitioningDelegate>
+@property (nonatomic, assign) UIDeviceOrientation originalOrientation;
 @property (nonatomic, assign) CGFloat contentMaximumHeightInset;
 @property (nonatomic, strong) UkeAlertBaseAnimation *animation;
 @property (nonatomic, strong) UIView *contentView;
@@ -24,6 +25,7 @@
     if (self) {
         self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         self.transitioningDelegate = self;
+        self.originalOrientation = [UIDevice currentDevice].orientation;
     }
     return self;
 }
@@ -65,11 +67,22 @@
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         CGFloat newContentMaximumHeight = size.height-self.contentMaximumHeightInset;
         if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
-            UIDevice *device = [UIDevice currentDevice];
-            // 如果是横屏
-            if (device.orientation == UIDeviceOrientationLandscapeLeft ||
-                device.orientation == UIDeviceOrientationLandscapeRight) {
-                newContentMaximumHeight += 20; // 横屏时状态栏是隐藏的，所以多出20pt
+            if (self.originalOrientation == UIDeviceOrientationPortrait ||
+                self.originalOrientation == UIDeviceOrientationPortraitUpsideDown) {
+                UIDevice *device = [UIDevice currentDevice];
+                // 如果最开始是竖屏，现在是横屏
+                if (device.orientation == UIDeviceOrientationLandscapeLeft ||
+                    device.orientation == UIDeviceOrientationLandscapeRight) {
+                    newContentMaximumHeight += CGRectGetHeight([UIApplication sharedApplication].statusBarFrame); // 横屏时状态栏是隐藏的，所以多出20pt
+                }
+            }else if (self.originalOrientation == UIDeviceOrientationLandscapeLeft ||
+                      self.originalOrientation == UIDeviceOrientationLandscapeRight) {
+                UIDevice *device = [UIDevice currentDevice];
+                // 如果最开始是横屏，现在是竖屏
+                if (device.orientation == UIDeviceOrientationPortrait ||
+                    device.orientation == UIDeviceOrientationPortraitUpsideDown) {
+                    newContentMaximumHeight -= CGRectGetHeight([UIApplication sharedApplication].statusBarFrame); // 横屏时状态栏是显示的，所以多出20pt
+                }
             }
         }
         
@@ -113,7 +126,15 @@
         self.dismissDelayTimeInterval = 0.1;
         self.dismissTimeInterval = 0.16;
         self.shouldRespondsMaskViewTouch = YES;
-        self.contentMaximumHeight = [UIScreen mainScreen].bounds.size.height-40;
+        
+        UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+        if (orientation == UIDeviceOrientationPortrait ||
+            orientation == UIDeviceOrientationPortraitUpsideDown) {
+            self.contentMaximumHeight = [UIScreen mainScreen].bounds.size.height-40;
+        }else if (orientation == UIDeviceOrientationLandscapeLeft ||
+                  orientation == UIDeviceOrientationLandscapeRight) {
+            self.contentMaximumHeight = [UIScreen mainScreen].bounds.size.height-8;
+        }
     }
 }
 
