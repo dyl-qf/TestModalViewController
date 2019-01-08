@@ -195,8 +195,12 @@
     if (!sheetContentView) {
         sheetContentView = [[UkeSheetContentView alloc] init];
         __weak typeof(self)weakSelf = self;
-        sheetContentView.dismissHandler = ^{
-            [weakSelf dismiss];
+        sheetContentView.ukeActionButtonHandler = ^(UkeAlertAction * _Nonnull action) {
+            [weakSelf dismissWithAnimated:YES completion:^{
+                if (action.actionHandler) {
+                    action.actionHandler(action);
+                }
+            }];
         };
     }
     return sheetContentView;

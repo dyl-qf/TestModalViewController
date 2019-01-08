@@ -105,12 +105,8 @@
 }
 
 - (void)handleCancelButtonAction:(UIButton *)button {
-    if (self.cancelAction.actionHandler) {
-        self.cancelAction.actionHandler(self.cancelAction);
-    }
-
-    if (self.dismissHandler) {
-        self.dismissHandler();
+    if (self.ukeActionButtonHandler) {
+        self.ukeActionButtonHandler(self.cancelAction);
     }
 }
 
