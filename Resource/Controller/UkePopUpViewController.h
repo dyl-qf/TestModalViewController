@@ -13,10 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_IOS(6_0)
 @interface UkePopUpViewController : UIViewController
 
-@property (nonatomic, assign) UIAlertControllerStyle preferredStyle;
-
 + (instancetype)alertControllerWithContentView:(UIView *)view
                              preferredStyle:(UIAlertControllerStyle)preferredStyle;
+
+@property (nonatomic, assign) UIAlertControllerStyle preferredStyle;
 - (void)addContentView:(UIView *)view;
 
 - (void)dismiss;
