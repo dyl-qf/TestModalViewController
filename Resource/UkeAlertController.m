@@ -131,9 +131,14 @@
     [super setContentWidth:contentWidth];
 }
 
-- (void)setSheetContentMarginBottom:(CGFloat)sheetContentMarginBottom {
-    _sheetContentMarginBottom = sheetContentMarginBottom;
-    [super setSheetContentMarginBottom:sheetContentMarginBottom];
+- (void)setTitleMessageAreaContentInsets:(UIEdgeInsets)titleMessageAreaContentInsets {
+    _titleMessageAreaContentInsets = titleMessageAreaContentInsets;
+    [_headerView setTitleMessageAreaContentInsets:titleMessageAreaContentInsets];
+}
+
+- (void)setTitleMessageVerticalSpacing:(CGFloat)titleMessageVerticalSpacing {
+    _titleMessageVerticalSpacing = titleMessageVerticalSpacing;
+    [_headerView setTitleMessageVerticalSpacing:titleMessageVerticalSpacing];
 }
 
 - (void)setSheetCancelButtonMarginTop:(CGFloat)sheetCancelButtonMarginTop {
@@ -141,6 +146,11 @@
     if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
         [self sheetContentView].sheetCancelButtonMarginTop = sheetCancelButtonMarginTop;
     }
+}
+
+- (void)setSheetContentMarginBottom:(CGFloat)sheetContentMarginBottom {
+    _sheetContentMarginBottom = sheetContentMarginBottom;
+    [super setSheetContentMarginBottom:sheetContentMarginBottom];
 }
 
 - (void)setTitleAttributes:(NSDictionary<NSString *,id> *)titleAttributes {
