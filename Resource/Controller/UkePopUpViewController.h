@@ -24,6 +24,8 @@ NS_CLASS_AVAILABLE_IOS(6_0)
 - (void)dismissWithAnimated:(BOOL)animated
                  completion:(void(^)(void))completionHandler;
 
+@property (nonatomic, strong) void (^dismissCompletion)(void);
+
 //! 中间内容区宽度。默认为0，内部通过contentView的约束计算宽度，如果手动指定宽度将忽略约束计算。
 @property (nonatomic, assign) CGFloat contentWidth;
 

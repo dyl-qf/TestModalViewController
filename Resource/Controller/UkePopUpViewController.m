@@ -213,7 +213,14 @@
 
 #pragma mark - Private.
 - (void)dismissPopControllerAnimated:(BOOL)animated completion:(void (^)(void))completionHandler {
-    [self dismissViewControllerAnimated:animated completion:completionHandler];
+    [self dismissViewControllerAnimated:animated completion:^{
+        if (completionHandler) {
+            completionHandler();
+        }
+        if (self.dismissCompletion) {
+            self.dismissCompletion();
+        }
+    }];
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate.
