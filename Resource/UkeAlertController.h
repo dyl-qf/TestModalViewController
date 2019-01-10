@@ -50,13 +50,14 @@ NS_CLASS_AVAILABLE_IOS(6_0)
 //  |        ---------      |
 //  |       |  title  |     |
 //  |       |         |     |
-//  |       | message|      |
+//  |       | message |     |
 //  |        ---------      |
 //   -----------------------
 
 //! title所在文本区域离四周的距离
-//! alert默认为 (20, 16, 20, 16)，与系统一致
-//! sheet默认为 (14.5, 16, 25, 16)，与系统一致
+//! alert默认为 (20, 16, 20, 16)。当只有title或message时，上下距离分别为insets.top和insets.top，与系统一致
+//! sheet默认为 (14.5, 16, 25, 16)。当只有title时，上下距离分别为insets.top和insets.top；
+//! 当只有message时，上下距离分别为insets.bottom和insets.bottom，与系统一致
 @property (nonatomic, assign) UIEdgeInsets titleMessageAreaContentInsets;
 
 //! title和message竖直方向的间距
