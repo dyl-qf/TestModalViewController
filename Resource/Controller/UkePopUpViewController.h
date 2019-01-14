@@ -19,10 +19,17 @@ NS_CLASS_AVAILABLE_IOS(6_0)
 @property (nonatomic, assign) UIAlertControllerStyle preferredStyle;
 - (void)addContentView:(UIView *)view;
 
+#pragma mark - Show
+- (void)show;
+- (void)showWithAnimated:(BOOL)animated;
+- (void)showWithAnimated:(BOOL)animated
+                 completion:(nullable void(^)(void))completionHandler;
+
+#pragma mark - Dismiss
 - (void)dismiss;
 - (void)dismissWithAnimated:(BOOL)animated;
 - (void)dismissWithAnimated:(BOOL)animated
-                 completion:(void(^)(void))completionHandler;
+                 completion:(nullable void(^)(void))completionHandler;
 
 @property (nonatomic, strong) void (^dismissCompletion)(void);
 

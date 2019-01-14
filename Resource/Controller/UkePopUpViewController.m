@@ -9,9 +9,11 @@
 #import "UkePopUpViewController.h"
 #import "UkeAlertStyleAnimation.h"
 #import "UkeActionSheetAnimation.h"
+#import "UkeAlertPresentingViewController.h"
 #import "Masonry.h"
 
 @interface UkePopUpViewController () <UIViewControllerTransitioningDelegate>
+@property (nonatomic, weak) UkeAlertPresentingViewController *presentingVc;
 @property (nonatomic, assign) UIDeviceOrientation originalOrientation;
 @property (nonatomic, assign) CGFloat contentMaximumHeightInset;
 @property (nonatomic, strong) UkeAlertBaseAnimation *animation;
@@ -199,26 +201,42 @@
     _contentView = view;
 }
 
+#pragma mark - Show
+- (void)show {
+    [self showWithAnimated:YES];
+}
+
+- (void)showWithAnimated:(BOOL)animated {
+    [self showWithAnimated:animated completion:nil];
+}
+
+- (void)showWithAnimated:(BOOL)animated
+              completion:(nullable void(^)(void))completionHandler {
+    UkeAlertPresentingViewController *presentingVc = [[UkeAlertPresentingViewController alloc] init];
+    [presentingVc presentViewController:self animated:animated completion:completionHandler];
+    _presentingVc = presentingVc;
+}
+
+#pragma mark - Dismiss
 - (void)dismiss {
     [self dismissWithAnimated:YES];
 }
 
 - (void)dismissWithAnimated:(BOOL)animated {
-    [self dismissViewControllerAnimated:animated completion:nil];
+    [self dismissWithAnimated:animated completion:nil];
 }
 
-- (void)dismissWithAnimated:(BOOL)animated completion:(void (^)(void))completionHandler {
-    [self dismissPopControllerAnimated:animated completion:completionHandler];
-}
-
-#pragma mark - Private.
-- (void)dismissPopControllerAnimated:(BOOL)animated completion:(void (^)(void))completionHandler {
+- (void)dismissWithAnimated:(BOOL)animated
+                 completion:(nullable void (^)(void))completionHandler {
     [self dismissViewControllerAnimated:animated completion:^{
         if (completionHandler) {
             completionHandler();
         }
         if (self.dismissCompletion) {
             self.dismissCompletion();
+        }
+        if (self.presentingVc) {
+            [self.presentingVc alertControllerDidDismiss];
         }
     }];
 }
