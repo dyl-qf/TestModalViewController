@@ -35,6 +35,11 @@ NS_CLASS_AVAILABLE_IOS(6_0)
 
 @property (nonatomic, strong) void (^dismissCompletion)(void);
 
+//! 弹出视图的唯一id，默认是一个UUID String。
+//! 默认情况下，同时弹出多个弹框时，弹框之间是互斥的，后面的弹框显示时会暂时移除前一个弹框。当后面的弹框消失后，前面被移除的弹框会再次显示出来。
+//! 如果弹出多个弹框时，指定他们的identifier一样，则前面的弹框会被永久性移除，不会再显示。
+@property (nonatomic, strong) NSString *identifier;
+
 //! 中间内容区宽度。默认为0，内部通过contentView的约束计算宽度，如果手动指定宽度将忽略约束计算。
 @property (nonatomic, assign) CGFloat contentWidth;
 

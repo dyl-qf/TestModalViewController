@@ -27,6 +27,7 @@
         self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         self.transitioningDelegate = self;
         self.originalOrientation = [UIDevice currentDevice].orientation;
+        self.identifier = [NSUUID UUID].UUIDString;
     }
     return self;
 }

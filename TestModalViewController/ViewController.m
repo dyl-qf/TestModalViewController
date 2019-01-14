@@ -70,13 +70,22 @@
 
 - (IBAction)test3:(id)sender {
     UkeAlertController *alert = [UkeAlertController alertControllerWithTitle:@"第一个" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    alert.identifier = @"1";
     [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
     [alert show];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         UkeAlertController *alert2 = [UkeAlertController alertControllerWithTitle:@"第二个" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        alert2.identifier = @"2";
         [alert2 addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
         [alert2 show];
+    });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        UkeAlertController *alert3 = [UkeAlertController alertControllerWithTitle:@"第一个" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        alert3.identifier = @"1";
+        [alert3 addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+        [alert3 show];
     });
 }
 

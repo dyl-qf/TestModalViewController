@@ -89,7 +89,7 @@
     if (self.alertHierarchStack.count != 0) {
         for (NSInteger i = self.alertHierarchStack.count-1; i >= 0; i --) {
             UkePopUpViewController *popUpVc = self.alertHierarchStack[i];
-            if ([popUpVc.contentView isEqual:popUpVcToPresent.contentView]) {
+            if ([popUpVc.identifier isEqualToString:popUpVcToPresent.identifier]) {
                 [self.alertHierarchStack removeObject:popUpVc];
                 break;
             }
