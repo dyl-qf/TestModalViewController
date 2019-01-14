@@ -17,6 +17,8 @@ NS_CLASS_AVAILABLE_IOS(6_0)
                              preferredStyle:(UIAlertControllerStyle)preferredStyle;
 
 @property (nonatomic, assign) UIAlertControllerStyle preferredStyle;
+@property (nonatomic, strong, readonly) UIView *contentView;
+
 - (void)addContentView:(UIView *)view;
 
 #pragma mark - Show

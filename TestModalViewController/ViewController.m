@@ -69,30 +69,15 @@
 }
 
 - (IBAction)test3:(id)sender {
-    UkeAlertController *alert = [UkeAlertController alertControllerWithTitle:@"你好" message:@"课前15分钟才可进入教室，请耐心等待哦～\n课前15分钟才可进入教室，请耐心等待哦～\n课前15分钟才可进入教室，请耐心等待哦～" preferredStyle:UIAlertControllerStyleAlert];
-    alert.titleMessageAreaContentInsets = UIEdgeInsetsMake(20, 30, 16, 30);
-    alert.titleMessageVerticalSpacing = 10;
-
-//    UIView *view = [[UIView alloc] init];
-////    view.frame = CGRectMake(0, 0, 300, 800);
-//    view.backgroundColor = [UIColor redColor];
-//
-//    UIView *subView = [[UIView alloc] init];
-//    subView.backgroundColor = [UIColor orangeColor];
-//    [view addSubview:subView];
-//    [subView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.size.mas_equalTo(CGSizeMake(200, 800));
-//        make.edges.mas_equalTo(UIEdgeInsetsMake(20, 20, 20, 20));
-//    }];
-    
-//    UkeAlertController *alert = [UkeAlertController alertControllerWithContentView:view preferredStyle:UIAlertControllerStyleAlert];
-    
-//    UkePopUpViewController *popUp = [UkePopUpViewController alertControllerWithContentView:view preferredStyle:UIAlertControllerStyleAlert];
-    
+    UkeAlertController *alert = [UkeAlertController alertControllerWithTitle:@"第一个" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [alert addAction:[UkeAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-
     [alert show];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        UkeAlertController *alert2 = [UkeAlertController alertControllerWithTitle:@"第二个" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [alert2 addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+        [alert2 show];
+    });
 }
 
 - (IBAction)test4:(id)sender {

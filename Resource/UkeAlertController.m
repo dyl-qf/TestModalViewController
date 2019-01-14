@@ -20,7 +20,7 @@
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *messageLabel;
 
-@property (nonatomic, strong) UkeAlertContentView *contentView; //! 整个content
+@property (nonatomic, strong) UkeAlertContentView *alertContentView; //! 整个content
 @property (nonatomic, strong) UkeAlertHeaderView *headerView; //! title和message
 @property (nonatomic, strong) UkeAlertActionGroupView *actionGroupView; //! 按钮区域
 @end
@@ -49,10 +49,10 @@
 
 - (void)viewDidLoad {
     BOOL needLayout = [self.actionGroupView layoutActions];
-    [self.contentView insertHeaderView:self.headerView];
-    [self.contentView insertActionGroupView:needLayout ? self.actionGroupView : nil];
+    [self.alertContentView insertHeaderView:self.headerView];
+    [self.alertContentView insertActionGroupView:needLayout ? self.actionGroupView : nil];
     
-    [super addContentView:self.contentView];
+    [super addContentView:self.alertContentView];
     [super viewDidLoad];
 }
 
@@ -108,7 +108,7 @@
             content = [self sheetContentView];
             content.contentMaximumHeight = self.contentMaximumHeight-self.sheetContentMarginBottom;
         }
-        _contentView = content;
+        _alertContentView = content;
         [self setCornerRadius:12.0];
     }
     return self;
@@ -120,7 +120,7 @@
     if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
         newContentMaximumHeight = contentMaximumHeight-self.sheetContentMarginBottom;
     }
-    [_contentView deviceOrientationWillChangeWithContentMaximumHeight:newContentMaximumHeight duration:duration];
+    [_alertContentView deviceOrientationWillChangeWithContentMaximumHeight:newContentMaximumHeight duration:duration];
     
     [super deviceOrientationWillChangeWithContentMaximumHeight:contentMaximumHeight duration:duration];
 }
@@ -186,25 +186,25 @@
 
 - (void)setCornerRadius:(CGFloat)cornerRadius {
     _cornerRadius = cornerRadius;
-    _contentView.cornerRadius = cornerRadius;
+    _alertContentView.cornerRadius = cornerRadius;
     [super setCornerRadius:cornerRadius];
 }
 
 - (void)setLineHeight:(CGFloat)lineHeight {
     _lineHeight = lineHeight;
-    self.contentView.separatorHeight = lineHeight;
+    self.alertContentView.separatorHeight = lineHeight;
     self.actionGroupView.lineHeight = lineHeight;
 }
 
 - (void)setLineColor:(UIColor *)lineColor {
     _lineColor = lineColor;
-    self.contentView.separatorColor = lineColor;
+    self.alertContentView.separatorColor = lineColor;
     self.actionGroupView.lineColor = lineColor;
 }
 
 #pragma mark - Getter.
 - (UkeSheetContentView *)sheetContentView {
-    UkeSheetContentView *sheetContentView = (UkeSheetContentView *)self.contentView;
+    UkeSheetContentView *sheetContentView = (UkeSheetContentView *)self.alertContentView;
     if (!sheetContentView) {
         sheetContentView = [[UkeSheetContentView alloc] init];
         __weak typeof(self)weakSelf = self;

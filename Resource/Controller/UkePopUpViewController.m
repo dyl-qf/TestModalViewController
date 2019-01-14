@@ -9,11 +9,10 @@
 #import "UkePopUpViewController.h"
 #import "UkeAlertStyleAnimation.h"
 #import "UkeActionSheetAnimation.h"
-#import "UkeAlertPresentingViewController.h"
+#import "UkeAlertSingleton.h"
 #import "Masonry.h"
 
 @interface UkePopUpViewController () <UIViewControllerTransitioningDelegate>
-@property (nonatomic, weak) UkeAlertPresentingViewController *presentingVc;
 @property (nonatomic, assign) UIDeviceOrientation originalOrientation;
 @property (nonatomic, assign) CGFloat contentMaximumHeightInset;
 @property (nonatomic, strong) UkeAlertBaseAnimation *animation;
@@ -86,7 +85,7 @@
             if (device.orientation == UIDeviceOrientationLandscapeLeft ||
                 device.orientation == UIDeviceOrientationLandscapeRight) {
                 if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
-                    newContentMaximumHeight += CGRectGetHeight([UIApplication sharedApplication].statusBarFrame); // 横屏时状态栏是隐藏的，所以多出20pt
+                    newContentMaximumHeight += CGRectGetHeight([UIApplication sharedApplication].statusBarFrame); // 横屏时状态栏是隐藏的，所以多出状态栏高度
                 }else if (self.preferredStyle == UIAlertControllerStyleAlert) {
                     
                 }
@@ -99,7 +98,7 @@
                 device.orientation == UIDeviceOrientationPortraitUpsideDown) {
                 
                 if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
-                    newContentMaximumHeight -= CGRectGetHeight([UIApplication sharedApplication].statusBarFrame); // 竖屏时状态栏是显示的，所以少20pt
+                    newContentMaximumHeight -= CGRectGetHeight([UIApplication sharedApplication].statusBarFrame); // 竖屏时状态栏是显示的，所以少了状态栏高度
                 }else if (self.preferredStyle == UIAlertControllerStyleAlert) {
                     if (safePadding >= 20) {
                         newContentMaximumHeight -= safePadding;
@@ -212,9 +211,8 @@
 
 - (void)showWithAnimated:(BOOL)animated
               completion:(nullable void(^)(void))completionHandler {
-    UkeAlertPresentingViewController *presentingVc = [[UkeAlertPresentingViewController alloc] init];
-    [presentingVc presentViewController:self animated:animated completion:completionHandler];
-    _presentingVc = presentingVc;
+    UkeAlertPresentingViewController *presentingVc = [[UkeAlertSingleton sharedInstance] ukeAlertPresentViewController];
+    [presentingVc presentPopUpViewController:self animated:animated completion:completionHandler];
 }
 
 #pragma mark - Dismiss
@@ -228,6 +226,9 @@
 
 - (void)dismissWithAnimated:(BOOL)animated
                  completion:(nullable void (^)(void))completionHandler {
+    UkeAlertPresentingViewController *presentingVc = [[UkeAlertSingleton sharedInstance] ukeAlertPresentViewController];
+    [presentingVc ukePopUpViewControllerWillDismiss:self];
+    
     [self dismissViewControllerAnimated:animated completion:^{
         if (completionHandler) {
             completionHandler();
@@ -235,9 +236,7 @@
         if (self.dismissCompletion) {
             self.dismissCompletion();
         }
-        if (self.presentingVc) {
-            [self.presentingVc alertControllerDidDismiss];
-        }
+        [presentingVc ukePopUpViewControllerDidDismiss];
     }];
 }
 

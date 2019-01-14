@@ -10,9 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class UkePopUpViewController;
 @interface UkeAlertPresentingViewController : UIViewController
 
-- (void)alertControllerDidDismiss;
+- (void)presentPopUpViewController:(UkePopUpViewController *)viewControllerToPresent
+                          animated:(BOOL)flag
+                        completion:(void (^)(void))completion;
+
+- (void)ukePopUpViewControllerWillDismiss:(UkePopUpViewController *)popUpViewController;
+- (void)ukePopUpViewControllerDidDismiss;
 
 @end
 

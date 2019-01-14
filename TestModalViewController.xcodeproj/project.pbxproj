@@ -10,6 +10,7 @@
 		0B36D7408F7F3B7315E7A672 /* Pods_TestModalViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4A41E29FA4DDB8995BE382B /* Pods_TestModalViewController.framework */; };
 		54094F3821EC63B700EBE647 /* NSParagraphStyle+Shortcut.m in Sources */ = {isa = PBXBuildFile; fileRef = 54094F3721EC63B700EBE647 /* NSParagraphStyle+Shortcut.m */; };
 		54094F3B21EC63D200EBE647 /* UkeAlertPresentingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54094F3A21EC63D200EBE647 /* UkeAlertPresentingViewController.m */; };
+		54094F4121EC72A200EBE647 /* UkeAlertSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 54094F4021EC72A200EBE647 /* UkeAlertSingleton.m */; };
 		5417911121C7BAE8000D5F7B /* UkeAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5417911021C7BAE8000D5F7B /* UkeAlertController.m */; };
 		5417911821C899D8000D5F7B /* UkeAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 5417911721C899D8000D5F7B /* UkeAlertAction.m */; };
 		5417911E21C8ECA5000D5F7B /* UkeAlertActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5417911D21C8ECA5000D5F7B /* UkeAlertActionButton.m */; };
@@ -59,6 +60,8 @@
 		54094F3721EC63B700EBE647 /* NSParagraphStyle+Shortcut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSParagraphStyle+Shortcut.m"; sourceTree = "<group>"; };
 		54094F3921EC63D200EBE647 /* UkeAlertPresentingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeAlertPresentingViewController.h; sourceTree = "<group>"; };
 		54094F3A21EC63D200EBE647 /* UkeAlertPresentingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeAlertPresentingViewController.m; sourceTree = "<group>"; };
+		54094F3F21EC72A200EBE647 /* UkeAlertSingleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeAlertSingleton.h; sourceTree = "<group>"; };
+		54094F4021EC72A200EBE647 /* UkeAlertSingleton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeAlertSingleton.m; sourceTree = "<group>"; };
 		5417910F21C7BAE8000D5F7B /* UkeAlertController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeAlertController.h; sourceTree = "<group>"; };
 		5417911021C7BAE8000D5F7B /* UkeAlertController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeAlertController.m; sourceTree = "<group>"; };
 		5417911621C899D8000D5F7B /* UkeAlertAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeAlertAction.h; sourceTree = "<group>"; };
@@ -152,6 +155,8 @@
 				54094F3721EC63B700EBE647 /* NSParagraphStyle+Shortcut.m */,
 				54094F3921EC63D200EBE647 /* UkeAlertPresentingViewController.h */,
 				54094F3A21EC63D200EBE647 /* UkeAlertPresentingViewController.m */,
+				54094F3F21EC72A200EBE647 /* UkeAlertSingleton.h */,
+				54094F4021EC72A200EBE647 /* UkeAlertSingleton.m */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -498,6 +503,7 @@
 				54B28D7521CDD43B00335FD9 /* UkeAlertHeaderView.m in Sources */,
 				54094F3B21EC63D200EBE647 /* UkeAlertPresentingViewController.m in Sources */,
 				54B28D7F21CDDD1F00335FD9 /* UkeAlertContentView.m in Sources */,
+				54094F4121EC72A200EBE647 /* UkeAlertSingleton.m in Sources */,
 				54B28D7421CDD43B00335FD9 /* UkeAlertActionGroupView.m in Sources */,
 				54B6365421D256D70059F2A9 /* ViewController2.m in Sources */,
 				5417911821C899D8000D5F7B /* UkeAlertAction.m in Sources */,
