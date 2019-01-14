@@ -69,4 +69,18 @@ NS_CLASS_AVAILABLE_IOS(6_0)
                                                    duration:(NSTimeInterval)duration;
 @end
 
+
+
+@interface UIViewController (UkeAlertController)
+
+//TODO
+//! 通过identifier移除alertController
+- (void)removeUkeAlertControllerWithIdentifier:(NSString *)identifier;
+
+//! 移除当前显示的和暂时隐藏在栈区的所有alertController
+- (void)removeAllUkeAlertConrollerAnimated:(BOOL)animated
+                                completion:(void(^)(void))completion;
+
+@end
+
 NS_ASSUME_NONNULL_END

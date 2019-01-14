@@ -84,6 +84,22 @@
     }
 }
 
+- (void)ukeRemoveAllAlertConrollerAnimated:(BOOL)animated
+                                completion:(nonnull void (^)(void))completion {
+    if (_currentPrentedVc) {
+        [self.alertHierarchStack removeAllObjects];
+        [_currentPrentedVc dismissWithAnimated:animated completion:^{
+            if (completion) completion();
+        }];
+    }else {
+        self.currentPrentedVc = nil;
+        self.window.rootViewController = nil;
+        self.window.hidden = YES;
+        [[UkeAlertSingleton sharedInstance] destoryUkeAlertSingleton];
+        if (completion) completion();
+    }
+}
+
 // 如果之前存在相同的popUpVc，则移除掉
 - (void)removeEqualVcFromStackWith:(UkePopUpViewController *)popUpVcToPresent {
     if (self.alertHierarchStack.count != 0) {

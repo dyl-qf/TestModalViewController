@@ -231,13 +231,14 @@
     [presentingVc ukePopUpViewControllerWillDismiss:self];
     
     [self dismissViewControllerAnimated:animated completion:^{
-        if (completionHandler) {
-            completionHandler();
-        }
         if (self.dismissCompletion) {
             self.dismissCompletion();
         }
         [presentingVc ukePopUpViewControllerDidDismiss];
+        
+        if (completionHandler) {
+            completionHandler();
+        }
     }];
 }
 
@@ -303,6 +304,17 @@
 
 - (void)dealloc {
     NSLog(@"UkePopUpViewController 销毁");
+}
+
+@end
+
+
+@implementation UIViewController (UkeAlertController)
+
+- (void)removeAllUkeAlertConrollerAnimated:(BOOL)animated
+                                completion:(nonnull void (^)(void))completion {
+    UkeAlertPresentingViewController *presentingVc = [[UkeAlertSingleton sharedInstance] ukeAlertPresentViewController];
+    [presentingVc ukeRemoveAllAlertConrollerAnimated:animated completion:completion];
 }
 
 @end

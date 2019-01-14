@@ -20,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)ukePopUpViewControllerWillDismiss:(UkePopUpViewController *)popUpViewController;
 - (void)ukePopUpViewControllerDidDismiss;
 
+- (void)ukeRemoveAllAlertConrollerAnimated:(BOOL)animated
+                                completion:(nonnull void (^)(void))completion;
+
 @end
 
 NS_ASSUME_NONNULL_END
