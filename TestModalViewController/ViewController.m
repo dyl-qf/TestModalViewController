@@ -74,25 +74,33 @@
     [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
     [alert show];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        UkeAlertController *alert2 = [UkeAlertController alertControllerWithTitle:@"第二个" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        alert2.identifier = @"2";
-        [alert2 addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-        [alert2 show];
-    });
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self removeAllUkeAlertConrollerAnimated:NO completion:^{
-            UkeAlertController *alert3 = [UkeAlertController alertControllerWithTitle:@"第一个" message:nil preferredStyle:UIAlertControllerStyleAlert];
-            alert3.identifier = @"1";
-            [alert3 addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-            [alert3 show];
-        }];
-    });
+    UkeAlertController *alert2 = [UkeAlertController alertControllerWithTitle:@"第二个" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    alert2.identifier = @"2";
+    [alert2 addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+    [alert2 show];
+    
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        UkeAlertController *alert2 = [UkeAlertController alertControllerWithTitle:@"第二个" message:nil preferredStyle:UIAlertControllerStyleAlert];
+//        alert2.identifier = @"2";
+//        [alert2 addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+//        [alert2 show];
+//    });
+//
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self removeUkeAlertControllerWithIdentifier:@"2" animated:NO completion:nil];
+//
+////        [self removeAllUkeAlertConrollerAnimated:NO completion:^{
+////            UkeAlertController *alert3 = [UkeAlertController alertControllerWithTitle:@"第一个" message:nil preferredStyle:UIAlertControllerStyleAlert];
+////            alert3.identifier = @"1";
+////            [alert3 addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+////            [alert3 show];
+////        }];
+//    });
 }
 
 - (IBAction)test4:(id)sender {
-    UkeAlertController *alert = [UkeAlertController alertControllerWithTitle:@"你好" message:@"哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈" preferredStyle:UIAlertControllerStyleActionSheet];
+    UkeAlertController *alert = [UkeAlertController alertControllerWithTitle:@"第一个" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
 //    alert.cornerRadius = 0;
 //    alert.contentWidth = [UIScreen mainScreen].bounds.size.width;
@@ -115,20 +123,15 @@
 //    UkePopUpViewController *popUp = [UkePopUpViewController alertControllerWithContentView:view preferredStyle:UIAlertControllerStyleActionSheet];
     
     [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
     [alert addAction:[UkeAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-
     [alert show];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        UkeAlertController *alert2 = [UkeAlertController alertControllerWithTitle:@"第二个" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        [alert2 addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+        [alert2 addAction:[UkeAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+        [alert2 show];
+    });
 }
 
 

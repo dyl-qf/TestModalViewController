@@ -15,13 +15,12 @@ NS_CLASS_AVAILABLE_IOS(6_0)
 
 + (instancetype)alertControllerWithContentView:(UIView *)view
                              preferredStyle:(UIAlertControllerStyle)preferredStyle;
+- (void)addContentView:(UIView *)view;
 
 @property (nonatomic, assign) UIAlertControllerStyle preferredStyle;
 @property (nonatomic, strong, readonly) UIView *contentView;
 
-- (void)addContentView:(UIView *)view;
-
-#pragma mark - Show
+#pragma mark - Show。不建议用presentViewController:animated:completion:的方式弹出，否则无法支持多个弹框同时弹出的效果。建议后期适配。
 - (void)show;
 - (void)showWithAnimated:(BOOL)animated;
 - (void)showWithAnimated:(BOOL)animated
@@ -57,14 +56,15 @@ NS_CLASS_AVAILABLE_IOS(6_0)
 @property (nonatomic, assign) CGFloat cornerRadius;
 
 #pragma mark - 动画时间
-// 弹出时间
+//! 弹出时间
 @property (nonatomic, assign) CGFloat presentDelayTimeInterval;
 @property (nonatomic, assign) CGFloat presentTimeInterval;
-// 消失时间
+//! 消失时间
 @property (nonatomic, assign) CGFloat dismissDelayTimeInterval;
 @property (nonatomic, assign) CGFloat dismissTimeInterval;
 
-#pragma mark - 
+#pragma mark - Override
+//! 屏幕方向发生变化时，子类可以重载
 - (void)deviceOrientationWillChangeWithContentMaximumHeight:(CGFloat)contentMaximumHeight
                                                    duration:(NSTimeInterval)duration;
 @end
@@ -73,13 +73,14 @@ NS_CLASS_AVAILABLE_IOS(6_0)
 
 @interface UIViewController (UkeAlertController)
 
-//TODO
-//! 通过identifier移除alertController
-- (void)removeUkeAlertControllerWithIdentifier:(NSString *)identifier;
+//! 通过identifier移除指定alertController
+- (void)removeUkeAlertControllerWithIdentifier:(NSString *)identifier
+                                      animated:(BOOL)animated
+                                    completion:(nullable void(^)(void))completion;
 
 //! 移除当前显示的和暂时隐藏在栈区的所有alertController
 - (void)removeAllUkeAlertConrollerAnimated:(BOOL)animated
-                                completion:(void(^)(void))completion;
+                                completion:(nullable void(^)(void))completion;
 
 @end
 

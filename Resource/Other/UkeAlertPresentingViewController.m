@@ -44,7 +44,7 @@
     
     if (_currentPrentedVc) {
         [_currentPrentedVc dismissViewControllerAnimated:NO completion:^{
-            [self removeEqualVcFromStackWith:viewControllerToPresent];
+            [self removeEqualVcFromStackWithIdentifier:viewControllerToPresent.identifier];
             [self presentViewController:viewControllerToPresent animated:flag completion:^{
                 self.currentPrentedVc = viewControllerToPresent;
                 [self.alertHierarchStack addObject:self.currentPrentedVc];
@@ -54,7 +54,7 @@
             }];
         }];
     }else {
-        [self removeEqualVcFromStackWith:viewControllerToPresent];
+        [self removeEqualVcFromStackWithIdentifier:viewControllerToPresent.identifier];
         [self presentViewController:viewControllerToPresent animated:flag completion:^{
             self.currentPrentedVc = viewControllerToPresent;
             [self.alertHierarchStack addObject:self.currentPrentedVc];
@@ -85,7 +85,7 @@
 }
 
 - (void)ukeRemoveAllAlertConrollerAnimated:(BOOL)animated
-                                completion:(nonnull void (^)(void))completion {
+                                completion:(nullable void (^)(void))completion {
     if (_currentPrentedVc) {
         [self.alertHierarchStack removeAllObjects];
         [_currentPrentedVc dismissWithAnimated:animated completion:^{
@@ -100,12 +100,22 @@
     }
 }
 
+- (void)ukeRemoveAlertConrollerWithIdentifier:(NSString *)identifier
+                                     animated:(BOOL)animated
+                                   completion:(nullable void (^)(void))completion {
+    if (_currentPrentedVc && [_currentPrentedVc.identifier isEqualToString:identifier]) {
+        [_currentPrentedVc dismissWithAnimated:animated completion:completion];
+    }else {
+        [self removeEqualVcFromStackWithIdentifier:identifier];
+    }
+}
+
 // 如果之前存在相同的popUpVc，则移除掉
-- (void)removeEqualVcFromStackWith:(UkePopUpViewController *)popUpVcToPresent {
+- (void)removeEqualVcFromStackWithIdentifier:(NSString *)identifier {
     if (self.alertHierarchStack.count != 0) {
         for (NSInteger i = self.alertHierarchStack.count-1; i >= 0; i --) {
             UkePopUpViewController *popUpVc = self.alertHierarchStack[i];
-            if ([popUpVc.identifier isEqualToString:popUpVcToPresent.identifier]) {
+            if ([popUpVc.identifier isEqualToString:identifier]) {
                 [self.alertHierarchStack removeObject:popUpVc];
                 break;
             }

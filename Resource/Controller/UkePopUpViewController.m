@@ -311,8 +311,15 @@
 
 @implementation UIViewController (UkeAlertController)
 
+- (void)removeUkeAlertControllerWithIdentifier:(NSString *)identifier
+                                      animated:(BOOL)animated
+                                    completion:(nullable void (^)(void))completion {
+    UkeAlertPresentingViewController *presentingVc = [[UkeAlertSingleton sharedInstance] ukeAlertPresentViewController];
+    [presentingVc ukeRemoveAlertConrollerWithIdentifier:identifier animated:animated completion:completion];
+}
+
 - (void)removeAllUkeAlertConrollerAnimated:(BOOL)animated
-                                completion:(nonnull void (^)(void))completion {
+                                completion:(nullable void (^)(void))completion {
     UkeAlertPresentingViewController *presentingVc = [[UkeAlertSingleton sharedInstance] ukeAlertPresentViewController];
     [presentingVc ukeRemoveAllAlertConrollerAnimated:animated completion:completion];
 }
