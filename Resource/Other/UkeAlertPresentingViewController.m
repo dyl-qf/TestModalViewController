@@ -10,9 +10,17 @@
 #import "UkePopUpViewController.h"
 #import "UkeAlertSingleton.h"
 
+typedef NS_ENUM(NSInteger, UkeAlertControllerPresentingState) {
+    UkeAlertControllerPresentingStateInitial = 0,
+    UkeAlertControllerPresentingStatePresenting,
+    UkeAlertControllerPresentingStatePresented = UkeAlertControllerPresentingStateInitial,
+    UkeAlertControllerPresentingStateNeedPresent
+};
+
 @interface UkeAlertPresentingViewController ()
 @property (nonatomic, strong) UIWindow *window;
 
+@property (atomic, assign) UkeAlertControllerPresentingState presentingState;
 @property (nonatomic, strong) UkePopUpViewController *currentPrentedVc;
 @property (nonatomic, strong) NSMutableArray<UkePopUpViewController *> *alertHierarchStack;
 @end
@@ -28,6 +36,7 @@
         window.windowLevel = UIWindowLevelAlert;
         _window = window;
         
+        _presentingState = UkeAlertControllerPresentingStateInitial;
         _alertHierarchStack = [NSMutableArray array];
     }
     return self;
