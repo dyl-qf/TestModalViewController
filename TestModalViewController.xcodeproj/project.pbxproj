@@ -35,6 +35,7 @@
 		54B6364721D0DE010059F2A9 /* UkeAlertCustomizeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B6364621D0DE010059F2A9 /* UkeAlertCustomizeHeaderView.m */; };
 		54B6365121D23F190059F2A9 /* UkeAlertBaseAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B6365021D23F190059F2A9 /* UkeAlertBaseAnimation.m */; };
 		54B6365421D256D70059F2A9 /* ViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B6365321D256D70059F2A9 /* ViewController2.m */; };
+		54BDC05B21EDCCCE00D41BEC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 54BDC05A21EDCCCE00D41BEC /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,7 @@
 		54B6365021D23F190059F2A9 /* UkeAlertBaseAnimation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeAlertBaseAnimation.m; sourceTree = "<group>"; };
 		54B6365221D256D70059F2A9 /* ViewController2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController2.h; sourceTree = "<group>"; };
 		54B6365321D256D70059F2A9 /* ViewController2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController2.m; sourceTree = "<group>"; };
+		54BDC05A21EDCCCE00D41BEC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E4A41E29FA4DDB8995BE382B /* Pods_TestModalViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TestModalViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E66E4CA7D6B7452954F053F4 /* Pods-TestModalViewController.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestModalViewController.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TestModalViewController/Pods-TestModalViewController.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -171,6 +173,7 @@
 				5434CE3B21C7E2E800178D31 /* View */,
 				5417911521C899C3000D5F7B /* Model */,
 				54094F3521EC636600EBE647 /* Other */,
+				54BDC05A21EDCCCE00D41BEC /* README.md */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -422,6 +425,7 @@
 			files = (
 				549FC7EA21C39BD000619693 /* LaunchScreen.storyboard in Resources */,
 				549FC7E721C39BD000619693 /* Assets.xcassets in Resources */,
+				54BDC05B21EDCCCE00D41BEC /* README.md in Resources */,
 				549FC7E521C39BCE00619693 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
