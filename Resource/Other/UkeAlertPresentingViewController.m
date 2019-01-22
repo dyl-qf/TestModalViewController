@@ -74,10 +74,12 @@ typedef NS_ENUM(NSInteger, UkeAlertControllerPresentingState) {
     }
 }
 
+#pragma mark - pop消失回调
+//! 注意：只有调用dismissWithAnimated:方法才会有下面两个回调，
+//! 而调用系统的dismissViewControllerAnimated:不会有下面的回调
 - (void)ukePopUpViewControllerWillDismiss:(UkePopUpViewController *)popUpViewController {
     [_alertHierarchStack removeObject:popUpViewController];
 }
-
 - (void)ukePopUpViewControllerDidDismiss {
     _currentPrentedVc = nil;
     
