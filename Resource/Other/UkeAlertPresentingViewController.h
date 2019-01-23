@@ -29,4 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
+
+@interface UkePendingPopUpModel : NSObject
+@property (nonatomic, strong) UkePopUpViewController *popController;
+@property (nonatomic, assign) BOOL animated;
+@property (nonatomic, strong, nullable) void(^completion)(void);
+@end
+
 NS_ASSUME_NONNULL_END

@@ -10,19 +10,22 @@
 #import "UkePopUpViewController.h"
 #import "UkeAlertSingleton.h"
 
-typedef NS_ENUM(NSInteger, UkeAlertControllerPresentingState) {
-    UkeAlertControllerPresentingStateInitial = 0,
-    UkeAlertControllerPresentingStatePresenting,
-    UkeAlertControllerPresentingStatePresented = UkeAlertControllerPresentingStateInitial,
-    UkeAlertControllerPresentingStateNeedPresent
-};
+//typedef NS_ENUM(NSInteger, UkeAlertControllerPresentingState) {
+//    UkeAlertControllerPresentingStatePresenting = 0,
+//    UkeAlertControllerPresentingStatePresented,
+//    UkeAlertControllerPresentingStateNeedPresent,
+//    UkeAlertControllerPresentingStateInitial = UkeAlertControllerPresentingStatePresented
+//};
 
 @interface UkeAlertPresentingViewController ()
 @property (nonatomic, strong) UIWindow *window;
 
-@property (atomic, assign) UkeAlertControllerPresentingState presentingState;
+@property (atomic, assign) BOOL isPresenting;
 @property (nonatomic, strong) UkePopUpViewController *currentPrentedVc;
+// 已经弹出过的alertController，用于当前alertController消失后可以再弹出之前的alertController
 @property (nonatomic, strong) NSMutableArray<UkePopUpViewController *> *alertHierarchStack;
+// 需要弹出的alertController信息，用于解决同一时间弹出多个alertController时，由于第一个还未弹出完毕，导致后面的无法弹出的问题
+@property (nonatomic, strong) NSMutableArray<UkePendingPopUpModel *> *pendingAlertControllers;
 @end
 
 @implementation UkeAlertPresentingViewController
@@ -36,8 +39,9 @@ typedef NS_ENUM(NSInteger, UkeAlertControllerPresentingState) {
         window.windowLevel = UIWindowLevelAlert;
         _window = window;
         
-        _presentingState = UkeAlertControllerPresentingStateInitial;
+        _isPresenting = NO;
         _alertHierarchStack = [NSMutableArray array];
+        _pendingAlertControllers = [NSMutableArray array];
     }
     return self;
 }
@@ -51,12 +55,24 @@ typedef NS_ENUM(NSInteger, UkeAlertControllerPresentingState) {
         [self.window makeKeyAndVisible];
     }
     
+    if (_isPresenting == YES) {
+        UkePendingPopUpModel *model = [[UkePendingPopUpModel alloc] init];
+        model.popController = viewControllerToPresent;
+        model.animated = flag;
+        model.completion = completion;
+        [_pendingAlertControllers addObject:model];
+        return;
+    }
+    
+    _isPresenting = YES;
     if (_currentPrentedVc) {
         [_currentPrentedVc dismissViewControllerAnimated:NO completion:^{
             [self removeEqualVcFromStackWithIdentifier:viewControllerToPresent.identifier];
             [self presentViewController:viewControllerToPresent animated:flag completion:^{
                 self.currentPrentedVc = viewControllerToPresent;
                 [self.alertHierarchStack addObject:self.currentPrentedVc];
+                self.isPresenting = NO;
+                [self presentToPendingPopUpControllerWhenCurrentPresentedCompletion:viewControllerToPresent];
                 if (completion) {
                     completion();
                 }
@@ -67,11 +83,34 @@ typedef NS_ENUM(NSInteger, UkeAlertControllerPresentingState) {
         [self presentViewController:viewControllerToPresent animated:flag completion:^{
             self.currentPrentedVc = viewControllerToPresent;
             [self.alertHierarchStack addObject:self.currentPrentedVc];
+            self.isPresenting = NO;
+            [self presentToPendingPopUpControllerWhenCurrentPresentedCompletion:viewControllerToPresent];
             if (completion) {
                 completion();
             }
         }];
     }
+}
+
+- (void)presentToPendingPopUpControllerWhenCurrentPresentedCompletion:(UkePopUpViewController *)currentPresentedPopUpVc {
+    if (_pendingAlertControllers.count == 0) {
+        return;
+    }
+    
+    for (int i = 0; i < _pendingAlertControllers.count; i ++) {
+        UkePendingPopUpModel *lastPendingModel = _pendingAlertControllers[i];
+        UkePopUpViewController *lastPendingVc = lastPendingModel.popController;
+        if (lastPendingVc == currentPresentedPopUpVc) {
+            [_pendingAlertControllers removeObject:lastPendingModel];
+            break;
+        }
+    }
+    if (_pendingAlertControllers.count == 0) {
+        return;
+    }
+    
+    UkePendingPopUpModel *pendingPopUpModel = _pendingAlertControllers.firstObject;
+    [self presentPopUpViewController:pendingPopUpModel.popController animated:pendingPopUpModel.animated completion:pendingPopUpModel.completion];
 }
 
 #pragma mark - pop消失回调
@@ -143,4 +182,8 @@ typedef NS_ENUM(NSInteger, UkeAlertControllerPresentingState) {
     [super viewDidLoad];
 }
 
+@end
+
+
+@implementation UkePendingPopUpModel
 @end
