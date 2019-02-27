@@ -22,9 +22,9 @@
 
 @property (atomic, assign) BOOL isPresenting;
 @property (nonatomic, strong) UkePopUpViewController *currentPrentedVc;
-// 已经弹出过的alertController，用于当前alertController消失后可以再弹出之前的alertController
+// 已经弹出过的alertController。 用于当前alertController消失后可以再弹出之前的alertController
 @property (nonatomic, strong) NSMutableArray<UkePopUpViewController *> *alertHierarchStack;
-// 需要弹出的alertController信息，用于解决同一时间弹出多个alertController时，由于第一个还未弹出完毕，导致后面的无法弹出的问题
+// 需要弹出的alertController。 用于解决同一时间弹出多个alertController时，由于第一个还未弹出完毕，导致后面的无法弹出的问题
 @property (nonatomic, strong) NSMutableArray<UkePendingPopUpModel *> *pendingAlertControllers;
 @end
 
@@ -66,51 +66,45 @@
     
     _isPresenting = YES;
     if (_currentPrentedVc) {
+        // 如果当前已经有一个alert显示，则暂时dismiss掉。注意，它还存在于alertHierarchStack里。
+        // 注意：这里不能调用UkePopUpViewController的dismiss方法，因为这会触发下面"pop消失回调"的那两个方法。
         [_currentPrentedVc dismissViewControllerAnimated:NO completion:^{
-            [self removeEqualVcFromStackWithIdentifier:viewControllerToPresent.identifier];
+            // 这里不能调用presentPopUpViewController方法，否则会进入死循环。
             [self presentViewController:viewControllerToPresent animated:flag completion:^{
+                // 移除alertHierarchStack里相同identifier的alertController
+                [self removeEqualVcFromStackWithIdentifier:viewControllerToPresent.identifier];
                 self.currentPrentedVc = viewControllerToPresent;
                 [self.alertHierarchStack addObject:self.currentPrentedVc];
                 self.isPresenting = NO;
-                [self presentToPendingPopUpControllerWhenCurrentPresentedCompletion:viewControllerToPresent];
-                if (completion) {
-                    completion();
-                }
+                if (completion) completion();
+                // 弹出完毕之后，检查pendingAlertControllers里有没有等待弹出的alertController，如果有的话继续弹出
+                [self checkToPresentPendingPopUpController];
             }];
         }];
     }else {
-        [self removeEqualVcFromStackWithIdentifier:viewControllerToPresent.identifier];
+        // 这里不能调用presentPopUpViewController方法，否则会进入死循环。
         [self presentViewController:viewControllerToPresent animated:flag completion:^{
+            [self removeEqualVcFromStackWithIdentifier:viewControllerToPresent.identifier];
             self.currentPrentedVc = viewControllerToPresent;
             [self.alertHierarchStack addObject:self.currentPrentedVc];
             self.isPresenting = NO;
-            [self presentToPendingPopUpControllerWhenCurrentPresentedCompletion:viewControllerToPresent];
-            if (completion) {
-                completion();
-            }
+            if (completion) completion();
+            [self checkToPresentPendingPopUpController];
         }];
     }
 }
 
-- (void)presentToPendingPopUpControllerWhenCurrentPresentedCompletion:(UkePopUpViewController *)currentPresentedPopUpVc {
-    if (_pendingAlertControllers.count == 0) {
-        return;
-    }
-    
-    for (int i = 0; i < _pendingAlertControllers.count; i ++) {
-        UkePendingPopUpModel *lastPendingModel = _pendingAlertControllers[i];
-        UkePopUpViewController *lastPendingVc = lastPendingModel.popController;
-        if (lastPendingVc == currentPresentedPopUpVc) {
-            [_pendingAlertControllers removeObject:lastPendingModel];
-            break;
-        }
-    }
+// 继续跳转到之前将要跳转的alertController
+- (void)checkToPresentPendingPopUpController {
     if (_pendingAlertControllers.count == 0) {
         return;
     }
     
     UkePendingPopUpModel *pendingPopUpModel = _pendingAlertControllers.firstObject;
-    [self presentPopUpViewController:pendingPopUpModel.popController animated:pendingPopUpModel.animated completion:pendingPopUpModel.completion];
+    [self presentPopUpViewController:pendingPopUpModel.popController animated:pendingPopUpModel.animated completion:^{
+        [self.pendingAlertControllers removeObject:pendingPopUpModel];
+        if (pendingPopUpModel.completion) pendingPopUpModel.completion();
+    }];
 }
 
 #pragma mark - pop消失回调
@@ -128,7 +122,10 @@
         [[UkeAlertSingleton sharedInstance] destoryUkeAlertSingleton];
     }else {
         UkePopUpViewController *previousVc = _alertHierarchStack.lastObject;
+        // 这里不能再调用presentPopUpViewController方法，否则alertHierarchStack会继续添加该控制器，进入死循环。
         [self presentViewController:previousVc animated:YES completion:^{
+            // 这里是恢复弹出之前隐藏的alertController，所以不必再调用其completionHandler了
+            
             self.currentPrentedVc = previousVc;
         }];
     }
