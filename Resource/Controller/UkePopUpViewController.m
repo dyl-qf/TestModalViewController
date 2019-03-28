@@ -67,74 +67,52 @@
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        CGFloat newContentMaximumHeight = size.height-self.contentMaximumHeightInset;
-        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-            [self deviceOrientationWillChangeWithContentMaximumHeight:newContentMaximumHeight duration:context.transitionDuration];
-            return;
-        }
-        
         CGFloat safePadding = 0;
         if (@available(iOS 11.0, *)) {
             UIEdgeInsets safeInsets = [UIApplication sharedApplication].keyWindow.safeAreaInsets;
             safePadding = MAX(safeInsets.top, safeInsets.bottom);
+        }else {
+            UkeAlertPresentingViewController *presentingVc = [[UkeAlertSingleton sharedInstance] ukeAlertPresentViewController];
+            safePadding = MAX(presentingVc.topLayoutGuide.length, presentingVc.bottomLayoutGuide.length);
         }
-
-        if (self.originalOrientation == UIDeviceOrientationPortrait ||
-            self.originalOrientation == UIDeviceOrientationPortraitUpsideDown) {
-            UIDevice *device = [UIDevice currentDevice];
-            // 如果最开始是竖屏，现在是横屏
-            if (device.orientation == UIDeviceOrientationLandscapeLeft ||
-                device.orientation == UIDeviceOrientationLandscapeRight) {
-                if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
-                    newContentMaximumHeight += CGRectGetHeight([UIApplication sharedApplication].statusBarFrame); // 横屏时状态栏是隐藏的，所以多出状态栏高度
-                }else if (self.preferredStyle == UIAlertControllerStyleAlert) {
-                    
-                }
-            }
-        }else if (self.originalOrientation == UIDeviceOrientationLandscapeLeft ||
-                  self.originalOrientation == UIDeviceOrientationLandscapeRight) {
-            UIDevice *device = [UIDevice currentDevice];
-            // 如果最开始是横屏，现在是竖屏
-            if (device.orientation == UIDeviceOrientationPortrait ||
-                device.orientation == UIDeviceOrientationPortraitUpsideDown) {
-                
-                if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
-                    newContentMaximumHeight -= CGRectGetHeight([UIApplication sharedApplication].statusBarFrame); // 竖屏时状态栏是显示的，所以少了状态栏高度
-                }else if (self.preferredStyle == UIAlertControllerStyleAlert) {
-                    if (safePadding >= 20) {
-                        newContentMaximumHeight -= safePadding;
-                    }
-                }
-            }
+        if (safePadding == 0) {
+            safePadding = 20;
+        }
+        
+        
+        CGFloat newContentMaximumHeight = 0;
+        if (self.contentMaximumHeightInset > 2*safePadding) {
+            newContentMaximumHeight = size.height - self.contentMaximumHeightInset;
+        }else {
+            newContentMaximumHeight = size.height - 2*safePadding;
         }
         
         [self deviceOrientationWillChangeWithContentMaximumHeight:newContentMaximumHeight duration:context.transitionDuration];
     } completion:nil];
 }
 #else
+
+#endif
+
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
                                 duration:(NSTimeInterval)duration {
-    CGFloat newContentMaximumHeight = CGRectGetHeight([UIScreen mainScreen].bounds)-self.contentMaximumHeightInset;
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        [self deviceOrientationWillChangeWithContentMaximumHeight:newContentMaximumHeight duration:context.transitionDuration];
-        return;
-    }
+    
+    UkeAlertPresentingViewController *presentingVc = [[UkeAlertSingleton sharedInstance] ukeAlertPresentViewController];
 
-    if (self.originalOrientation == UIDeviceOrientationLandscapeLeft ||
-             self.originalOrientation == UIDeviceOrientationLandscapeRight) {
-        UIDevice *device = [UIDevice currentDevice];
-        // 如果最开始是横屏，现在是竖屏
-        if (device.orientation == UIDeviceOrientationPortrait ||
-            device.orientation == UIDeviceOrientationPortraitUpsideDown) {
-            
-            if (self.preferredStyle == UIAlertControllerStyleActionSheet) {
-                newContentMaximumHeight -= CGRectGetHeight([UIApplication sharedApplication].statusBarFrame); // 竖屏时状态栏是显示的，所以少20pt
-            }
-        }
+    CGFloat safePadding = MAX(presentingVc.topLayoutGuide.length, presentingVc.bottomLayoutGuide.length);
+    if (safePadding == 0) {
+        safePadding = 20;
     }
+    
+    CGFloat newContentMaximumHeight = 0;
+    if (self.contentMaximumHeightInset > 2*safePadding) {
+        newContentMaximumHeight = CGRectGetHeight([UIScreen mainScreen].bounds) - self.contentMaximumHeightInset;
+    }else {
+        newContentMaximumHeight = CGRectGetHeight([UIScreen mainScreen].bounds) - 2*safePadding;
+    }
+    
     [self deviceOrientationWillChangeWithContentMaximumHeight:newContentMaximumHeight duration:duration];
 }
-#endif
 
 - (void)deviceOrientationWillChangeWithContentMaximumHeight:(CGFloat)contentMaximumHeight
                                                   duration:(NSTimeInterval)duration {
@@ -158,6 +136,13 @@
     if (@available(iOS 11.0, *)) {
         UIEdgeInsets safeInsets = [UIApplication sharedApplication].keyWindow.safeAreaInsets;
         safePadding = MAX(safeInsets.top, safeInsets.bottom);
+    }else {
+        UkeAlertPresentingViewController *presentingVc = [[UkeAlertSingleton sharedInstance] ukeAlertPresentViewController];
+        safePadding = MAX(presentingVc.topLayoutGuide.length, presentingVc.bottomLayoutGuide.length);
+    }
+    
+    if (safePadding == 0) {
+        safePadding = 20;
     }
     
     if (preferredStyle == UIAlertControllerStyleAlert) {
@@ -166,35 +151,15 @@
         self.dismissDelayTimeInterval = 0.1;
         self.dismissTimeInterval = 0.22;
         self.shouldRespondsMaskViewTouch = NO;
-        
-        if (safePadding <= 20) {
-            safePadding = 24;
-        }
-        self.contentMaximumHeight = [UIScreen mainScreen].bounds.size.height-safePadding-safePadding;
     }else if (preferredStyle == UIAlertControllerStyleActionSheet) {
         self.presentDelayTimeInterval = 0.1;
         self.presentTimeInterval = 0.18;
         self.dismissDelayTimeInterval = 0.1;
         self.dismissTimeInterval = 0.16;
         self.shouldRespondsMaskViewTouch = YES;
-        
-        UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
-        if (orientation == UIDeviceOrientationPortrait ||
-            orientation == UIDeviceOrientationPortraitUpsideDown) {
-            if (safePadding <= 20) {
-                safePadding = 40;
-            }
-        }else if (orientation == UIDeviceOrientationLandscapeLeft ||
-                  orientation == UIDeviceOrientationLandscapeRight) {
-            if (safePadding == 0) {
-                safePadding = 8;
-                if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-                    safePadding = 40; // iPad横屏时状态栏不消失
-                }
-            }
-        }
-        self.contentMaximumHeight = [UIScreen mainScreen].bounds.size.height-safePadding;
     }
+    
+    self.contentMaximumHeight = [UIScreen mainScreen].bounds.size.height-2*safePadding;
 }
 
 - (void)addContentView:(UIView *)view {
@@ -258,7 +223,7 @@
 #pragma mark - Setter.
 - (void)setContentMaximumHeight:(CGFloat)contentMaximumHeight {
     _contentMaximumHeight = contentMaximumHeight;
-    _contentMaximumHeightInset = CGRectGetHeight([UIScreen mainScreen].bounds)-contentMaximumHeight;
+    _contentMaximumHeightInset =(CGRectGetHeight([UIScreen mainScreen].bounds)-contentMaximumHeight>=0)?:0;
 }
 
 - (void)setPresentDelayTimeInterval:(CGFloat)presentDelayTimeInterval {
