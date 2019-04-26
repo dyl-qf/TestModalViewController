@@ -73,6 +73,9 @@ NS_CLASS_AVAILABLE_IOS(7_0)
 
 @interface UIViewController (UkeAlertController)
 
+//! 判断当前是否有弹框显示
+- (BOOL)isUkeAlertControllerCurrentShowed;
+
 //! 通过identifier移除指定alertController
 - (void)removeUkeAlertControllerWithIdentifier:(NSString *)identifier
                                       animated:(BOOL)animated

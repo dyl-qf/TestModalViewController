@@ -275,6 +275,11 @@
 
 @implementation UIViewController (UkeAlertController)
 
+- (BOOL)isUkeAlertControllerCurrentShowed {
+    UkeAlertPresentingViewController *presentingVc = [[UkeAlertSingleton sharedInstance] ukeAlertPresentViewController];
+    return [presentingVc ukeIsUkeAlertControllerCurrentShowed];
+}
+
 - (void)removeUkeAlertControllerWithIdentifier:(NSString *)identifier
                                       animated:(BOOL)animated
                                     completion:(nullable void (^)(void))completion {

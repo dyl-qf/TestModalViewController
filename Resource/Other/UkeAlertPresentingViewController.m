@@ -130,6 +130,10 @@
     }
 }
 
+- (BOOL)ukeIsUkeAlertControllerCurrentShowed {
+    return (_currentPrentedVc != nil);
+}
+
 - (void)ukeRemoveAllAlertConrollerAnimated:(BOOL)animated
                                 completion:(nullable void (^)(void))completion {
     if (_currentPrentedVc) {
