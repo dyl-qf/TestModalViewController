@@ -52,7 +52,6 @@
     if (self.window.isHidden) {
         self.window.rootViewController = self;
         self.window.hidden = NO;
-        [self.window makeKeyAndVisible];
     }
     
     if (_isPresenting == YES) {

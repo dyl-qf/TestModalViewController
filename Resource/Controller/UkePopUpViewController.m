@@ -76,9 +76,8 @@
             safePadding = MAX(presentingVc.topLayoutGuide.length, presentingVc.bottomLayoutGuide.length);
         }
         if (safePadding == 0) {
-            safePadding = 20;
+            safePadding = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame)?:20;
         }
-        
         
         CGFloat newContentMaximumHeight = 0;
         if (self.contentMaximumHeightInset > 2*safePadding) {
@@ -91,17 +90,14 @@
     } completion:nil];
 }
 #else
-
-#endif
-
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
                                 duration:(NSTimeInterval)duration {
     
     UkeAlertPresentingViewController *presentingVc = [[UkeAlertSingleton sharedInstance] ukeAlertPresentViewController];
-
+    
     CGFloat safePadding = MAX(presentingVc.topLayoutGuide.length, presentingVc.bottomLayoutGuide.length);
     if (safePadding == 0) {
-        safePadding = 20;
+        safePadding = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame)?:20;
     }
     
     CGFloat newContentMaximumHeight = 0;
@@ -113,6 +109,9 @@
     
     [self deviceOrientationWillChangeWithContentMaximumHeight:newContentMaximumHeight duration:duration];
 }
+#endif
+
+
 
 - (void)deviceOrientationWillChangeWithContentMaximumHeight:(CGFloat)contentMaximumHeight
                                                   duration:(NSTimeInterval)duration {
@@ -142,7 +141,7 @@
     }
     
     if (safePadding == 0) {
-        safePadding = 20;
+        safePadding = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame)?:20;
     }
     
     if (preferredStyle == UIAlertControllerStyleAlert) {
@@ -159,7 +158,7 @@
         self.shouldRespondsMaskViewTouch = YES;
     }
     
-    self.contentMaximumHeight = [UIScreen mainScreen].bounds.size.height-2*safePadding;
+    self.contentMaximumHeight = CGRectGetHeight([UIScreen mainScreen].bounds)-2*safePadding;
 }
 
 - (void)addContentView:(UIView *)view {
