@@ -10,7 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger, UkePopUpControllerExecutionOrder) {
+    // 默认。后面的弹框不会遮挡前面的弹框。假设同时需要弹出2个弹框，那么第一个出现的弹框不会被后面的弹框隐藏。只有当第一个弹框消失后，第二个弹框才会显示。
+    UkePopUpControllerFIFOExecutionOrder,
+    // 后面的弹框会遮挡前面的弹框。假设同时需要弹出2个弹框，那么第二个弹框遮挡第一个弹框。只有当第二个弹框消失后，，第一个弹框才会显示。
+    UkePopUpControllerFILOExecutionOrder
+};
+
 NS_CLASS_AVAILABLE_IOS(7_0)
+
 @interface UkePopUpViewController : UIViewController
 
 + (instancetype)alertControllerWithContentView:(UIView *)view
@@ -57,6 +65,11 @@ NS_CLASS_AVAILABLE_IOS(7_0)
 
 //! maskView背景色
 @property (nonatomic, strong) UIColor *maskBackgroundColor;
+
+//! 弹框出现的顺序：
+//! FIFO：假设同时需要弹出2个弹框，那么第一个出现的弹框不会被后面的弹框隐藏。只有当第一个弹框消失后，第二个弹框才会显示。
+//! FILO：假设同时需要弹出2个弹框，那么第二个弹框遮挡第一个弹框。只有当第二个弹框消失后，，第一个弹框才会显示。
+@property (nonatomic, assign) UkePopUpControllerExecutionOrder alertExecutionOrder;
 
 #pragma mark - 动画时间
 //! 弹出时间

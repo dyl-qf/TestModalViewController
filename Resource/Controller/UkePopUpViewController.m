@@ -178,7 +178,7 @@
 - (void)showWithAnimated:(BOOL)animated
               completion:(nullable void(^)(void))completionHandler {
     UkeAlertPresentingViewController *presentingVc = [[UkeAlertSingleton sharedInstance] ukeAlertPresentViewController];
-    [presentingVc presentPopUpViewController:self animated:animated completion:completionHandler];
+    [presentingVc uke_presentPopUpViewController:self animated:animated completion:completionHandler];
 }
 
 #pragma mark - Dismiss
