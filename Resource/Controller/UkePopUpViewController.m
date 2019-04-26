@@ -28,6 +28,7 @@
         self.transitioningDelegate = self;
         self.originalOrientation = [UIDevice currentDevice].orientation;
         self.identifier = [NSUUID UUID].UUIDString;
+        self.maskBackgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
     }
     return self;
 }

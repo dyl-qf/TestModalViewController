@@ -47,7 +47,7 @@
     UIView *containerView = [transitionContext containerView];
     // 添加黑色遮罩
     UIView *maskView = [[UIView alloc] init];
-    maskView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
+    maskView.backgroundColor = _popUpVc.maskBackgroundColor;
     maskView.tag = 1000;
     maskView.alpha = 0;
     [containerView addSubview:maskView];

@@ -55,6 +55,9 @@ NS_CLASS_AVAILABLE_IOS(7_0)
 //! 圆角值
 @property (nonatomic, assign) CGFloat cornerRadius;
 
+//! maskView背景色
+@property (nonatomic, strong) UIColor *maskBackgroundColor;
+
 #pragma mark - 动画时间
 //! 弹出时间
 @property (nonatomic, assign) CGFloat presentDelayTimeInterval;
