@@ -11,10 +11,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, UkePopUpControllerExecutionOrder) {
-    // 默认。后面的弹框不会遮挡前面的弹框。假设同时需要弹出2个弹框，那么第一个出现的弹框不会被后面的弹框隐藏。只有当第一个弹框消失后，第二个弹框才会显示。
+    //  默认。最后弹出的弹框第一个消失。假设同时需要弹出2个弹框，那么第二个弹框遮挡第一个弹框。只有当第二个弹框消失后，，第一个弹框才会显示。
+    UkePopUpControllerLIFOExecutionOrder,
+    
+    //最开始弹出的弹框第一个消失。假设同时需要弹出2个弹框，那么第一个出现的弹框不会被后面的弹框隐藏。只有当第一个弹框消失后，第二个弹框才会显示。
     UkePopUpControllerFIFOExecutionOrder,
-    // 后面的弹框会遮挡前面的弹框。假设同时需要弹出2个弹框，那么第二个弹框遮挡第一个弹框。只有当第二个弹框消失后，，第一个弹框才会显示。
-    UkePopUpControllerFILOExecutionOrder
 };
 
 NS_CLASS_AVAILABLE_IOS(7_0)
@@ -78,6 +79,7 @@ NS_CLASS_AVAILABLE_IOS(7_0)
 //! 消失时间
 @property (nonatomic, assign) CGFloat dismissDelayTimeInterval;
 @property (nonatomic, assign) CGFloat dismissTimeInterval;
+
 
 #pragma mark - Override
 //! 屏幕方向发生变化时，子类可以重载

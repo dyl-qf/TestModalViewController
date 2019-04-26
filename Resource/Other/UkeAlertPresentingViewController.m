@@ -10,13 +10,6 @@
 #import "UkePopUpViewController.h"
 #import "UkeAlertSingleton.h"
 
-//typedef NS_ENUM(NSInteger, UkeAlertControllerPresentingState) {
-//    UkeAlertControllerPresentingStatePresenting = 0,
-//    UkeAlertControllerPresentingStatePresented,
-//    UkeAlertControllerPresentingStateNeedPresent,
-//    UkeAlertControllerPresentingStateInitial = UkeAlertControllerPresentingStatePresented
-//};
-
 @interface UkeAlertPresentingViewController ()
 @property (nonatomic, strong) UIWindow *window;
 
@@ -124,7 +117,6 @@
         // 这里不能再调用uke_presentPopUpViewController方法，否则alertHierarchStack会继续添加该控制器，进入死循环。
         [self presentViewController:previousVc animated:YES completion:^{
             // 这里是恢复弹出之前隐藏的alertController，所以不必再调用其completionHandler了
-            
             self.currentPrentedVc = previousVc;
         }];
     }

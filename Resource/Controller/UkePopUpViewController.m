@@ -13,7 +13,6 @@
 #import "Masonry.h"
 
 @interface UkePopUpViewController () <UIViewControllerTransitioningDelegate>
-@property (nonatomic, assign) UIDeviceOrientation originalOrientation;
 @property (nonatomic, assign) CGFloat contentMaximumHeightInset;
 @property (nonatomic, strong) UkeAlertBaseAnimation *animation;
 @property (nonatomic, strong) UIView *contentView;
@@ -26,9 +25,9 @@
     if (self) {
         self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         self.transitioningDelegate = self;
-        self.originalOrientation = [UIDevice currentDevice].orientation;
         self.identifier = [NSUUID UUID].UUIDString;
         self.maskBackgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
+        self.alertExecutionOrder = UkePopUpControllerLIFOExecutionOrder;
     }
     return self;
 }
