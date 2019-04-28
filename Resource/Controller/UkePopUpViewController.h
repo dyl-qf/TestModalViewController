@@ -30,15 +30,15 @@ NS_CLASS_AVAILABLE_IOS(7_0)
 @property (nonatomic, strong, readonly) UIView *contentView;
 
 #pragma mark - Show。不建议用presentViewController:animated:completion:的方式弹出，否则无法支持多个弹框同时弹出的效果。建议后期适配。
-- (void)show;
-- (void)showWithAnimated:(BOOL)animated;
-- (void)showWithAnimated:(BOOL)animated
+- (void)uke_show;
+- (void)uke_showWithAnimated:(BOOL)animated;
+- (void)uke_showWithAnimated:(BOOL)animated
                  completion:(nullable void(^)(void))completionHandler;
 
 #pragma mark - Dismiss
-- (void)dismiss;
-- (void)dismissWithAnimated:(BOOL)animated;
-- (void)dismissWithAnimated:(BOOL)animated
+- (void)uke_dismiss;
+- (void)uke_dismissWithAnimated:(BOOL)animated;
+- (void)uke_dismissWithAnimated:(BOOL)animated
                  completion:(nullable void(^)(void))completionHandler;
 
 @property (nonatomic, strong) void (^dismissCompletion)(void);

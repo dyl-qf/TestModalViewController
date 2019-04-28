@@ -166,30 +166,30 @@
 }
 
 #pragma mark - Show
-- (void)show {
-    [self showWithAnimated:YES];
+- (void)uke_show {
+    [self uke_showWithAnimated:YES];
 }
 
-- (void)showWithAnimated:(BOOL)animated {
-    [self showWithAnimated:animated completion:nil];
+- (void)uke_showWithAnimated:(BOOL)animated {
+    [self uke_showWithAnimated:animated completion:nil];
 }
 
-- (void)showWithAnimated:(BOOL)animated
+- (void)uke_showWithAnimated:(BOOL)animated
               completion:(nullable void(^)(void))completionHandler {
     UkeAlertPresentingViewController *presentingVc = [[UkeAlertSingleton sharedInstance] ukeAlertPresentViewController];
     [presentingVc uke_presentPopUpViewController:self animated:animated completion:completionHandler];
 }
 
 #pragma mark - Dismiss
-- (void)dismiss {
-    [self dismissWithAnimated:YES];
+- (void)uke_dismiss {
+    [self uke_dismissWithAnimated:YES];
 }
 
-- (void)dismissWithAnimated:(BOOL)animated {
-    [self dismissWithAnimated:animated completion:nil];
+- (void)uke_dismissWithAnimated:(BOOL)animated {
+    [self uke_dismissWithAnimated:animated completion:nil];
 }
 
-- (void)dismissWithAnimated:(BOOL)animated
+- (void)uke_dismissWithAnimated:(BOOL)animated
                  completion:(nullable void (^)(void))completionHandler {
     UkeAlertPresentingViewController *presentingVc = [[UkeAlertSingleton sharedInstance] ukeAlertPresentViewController];
     [presentingVc ukePopUpViewControllerWillDismiss:self];

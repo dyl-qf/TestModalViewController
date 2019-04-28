@@ -124,7 +124,7 @@
 }
 
 - (void)handleMaskViewTapAction {
-    [_popUpVc dismiss];
+    [_popUpVc uke_dismiss];
 }
 
 - (void)dealloc {

@@ -209,7 +209,7 @@
         sheetContentView = [[UkeSheetContentView alloc] init];
         __weak typeof(self)weakSelf = self;
         sheetContentView.ukeActionButtonHandler = ^(UkeAlertAction * _Nonnull action) {
-            [weakSelf dismissWithAnimated:YES completion:^{
+            [weakSelf uke_dismissWithAnimated:YES completion:^{
                 if (action.actionHandler) {
                     action.actionHandler(action);
                 }
@@ -229,7 +229,7 @@
         
         __weak typeof(self)weakSelf = self;
         _actionGroupView.ukeActionButtonHandler = ^(UkeAlertAction * _Nonnull action) {
-            [weakSelf dismissWithAnimated:YES completion:^{
+            [weakSelf uke_dismissWithAnimated:YES completion:^{
                 if (action.actionHandler) {
                     action.actionHandler(action);
                 }

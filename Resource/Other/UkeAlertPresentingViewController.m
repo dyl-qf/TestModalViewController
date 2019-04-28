@@ -74,7 +74,7 @@
             }];
         }];
     }else {
-        // 这里不能调用uke_presentPopUpViewController方法，否则会进入死循环。
+        // 注意：这里不能调用uke_presentPopUpViewController方法，否则会进入死循环。
         [self presentViewController:viewControllerToPresent animated:flag completion:^{
             [self removeEqualVcFromStackWithIdentifier:viewControllerToPresent.identifier];
             self.currentPrentedVc = viewControllerToPresent;
@@ -100,7 +100,7 @@
 }
 
 #pragma mark - pop消失回调
-//! 注意：只有调用dismissWithAnimated:方法才会有下面两个回调，
+//! 注意：只有调用uke_dismissWithAnimated:方法才会有下面两个回调，
 //! 而调用系统的dismissViewControllerAnimated:不会有下面的回调
 - (void)ukePopUpViewControllerWillDismiss:(UkePopUpViewController *)popUpViewController {
     [_alertHierarchStack removeObject:popUpViewController];
@@ -130,7 +130,7 @@
                                 completion:(nullable void (^)(void))completion {
     if (_currentPrentedVc) {
         [self.alertHierarchStack removeAllObjects];
-        [_currentPrentedVc dismissWithAnimated:animated completion:^{
+        [_currentPrentedVc uke_dismissWithAnimated:animated completion:^{
             if (completion) completion();
         }];
     }else {
@@ -146,7 +146,7 @@
                                      animated:(BOOL)animated
                                    completion:(nullable void (^)(void))completion {
     if (_currentPrentedVc && [_currentPrentedVc.identifier isEqualToString:identifier]) {
-        [_currentPrentedVc dismissWithAnimated:animated completion:completion];
+        [_currentPrentedVc uke_dismissWithAnimated:animated completion:completion];
     }else {
         [self removeEqualVcFromStackWithIdentifier:identifier];
     }
