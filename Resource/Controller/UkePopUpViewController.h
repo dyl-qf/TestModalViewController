@@ -10,12 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSInteger, UkePopUpControllerExecutionOrder) {
-    //  默认。最后弹出的弹框第一个消失。假设同时需要弹出2个弹框，那么第二个弹框遮挡第一个弹框。只有当第二个弹框消失后，，第一个弹框才会显示。
-    UkePopUpControllerLIFOExecutionOrder,
+// 弹框显示优先级
+typedef NS_ENUM(NSInteger, UkePopUpControllerPriority) {
+    // 默认优先级的弹框会强制显示，并隐藏低优先级的弹框。
+    // 注意：相同优先级的弹框，后显示的要比先显示的优先级要高
+    UkePopUpControllerPriorityDefault,
     
-    //最开始弹出的弹框第一个消失。假设同时需要弹出2个弹框，那么第一个出现的弹框不会被后面的弹框隐藏。只有当第一个弹框消失后，第二个弹框才会显示。
-    UkePopUpControllerFIFOExecutionOrder,
+    // 低优先级的弹框不会强制显示，会暂时隐藏
+    UkePopUpControllerPriorityLow,
 };
 
 NS_CLASS_AVAILABLE_IOS(7_0)
@@ -70,7 +72,7 @@ NS_CLASS_AVAILABLE_IOS(7_0)
 //! 弹框出现的顺序：
 //! FIFO：假设同时需要弹出2个弹框，那么第一个出现的弹框不会被后面的弹框隐藏。只有当第一个弹框消失后，第二个弹框才会显示。
 //! FILO：假设同时需要弹出2个弹框，那么第二个弹框遮挡第一个弹框。只有当第二个弹框消失后，，第一个弹框才会显示。
-@property (nonatomic, assign) UkePopUpControllerExecutionOrder alertExecutionOrder;
+@property (nonatomic, assign) UkePopUpControllerPriority showPriority;
 
 #pragma mark - 动画时间
 //! 弹出时间

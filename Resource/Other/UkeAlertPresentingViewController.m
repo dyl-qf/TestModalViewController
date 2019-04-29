@@ -47,7 +47,7 @@
         self.window.hidden = NO;
     }
     
-    if (_isPresenting == YES) {
+    if (_isPresenting == YES) { // 如果正在进行跳转动画
         UkePendingPopUpModel *model = [[UkePendingPopUpModel alloc] init];
         model.popController = viewControllerToPresent;
         model.animated = flag;
@@ -56,24 +56,33 @@
         return;
     }
     
-    _isPresenting = YES;
-    if (_currentPrentedVc) {
-        // 如果当前已经有一个alert显示，则暂时dismiss掉。注意，它还存在于alertHierarchStack里。
-        // 注意：这里不能调用UkePopUpViewController的dismiss方法，因为这会触发下面"pop消失回调"的那两个方法。
-        [_currentPrentedVc dismissViewControllerAnimated:NO completion:^{
-            // 这里不能调用uke_presentPopUpViewController方法，否则会进入死循环。
-            [self presentViewController:viewControllerToPresent animated:flag completion:^{
+    if (_currentPrentedVc) { // 当前屏幕上有正在显示的alert
+        // 隐藏旧的，弹出新的
+        if (viewControllerToPresent.showPriority == UkePopUpControllerPriorityDefault) {
+            self.isPresenting = YES;
+            // 注意：这里不能调用UkePopUpViewController的dismiss方法，因为这会触发下面"pop消失回调"的那两个方法。
+            [_currentPrentedVc dismissViewControllerAnimated:NO completion:^{
                 // 移除alertHierarchStack里相同identifier的alertController
                 [self removeEqualVcFromStackWithIdentifier:viewControllerToPresent.identifier];
-                self.currentPrentedVc = viewControllerToPresent;
                 [self.alertHierarchStack addObject:self.currentPrentedVc];
-                self.isPresenting = NO;
-                if (completion) completion();
-                // 弹出完毕之后，检查pendingAlertControllers里有没有等待弹出的alertController，如果有的话继续弹出
-                [self checkToPresentPendingPopUpController];
+                // 这里不能调用uke_presentPopUpViewController方法，否则会进入死循环。
+                [self presentViewController:viewControllerToPresent animated:flag completion:^{
+                    self.currentPrentedVc = viewControllerToPresent;
+                    self.isPresenting = NO;
+                    if (completion) completion();
+                    // 弹出完毕之后，检查pendingAlertControllers里有没有等待弹出的alertController，如果有的话继续弹出
+                    [self checkToPresentPendingPopUpController];
+                }];
             }];
-        }];
-    }else {
+        }
+        // 旧的不隐藏，新的暂存
+        else if (viewControllerToPresent.showPriority == UkePopUpControllerPriorityLow) {
+            // 移除alertHierarchStack里相同identifier的alertController
+            [self removeEqualVcFromStackWithIdentifier:viewControllerToPresent.identifier];
+            [self.alertHierarchStack insertObject:viewControllerToPresent atIndex:0];
+        }
+    }else { // 当前没有正在显示的alert
+        self.isPresenting = YES;
         // 注意：这里不能调用uke_presentPopUpViewController方法，否则会进入死循环。
         [self presentViewController:viewControllerToPresent animated:flag completion:^{
             [self removeEqualVcFromStackWithIdentifier:viewControllerToPresent.identifier];

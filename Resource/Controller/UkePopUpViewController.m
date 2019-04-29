@@ -27,7 +27,7 @@
         self.transitioningDelegate = self;
         self.identifier = [NSUUID UUID].UUIDString;
         self.maskBackgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
-        self.alertExecutionOrder = UkePopUpControllerLIFOExecutionOrder;
+        self.showPriority = UkePopUpControllerPriorityDefault;
     }
     return self;
 }
