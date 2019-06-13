@@ -7,6 +7,7 @@
 //
 
 #import "UkeAlertStyleAnimation.h"
+#import <sys/utsname.h>
 #import "UkePopUpViewController.h"
 #import "Masonry.h"
 
@@ -54,6 +55,20 @@
     [maskView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
+    
+    BOOL supportVisualEffectView = YES;
+    NSString *name = [self deviceName];
+    if ([name hasPrefix:@"iPad2"] || [name hasPrefix:@"iPad3"]) {
+        supportVisualEffectView = NO;
+    }
+    
+    if (popUpVc.maskType == UkePopUpControllerMaskTypeVisualEffect && supportVisualEffectView) {
+        UIVisualEffectView *visualView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
+        [maskView addSubview:visualView];
+        [visualView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(UIEdgeInsetsZero);
+        }];
+    }
     
     if (popUpVc.shouldRespondsMaskViewTouch) {
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleMaskViewTapAction)];
@@ -131,6 +146,13 @@
 
 - (void)handleMaskViewTapAction {
     [_popUpVc uke_dismiss];
+}
+
+- (NSString*)deviceName {
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    return [NSString stringWithCString:systemInfo.machine
+                              encoding:NSUTF8StringEncoding];
 }
 
 - (void)dealloc {

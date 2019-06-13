@@ -20,6 +20,13 @@ typedef NS_ENUM(NSInteger, UkePopUpControllerPriority) {
     UkePopUpControllerPriorityLow,
 };
 
+typedef NS_ENUM(NSInteger, UkePopUpControllerMaskType) {
+    // maskView背景为普通颜色背景
+    UkePopUpControllerMaskTypeDefault = 0,
+    // maskView背景为高斯模糊效果
+    UkePopUpControllerMaskTypeVisualEffect = 1,
+};
+
 NS_CLASS_AVAILABLE_IOS(7_0)
 
 @interface UkePopUpViewController : UIViewController
@@ -66,7 +73,10 @@ NS_CLASS_AVAILABLE_IOS(7_0)
 //! 圆角值
 @property (nonatomic, assign) CGFloat cornerRadius;
 
-//! maskView背景色
+// maskView的背景模式
+@property (nonatomic, assign) UkePopUpControllerMaskType maskType;
+
+//! maskView背景色。
 @property (nonatomic, strong) UIColor *maskBackgroundColor;
 
 //! 弹框出现的顺序：

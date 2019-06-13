@@ -98,6 +98,7 @@
 
 
     UkeAlertController *alert2 = [UkeAlertController alertControllerWithTitle:@"第二个" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    alert2.maskType = UkePopUpControllerMaskTypeVisualEffect;
     [alert2 addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
     [alert2 uke_show];
     

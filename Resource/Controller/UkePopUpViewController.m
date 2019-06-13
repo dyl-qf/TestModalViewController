@@ -28,6 +28,7 @@
         self.identifier = [NSUUID UUID].UUIDString;
         self.maskBackgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
         self.showPriority = UkePopUpControllerPriorityDefault;
+        self.maskType = UkePopUpControllerMaskTypeDefault;
     }
     return self;
 }

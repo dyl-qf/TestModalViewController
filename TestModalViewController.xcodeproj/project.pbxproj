@@ -69,6 +69,7 @@
 		5417911721C899D8000D5F7B /* UkeAlertAction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeAlertAction.m; sourceTree = "<group>"; };
 		5417911C21C8ECA5000D5F7B /* UkeAlertActionButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeAlertActionButton.h; sourceTree = "<group>"; };
 		5417911D21C8ECA5000D5F7B /* UkeAlertActionButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UkeAlertActionButton.m; sourceTree = "<group>"; };
+		5427AEB622B2225400F50466 /* UkeAlertControllerConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UkeAlertControllerConstant.h; sourceTree = "<group>"; };
 		5434CE3D21C7E2E800178D31 /* UkeAlertStyleAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UkeAlertStyleAnimation.m; sourceTree = "<group>"; };
 		5434CE3E21C7E2E800178D31 /* UkeActionSheetAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UkeActionSheetAnimation.m; sourceTree = "<group>"; };
 		5434CE3F21C7E2E800178D31 /* UkeActionSheetAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UkeActionSheetAnimation.h; sourceTree = "<group>"; };
@@ -168,6 +169,7 @@
 			children = (
 				5417910F21C7BAE8000D5F7B /* UkeAlertController.h */,
 				5417911021C7BAE8000D5F7B /* UkeAlertController.m */,
+				5427AEB622B2225400F50466 /* UkeAlertControllerConstant.h */,
 				5434CE4121C7E2E800178D31 /* Controller */,
 				5434CE3C21C7E2E800178D31 /* Animation */,
 				5434CE3B21C7E2E800178D31 /* View */,
