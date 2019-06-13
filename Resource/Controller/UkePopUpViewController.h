@@ -70,8 +70,8 @@ NS_CLASS_AVAILABLE_IOS(7_0)
 @property (nonatomic, strong) UIColor *maskBackgroundColor;
 
 //! 弹框出现的顺序：
-//! FIFO：假设同时需要弹出2个弹框，那么第一个出现的弹框不会被后面的弹框隐藏。只有当第一个弹框消失后，第二个弹框才会显示。
-//! FILO：假设同时需要弹出2个弹框，那么第二个弹框遮挡第一个弹框。只有当第二个弹框消失后，，第一个弹框才会显示。
+//! 假设同时需要弹出2个弹框，第一个弹框优先级更高，那么第一个出现的弹框不会被后面的弹框遮挡。只有当第一个弹框消失后，第二个弹框才会显示。
+//! 假设同时需要弹出2个弹框，第一个弹框优先级更低，那么第二个弹框会遮挡第一个弹框。只有当第二个弹框消失后，，第一个弹框才会显示。
 @property (nonatomic, assign) UkePopUpControllerPriority showPriority;
 
 #pragma mark - 动画时间

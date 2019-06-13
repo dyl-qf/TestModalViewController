@@ -42,7 +42,7 @@
 - (void)uke_presentPopUpViewController:(UkePopUpViewController *)viewControllerToPresent
                           animated:(BOOL)flag
                         completion:(void (^)(void))completion {
-    if (self.window.isHidden) {
+    if (self.window.isHidden == YES) {
         self.window.rootViewController = self;
         self.window.hidden = NO;
     }

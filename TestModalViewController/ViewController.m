@@ -90,13 +90,14 @@
 //    [alert addAction:[UkeAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
 //    [alert uke_show];
     
+    
     UkeAlertController *alert = [UkeAlertController alertControllerWithTitle:@"第一个" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    alert.showPriority = UkePopUpControllerPriorityLow;
     [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
     [alert uke_show];
 
 
     UkeAlertController *alert2 = [UkeAlertController alertControllerWithTitle:@"第二个" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    alert2.showPriority = UkePopUpControllerPriorityLow;
     [alert2 addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
     [alert2 uke_show];
     
