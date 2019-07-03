@@ -177,6 +177,9 @@
 
 - (void)uke_showWithAnimated:(BOOL)animated
               completion:(nullable void(^)(void))completionHandler {
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    [window endEditing:YES];
+    
     UkeAlertPresentingViewController *presentingVc = [[UkeAlertSingleton sharedInstance] ukeAlertPresentViewController];
     [presentingVc uke_presentPopUpViewController:self animated:animated completion:completionHandler];
 }
