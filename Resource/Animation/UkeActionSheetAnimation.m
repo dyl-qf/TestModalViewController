@@ -70,10 +70,8 @@
         }];
     }
     
-    if (popUpVc.shouldRespondsMaskViewTouch) {
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleMaskViewTapAction)];
-        [maskView addGestureRecognizer:tap];
-    }
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleMaskViewTapAction)];
+    [maskView addGestureRecognizer:tap];
     
     // 添加toView
     CGRect startFrame = CGRectMake((CGRectGetWidth(containerView.frame)-CGRectGetWidth(toView.frame))*0.5, CGRectGetHeight(containerView.frame), CGRectGetWidth(toView.frame), CGRectGetHeight(toView.frame));
@@ -139,7 +137,11 @@
 }
 
 - (void)handleMaskViewTapAction {
-    [_popUpVc uke_dismiss];
+    if (_popUpVc.shouldRespondsMaskViewTouch) {
+        [_popUpVc uke_dismiss];
+    }
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    [window endEditing:YES];
 }
 
 - (NSString*)deviceName {
@@ -150,7 +152,7 @@
 }
 
 - (void)dealloc {
-    NSLog(@"animation 销毁");
+//    NSLog(@"animation 销毁");
 }
 
 @end
