@@ -22,8 +22,8 @@ NS_CLASS_AVAILABLE_IOS(7_0)
 
 
 + (instancetype)alertControllerWithTitle:(nullable NSString *)title
-                                     message:(nullable NSString *)message
-                              preferredStyle:(UIAlertControllerStyle)preferredStyle;
+                                 message:(nullable NSString *)message
+                          preferredStyle:(UIAlertControllerStyle)preferredStyle;
 
 - (void)addAction:(UkeAlertAction *)action;
 @property (nonatomic, readonly) NSArray<UkeAlertAction *> *actions;
@@ -65,7 +65,6 @@ NS_CLASS_AVAILABLE_IOS(7_0)
 //! sheet默认为 12，与系统一致
 @property (nonatomic, assign) CGFloat titleMessageVerticalSpacing;
 
-
 //! actionSheet的cancelButton距离上边内容的间距，默认为8，跟系统保持一致
 @property (nonatomic, assign) CGFloat sheetCancelButtonMarginTop;
 
@@ -79,8 +78,38 @@ NS_CLASS_AVAILABLE_IOS(7_0)
 //! 按钮相关属性
 // 按钮高度。alert默认44.0，sheet默认57.0，跟系统保持一致
 @property (nonatomic, assign) CGFloat actionButtonHeight;
+
+/*
+ Alert:
+ @{NSForegroundColorAttributeName: [UIColor colorWithRed:45/255.0 green:139/255.0 blue:245/255.0 alpha:1.0],
+ NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Regular" size:17]};
+ 
+ ActionSheet:
+ @{NSForegroundColorAttributeName: [UIColor colorWithRed:45/255.0 green:139/255.0 blue:245/255.0 alpha:1.0],
+ NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Regular" size:20]};
+ */
 @property(nonatomic, strong) NSDictionary<NSString *, id> *defaultButtonAttributes;
+
+/*
+ Alert:
+ @{NSForegroundColorAttributeName: [UIColor colorWithRed:45/255.0 green:139/255.0 blue:245/255.0 alpha:1.0],
+ NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Semibold" size:17]};
+ 
+ ActionSheet:
+ @{NSForegroundColorAttributeName: [UIColor colorWithRed:45/255.0 green:139/255.0 blue:245/255.0 alpha:1.0],
+ NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Semibold" size:20]};
+ */
 @property(nonatomic, strong) NSDictionary<NSString *, id> *cancelButtonAttributes;
+
+/*
+ Alert:
+ @{NSForegroundColorAttributeName: [UIColor redColor],
+ NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Regular" size:17]};
+ 
+ ActionSheet:
+ @{NSForegroundColorAttributeName: [UIColor redColor],
+ NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Regular" size:20]};
+ */
 @property(nonatomic, strong) NSDictionary<NSString *, id> *destructiveButtonAttributes;
 
 //! 圆角值、默认12.0，与系统一致
