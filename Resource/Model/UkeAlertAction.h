@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "UkeAlertActionButton.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,6 +21,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, readonly) NSString *title;
 @property (nonatomic, assign, readonly) UIAlertActionStyle style;
 @property (nullable, nonatomic, strong, readonly) void(^actionHandler)(UkeAlertAction *action);
+
+// 按钮的enable属性。Default YES
+@property (nonatomic, assign) BOOL enabled;
+
+// UkeAlertAction所对应的按钮，可能为空。
+// 注：actionButton只有在controller调用了uke_show后才能获取到。
+@property (nonatomic, strong, nullable) UkeAlertActionButton *actionButton;
 
 @end
 

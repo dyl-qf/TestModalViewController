@@ -23,7 +23,16 @@
     action.title = title;
     action.style = style;
     action.actionHandler = handler;
+    action.enabled = YES;
+    action.actionButton = nil;
     return action;
+}
+
+- (void)setEnabled:(BOOL)enabled {
+    _enabled = enabled;
+    if (self.actionButton) {
+        self.actionButton.enabled = enabled;
+    }
 }
 
 @end

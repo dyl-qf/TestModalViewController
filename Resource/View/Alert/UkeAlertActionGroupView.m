@@ -81,6 +81,8 @@
         [self setAttributedTextWith:action.title forButton:button style:action.style];
         [button addTarget:self action:@selector(handleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [_actionGroupArea addSubview:button];
+        action.actionButton = button;
+        action.enabled = action.enabled;
     
         if (i == 0) {
             [button mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -106,6 +108,8 @@
         [self setAttributedTextWith:action.title forButton:button style:action.style];
         [button addTarget:self action:@selector(handleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.actionGroupArea addSubview:button];
+        action.actionButton = button;
+        action.enabled = action.enabled;
         
         UIView *lineView = [[UIView alloc] init];
         lineView.backgroundColor = self.lineColor;

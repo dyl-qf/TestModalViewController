@@ -29,7 +29,6 @@ NS_CLASS_AVAILABLE_IOS(7_0)
 @property (nonatomic, readonly) NSArray<UkeAlertAction *> *actions;
 
 
-
 /**
  添加一个自定义内容头视图
  

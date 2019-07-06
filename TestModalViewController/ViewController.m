@@ -93,14 +93,24 @@
     
     UkeAlertController *alert = [UkeAlertController alertControllerWithTitle:@"第一个" message:nil preferredStyle:UIAlertControllerStyleAlert];
     alert.showPriority = UkePopUpControllerPriorityLow;
-    [alert addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+    
+    [alert addAction:[UkeAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    
+    UkeAlertAction *confirmAction = [UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:confirmAction];
+    
+    confirmAction.enabled = NO;
+    
     [alert uke_show];
 
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        confirmAction.enabled = YES;
+    });
 
-    UkeAlertController *alert2 = [UkeAlertController alertControllerWithTitle:@"第二个" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    alert2.maskType = UkePopUpControllerMaskTypeVisualEffect;
-    [alert2 addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [alert2 uke_show];
+//    UkeAlertController *alert2 = [UkeAlertController alertControllerWithTitle:@"第二个" message:nil preferredStyle:UIAlertControllerStyleAlert];
+//    alert2.maskType = UkePopUpControllerMaskTypeVisualEffect;
+//    [alert2 addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+//    [alert2 uke_show];
     
     
     

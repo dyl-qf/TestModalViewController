@@ -76,6 +76,9 @@
     cancelButton.titleLabel.attributedText = [[NSAttributedString alloc] initWithString:self.cancelAction.title attributes:self.cancelButtonAttributes];
     [cancelButton addTarget:self action:@selector(handleCancelButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [cancelView addSubview:cancelButton];
+    action.actionButton = cancelButton;
+    action.enabled = action.enabled;
+    
     [cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
