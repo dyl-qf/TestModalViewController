@@ -50,7 +50,9 @@ NS_CLASS_AVAILABLE_IOS(7_0)
 - (void)uke_dismissWithAnimated:(BOOL)animated
                  completion:(nullable void(^)(void))completionHandler;
 
-@property (nonatomic, strong) void (^dismissCompletion)(void);
+@property (nonatomic, copy) void (^dismissCompletion)(void);
+
+@property (nonatomic, copy) void (^viewDidLayoutSubviewsBlock)(void);
 
 //! 弹出视图的唯一id，默认是一个UUID String。
 //! 默认情况下，同时弹出多个弹框时，弹框之间是互斥的，后面的弹框显示时会暂时移除前一个弹框。当后面的弹框消失后，前面被移除的弹框会再次显示出来。
@@ -71,7 +73,7 @@ NS_CLASS_AVAILABLE_IOS(7_0)
 @property (nonatomic, assign) BOOL shouldRespondsMaskViewTouch;
 
 //! 圆角值
-@property (nonatomic, assign) CGFloat cornerRadius;
+//@property (nonatomic, assign) CGFloat cornerRadius;
 
 // maskView的背景模式
 @property (nonatomic, assign) UkePopUpControllerMaskType maskType;

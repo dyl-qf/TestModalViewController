@@ -62,6 +62,11 @@
     self.view.bounds = _contentView.bounds;
 }
 
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    !self.viewDidLayoutSubviewsBlock ?: self.viewDidLayoutSubviewsBlock();
+}
+
 #pragma mark - 监听屏幕方向变化
 #ifdef __IPHONE_8_0
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
