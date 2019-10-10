@@ -26,7 +26,16 @@
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        UIWindow *window = [[UIWindow alloc] init];
+        UIWindow *window = nil;
+#ifdef __IPHONE_13_0
+        if (@available(iOS 13, *)) {
+            window = [[UIWindow alloc] initWithWindowScene:UIApplication.sharedApplication.keyWindow.windowScene];
+        } else {
+            window = [[UIWindow alloc] init];
+        }
+#else
+        window = [[UIWindow alloc] init];
+#endif
         window.backgroundColor = [UIColor clearColor];
         window.frame = [UIScreen mainScreen].bounds;
         window.windowLevel = UIWindowLevelAlert;
