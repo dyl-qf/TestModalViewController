@@ -99,7 +99,7 @@
     UkeAlertAction *confirmAction = [UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
     [alert addAction:confirmAction];
     
-    confirmAction.enabled = NO;
+    confirmAction.shouldAutoDismissAlertController = NO;
     
     [alert uke_show];
 

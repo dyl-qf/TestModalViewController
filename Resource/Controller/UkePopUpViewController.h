@@ -72,9 +72,6 @@ NS_CLASS_AVAILABLE_IOS(7_0)
 //! maskView是否可以响应dismiss手势。默认alert不响应，sheet响应
 @property (nonatomic, assign) BOOL shouldRespondsMaskViewTouch;
 
-//! 圆角值
-//@property (nonatomic, assign) CGFloat cornerRadius;
-
 // maskView的背景模式
 @property (nonatomic, assign) UkePopUpControllerMaskType maskType;
 

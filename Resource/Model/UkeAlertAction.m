@@ -24,6 +24,7 @@
     action.style = style;
     action.actionHandler = handler;
     action.enabled = YES;
+    action.shouldAutoDismissAlertController = YES;
     action.actionButton = nil;
     return action;
 }

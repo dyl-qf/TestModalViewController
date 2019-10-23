@@ -187,7 +187,6 @@
 - (void)setCornerRadius:(CGFloat)cornerRadius {
     _cornerRadius = cornerRadius;
     _alertContentView.cornerRadius = cornerRadius;
-    [super setCornerRadius:cornerRadius];
 }
 
 - (void)setLineHeight:(CGFloat)lineHeight {
@@ -209,11 +208,17 @@
         sheetContentView = [[UkeSheetContentView alloc] init];
         __weak typeof(self)weakSelf = self;
         sheetContentView.ukeActionButtonHandler = ^(UkeAlertAction * _Nonnull action) {
-            [weakSelf uke_dismissWithAnimated:YES completion:^{
+            if (action.shouldAutoDismissAlertController) {
+                [weakSelf uke_dismissWithAnimated:YES completion:^{
+                    if (action.actionHandler) {
+                        action.actionHandler(action);
+                    }
+                }];
+            } else {
                 if (action.actionHandler) {
                     action.actionHandler(action);
                 }
-            }];
+            }
         };
     }
     return sheetContentView;
@@ -229,11 +234,17 @@
         
         __weak typeof(self)weakSelf = self;
         _actionGroupView.ukeActionButtonHandler = ^(UkeAlertAction * _Nonnull action) {
-            [weakSelf uke_dismissWithAnimated:YES completion:^{
+            if (action.shouldAutoDismissAlertController) {
+                [weakSelf uke_dismissWithAnimated:YES completion:^{
+                    if (action.actionHandler) {
+                        action.actionHandler(action);
+                    }
+                }];
+            } else {
                 if (action.actionHandler) {
                     action.actionHandler(action);
                 }
-            }];
+            }
         };
     }
     return _actionGroupView;
