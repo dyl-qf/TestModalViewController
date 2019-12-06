@@ -17,10 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
                           animated:(BOOL)flag
                         completion:(void (^)(void))completion;
 
-- (void)ukePopUpViewControllerWillDismiss:(UkePopUpViewController *)popUpViewController;
-- (void)ukePopUpViewControllerDidDismiss;
-
-
 - (BOOL)ukeIsUkeAlertControllerCurrentShowed;
 
 - (void)ukeRemoveAllAlertConrollerAnimated:(BOOL)animated
@@ -29,6 +25,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)ukeRemoveAlertConrollerWithIdentifier:(NSString *)identifier
                                      animated:(BOOL)animated
                                 completion:(nullable void (^)(void))completion;
+
+
+#pragma mark - 通知
+- (void)ukePopUpViewControllerWillDismiss:(UkePopUpViewController *)popUpViewController;
+- (void)ukePopUpViewControllerDidDismiss;
 
 @end
 
