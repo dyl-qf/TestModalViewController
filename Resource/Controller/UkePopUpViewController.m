@@ -275,6 +275,18 @@
     return _sheetContentMarginBottom+safePaddingBottom;
 }
 
+- (BOOL)isEqual:(id)object {
+    if ([object isKindOfClass:[self class]]) {
+        UkePopUpViewController *popUpViewController = (UkePopUpViewController *)object;
+        return [self.identifier isEqualToString:popUpViewController.identifier];
+    }
+    return NO;
+}
+
+- (NSUInteger)hash {
+    return self.identifier.hash;
+}
+
 - (void)dealloc {
     NSLog(@"UkePopUpViewController 销毁");
 }

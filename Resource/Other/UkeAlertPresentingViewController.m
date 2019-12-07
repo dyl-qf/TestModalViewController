@@ -16,9 +16,9 @@
 @property (atomic, assign) BOOL isAnimating;
 @property (nonatomic, strong) UkePopUpViewController *currentPrentedVc;
 // 已经弹出过的UkePopUpViewController的栈
-@property (nonatomic, strong) NSMutableArray<UkePopUpViewController *> *alertHierarchStack;
+@property (nonatomic, strong) NSMutableArray<UkePopUpViewController *> *alertedStack;
 // 将要弹出的UkePopUpViewController，来不及弹出的UkePopUpViewController都会被放在这个数组里
-@property (nonatomic, strong) NSMutableArray<UkePendingPopUpModel *> *pendingAlertControllers;
+@property (nonatomic, strong) NSMutableArray<UkePendingPopUpModel *> *pendingStack;
 @end
 
 @implementation UkeAlertPresentingViewController
@@ -43,8 +43,8 @@
         self.window = window;
         
         self.isAnimating = NO;
-        self.alertHierarchStack = [NSMutableArray array];
-        self.pendingAlertControllers = [NSMutableArray array];
+        self.alertedStack = [NSMutableArray array];
+        self.pendingStack = [NSMutableArray array];
     }
     return self;
 }
@@ -53,79 +53,72 @@
 - (void)uke_presentPopUpViewController:(UkePopUpViewController *)viewControllerToPresent
                           animated:(BOOL)flag
                         completion:(void (^)(void))completion {
+    
+    __weak typeof(self) weakSelf = self;
     if (self.window.isHidden == YES) {
-        self.window.rootViewController = self;
+        self.window.rootViewController = weakSelf;
         self.window.hidden = NO;
     }
     
-    if (self.isAnimating == YES) { // 如果正在进行跳转动画
+    if (self.isAnimating == YES) { // 如果正在进行跳转/消失动画，移入pending中
         UkePendingPopUpModel *model = [[UkePendingPopUpModel alloc] init];
         model.popController = viewControllerToPresent;
         model.animated = flag;
         model.completion = completion;
         if (viewControllerToPresent.showPriority == UkePopUpControllerPriorityDefault) {
-            [self.pendingAlertControllers insertObject:model atIndex:0];
+            [self insertToPendingWith:model atIndex:0];
         } else {
-            [self.pendingAlertControllers addObject:model];
+            [self addToPendingWith:model];
         }
         return;
     }
     
     if (self.currentPrentedVc) { // 当前屏幕上有正在显示的alert
+        if ([self.currentPrentedVc.identifier isEqualToString:viewControllerToPresent.identifier]) {
+            if (completion) completion();
+            
+            return;
+        }
+        
         if (viewControllerToPresent.showPriority == UkePopUpControllerPriorityDefault) { // 暂时隐藏旧的，弹出新的
             self.isAnimating = YES;
-            // 注意：这里不能调用UkePopUpViewController的dismiss方法，因为这会触发下面"pop消失回调"的那两个方法。
+            // 注意：这里不能调用uke_dismiss方法，因为这会触发下面"pop消失回调"的那两个方法。
             [self.currentPrentedVc dismissViewControllerAnimated:NO completion:^{
-                // 这里不能调用uke_presentPopUpViewController方法，否则会进入死循环。
-                [self presentViewController:viewControllerToPresent animated:flag completion:^{
-                    [self removeEqualVcFromStackWithIdentifier:viewControllerToPresent.identifier];
-                    [self.alertHierarchStack addObject:viewControllerToPresent];
-                    [self log];
-
-                    self.currentPrentedVc = viewControllerToPresent;
-                    
-                    self.isAnimating = NO;
-                    if (completion) completion();
-                    // 弹出完毕之后，检查pendingAlertControllers里有没有等待弹出的alertController，如果有的话继续弹出
-                    [self checkToPresentPendingPopUpController];
-                }];
+                self.isAnimating = NO;
+                self.currentPrentedVc = nil;
+                [self uke_presentPopUpViewController:viewControllerToPresent animated:flag completion:completion];
             }];
         } else if (viewControllerToPresent.showPriority == UkePopUpControllerPriorityLow) { // 旧的不隐藏，新的暂存
-            [self removeEqualVcFromStackWithIdentifier:viewControllerToPresent.identifier];
-            [self.alertHierarchStack insertObject:viewControllerToPresent atIndex:0];
-            
-            [self log];
+            [self insertToStackWith:viewControllerToPresent atIndex:0];
         }
-    }else { // 当前没有正在显示的alert
+    } else { // 当前没有正在显示的alert
         self.isAnimating = YES;
         // 注意：这里不能调用uke_presentPopUpViewController方法，否则会进入死循环。
         [self presentViewController:viewControllerToPresent animated:flag completion:^{
-            [self removeEqualVcFromStackWithIdentifier:viewControllerToPresent.identifier];
-            [self.alertHierarchStack addObject:viewControllerToPresent];
-            [self log];
+            [self addToStackWith:viewControllerToPresent];
             
             self.currentPrentedVc = viewControllerToPresent;
-
             self.isAnimating = NO;
+            
             if (completion) completion();
+            
             [self checkToPresentPendingPopUpController];
         }];
     }
 }
 
 - (BOOL)ukeIsUkeAlertControllerCurrentShowed {
-    return (_currentPrentedVc != nil);
+    return (self.currentPrentedVc != nil);
 }
 
 - (void)ukeRemoveAllAlertConrollerAnimated:(BOOL)animated
                                 completion:(nullable void (^)(void))completion {
-    if (_currentPrentedVc) {
-        [self.alertHierarchStack removeAllObjects];
-        [_currentPrentedVc uke_dismissWithAnimated:animated completion:^{
+    if (self.currentPrentedVc) {
+        [self.alertedStack removeAllObjects];
+        [self.currentPrentedVc uke_dismissWithAnimated:animated completion:^{
             if (completion) completion();
         }];
     }else {
-        self.currentPrentedVc = nil;
         self.window.rootViewController = nil;
         self.window.hidden = YES;
         [[UkeAlertSingleton sharedInstance] destoryUkeAlertSingleton];
@@ -136,10 +129,12 @@
 - (void)ukeRemoveAlertConrollerWithIdentifier:(NSString *)identifier
                                      animated:(BOOL)animated
                                    completion:(nullable void (^)(void))completion {
-    if (_currentPrentedVc && [_currentPrentedVc.identifier isEqualToString:identifier]) {
-        [_currentPrentedVc uke_dismissWithAnimated:animated completion:completion];
+    if (self.currentPrentedVc && [self.currentPrentedVc.identifier isEqualToString:identifier]) {
+        [self.currentPrentedVc uke_dismissWithAnimated:animated completion:completion];
     }else {
         [self removeEqualVcFromStackWithIdentifier:identifier];
+        
+        if (completion) completion();
     }
 }
 
@@ -149,22 +144,22 @@
 - (void)ukePopUpViewControllerWillDismiss:(UkePopUpViewController *)popUpViewController {
     self.isAnimating = YES;
     
-    [self.alertHierarchStack removeObject:popUpViewController];
-    [self removeEqualVcFromStackWithIdentifier:popUpViewController.identifier];
+    [self.alertedStack removeObject:popUpViewController];
 }
 
 - (void)ukePopUpViewControllerDidDismiss {
     self.currentPrentedVc = nil;
     self.isAnimating = NO;
     
-    if (self.alertHierarchStack.count == 0) {
-        [self log];
-
+    if (self.alertedStack.count == 0) {
         self.window.rootViewController = nil;
         self.window.hidden = YES;
         [[UkeAlertSingleton sharedInstance] destoryUkeAlertSingleton];
     }else {
-        UkePopUpViewController *previousVc = _alertHierarchStack.lastObject;
+        UkePopUpViewController *previousVc = self.alertedStack.lastObject;
+        
+        // 这里的completon不能再回调回去了，否则会重复
+        // 优化：这个animated不应该写死，最好在alertedStack里也存储UkePopUpModel
         [self uke_presentPopUpViewController:previousVc animated:YES completion:^{}];
     }
 }
@@ -172,37 +167,62 @@
 #pragma mark - Private.
 // 继续跳转到之前将要跳转的alertController
 - (void)checkToPresentPendingPopUpController {
-    if (_pendingAlertControllers.count == 0) {
+    if (self.pendingStack.count == 0) {
         return;
     }
     
-    UkePendingPopUpModel *pendingPopUpModel = _pendingAlertControllers.firstObject;
+    UkePendingPopUpModel *pendingPopUpModel = self.pendingStack.firstObject;
     [self uke_presentPopUpViewController:pendingPopUpModel.popController animated:pendingPopUpModel.animated completion:^{
-        [self.pendingAlertControllers removeObject:pendingPopUpModel];
-        if (pendingPopUpModel.completion) pendingPopUpModel.completion();
+        [self.pendingStack removeObject:pendingPopUpModel];
         
-        [self log];
+        if (pendingPopUpModel.completion) pendingPopUpModel.completion();
     }];
 }
 
-// 移除alertHierarchStack里相同identifier的alertController
+// 移除alertedStack里相同identifier的alertController
 - (void)removeEqualVcFromStackWithIdentifier:(NSString *)identifier {
-    if (self.alertHierarchStack.count != 0) {
-        for (NSInteger i = self.alertHierarchStack.count-1; i >= 0; i --) {
-            UkePopUpViewController *popUpVc = self.alertHierarchStack[i];
-            if ([popUpVc.identifier isEqualToString:identifier]) {
-                [self.alertHierarchStack removeObject:popUpVc];
-            }
+    for (NSInteger i = self.alertedStack.count-1; i >= 0; i --) {
+        UkePopUpViewController *popUpVc = self.alertedStack[i];
+        if ([popUpVc.identifier isEqualToString:identifier]) {
+            [self.alertedStack removeObject:popUpVc];
         }
     }
 }
 
+- (void)addToStackWith:(UkePopUpViewController *)popUpViewController {
+    if ([self.alertedStack containsObject:popUpViewController]) {
+        [self removeEqualVcFromStackWithIdentifier:popUpViewController.identifier];
+    }
+    [self.alertedStack addObject:popUpViewController];
+}
+
+- (void)insertToStackWith:(UkePopUpViewController *)popUpViewController atIndex:(NSUInteger)index {
+    if ([self.alertedStack containsObject:popUpViewController]) {
+        [self removeEqualVcFromStackWithIdentifier:popUpViewController.identifier];
+    }
+    [self.alertedStack insertObject:popUpViewController atIndex:index];
+}
+
+- (void)addToPendingWith:(UkePendingPopUpModel *)popUpModel {
+    if ([self.pendingStack containsObject:popUpModel]) {
+        return;
+    }
+    [self.pendingStack addObject:popUpModel];
+}
+
+- (void)insertToPendingWith:(UkePendingPopUpModel *)popUpModel atIndex:(NSUInteger)index {
+    if ([self.pendingStack containsObject:popUpModel]) {
+        return;
+    }
+    [self.pendingStack insertObject:popUpModel atIndex:index];
+}
+
 - (void)logStack {
-    NSLog(@">>> stack: %@", self.alertHierarchStack);
+    NSLog(@">>> stack: %@", self.alertedStack);
 }
 
 - (void)logPending {
-    NSLog(@">>> pending: %@\n\n", self.pendingAlertControllers);
+    NSLog(@">>> pending: %@\n\n", self.pendingStack);
 }
 
 - (void)log {
@@ -223,4 +243,17 @@
 
 
 @implementation UkePendingPopUpModel
+
+- (BOOL)isEqual:(id)object {
+    if ([object isKindOfClass:[self class]]) {
+        UkePendingPopUpModel *popUpModel = (UkePendingPopUpModel *)object;        
+        return [self.popController.identifier isEqualToString:popUpModel.popController.identifier];
+    }
+    return NO;
+}
+
+- (NSUInteger)hash {
+    return self.popController.identifier.hash;
+}
+
 @end

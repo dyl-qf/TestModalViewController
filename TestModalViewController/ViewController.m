@@ -109,10 +109,19 @@
     [alert uke_show];
 
     UkeAlertController *alert2 = [UkeAlertController alertControllerWithTitle:@"第二个" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    alert2.showPriority = UkePopUpControllerPriorityLow;
-    alert2.identifier = @"1";
+    alert2.identifier = @"2";
     [alert2 addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
     [alert2 uke_show];
+    
+    UkeAlertController *alert3 = [UkeAlertController alertControllerWithTitle:@"第三个" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    alert3.identifier = @"2";
+    [alert3 addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+    [alert3 uke_show];
+    
+    UkeAlertController *alert4 = [UkeAlertController alertControllerWithTitle:@"第二个" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    alert4.identifier = @"2";
+    [alert4 addAction:[UkeAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+    [alert4 uke_show];
     
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        UkeAlertController *alert3 = [UkeAlertController alertControllerWithTitle:@"第三个" message:nil preferredStyle:UIAlertControllerStyleAlert];
